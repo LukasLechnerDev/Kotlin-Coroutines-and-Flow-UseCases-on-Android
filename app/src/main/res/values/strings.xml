@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Coroutine Usecases on Android</string>
     <string name="perform_single_network_request_on_background_thread">Perform single Network Request on Background Thread</string>
+    <string name="perform_2_network_requests_sequentially">Perform 2 network requests sequentially</string>
 </resources>
