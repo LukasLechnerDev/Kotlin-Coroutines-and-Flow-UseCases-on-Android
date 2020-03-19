@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid
+package com.lukaslechner.coroutineusecasesonandroid.views
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityUsecasesBinding
 
 class UseCaseActivity : BaseActivity() {
@@ -32,7 +33,11 @@ class UseCaseActivity : BaseActivity() {
 
     private fun initRecyclerView() {
         binding.recyclerView.apply {
-            adapter = UseCaseAdapter(useCaseCategory, onUseCaseClickListener)
+            adapter =
+                UseCaseAdapter(
+                    useCaseCategory,
+                    onUseCaseClickListener
+                )
             hasFixedSize()
             layoutManager = LinearLayoutManager(this@UseCaseActivity)
             addItemDecoration(initItemDecoration())

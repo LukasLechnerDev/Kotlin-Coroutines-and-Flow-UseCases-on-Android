@@ -1,9 +1,10 @@
-package com.lukaslechner.coroutineusecasesonandroid
+package com.lukaslechner.coroutineusecasesonandroid.views
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.lukaslechner.coroutineusecasesonandroid.R
 
 class UseCaseCategoryAdapter(
     private val useCaseCategories: List<UseCaseCategory>,
@@ -15,7 +16,9 @@ class UseCaseCategoryAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val textView = LayoutInflater.from(parent.context)
             .inflate(R.layout.recyclerview_item, parent, false) as TextView
-        return ViewHolder(textView)
+        return ViewHolder(
+            textView
+        )
     }
 
     override fun getItemCount() = useCaseCategories.size

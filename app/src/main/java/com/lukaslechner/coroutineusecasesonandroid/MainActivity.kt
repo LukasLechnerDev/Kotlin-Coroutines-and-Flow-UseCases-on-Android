@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityMainBinding
+import com.lukaslechner.coroutineusecasesonandroid.views.*
 
 class MainActivity : BaseActivity() {
 
@@ -26,7 +27,11 @@ class MainActivity : BaseActivity() {
 
     private fun initRecyclerView() {
         binding.recyclerView.apply {
-            adapter = UseCaseCategoryAdapter(useCaseCategories, onUseCaseCategoryClickListener)
+            adapter =
+                UseCaseCategoryAdapter(
+                    useCaseCategories,
+                    onUseCaseCategoryClickListener
+                )
             hasFixedSize()
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(initItemDecoration())

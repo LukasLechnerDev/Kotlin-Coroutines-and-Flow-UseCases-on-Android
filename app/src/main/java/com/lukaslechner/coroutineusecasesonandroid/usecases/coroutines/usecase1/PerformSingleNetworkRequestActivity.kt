@@ -1,8 +1,8 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import android.os.Bundle
-import com.lukaslechner.coroutineusecasesonandroid.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformsinglenetworkrequestBinding
+import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class PerformSingleNetworkRequestActivity : BaseActivity() {
 

@@ -1,8 +1,8 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import android.os.Bundle
-import com.lukaslechner.coroutineusecasesonandroid.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerform2sequentialnetworkrequestsBinding
+import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
 
