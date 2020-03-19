@@ -21,7 +21,7 @@ private val coroutinesUseCases =
     UseCaseCategory(
         "Coroutine Use Cases", listOf(
             UseCase(
-                "Perform network request, show the response in the UI and save it to the database",
+                "Perform single network request",
                 PerformSingleNetworkRequestActivity::class.java
             ),
             UseCase(
