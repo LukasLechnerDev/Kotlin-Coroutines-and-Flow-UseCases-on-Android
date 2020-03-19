@@ -1,2 +1,3 @@
 # Coroutine-Use-Cases-on-Android
-Examples about how to implement common Android use cases with Kotlin Coroutines, Channels and Flow. 
+Learning Coroutines, Channels and Flow by example.
+Sample Implementations for lots of common Android use cases.
