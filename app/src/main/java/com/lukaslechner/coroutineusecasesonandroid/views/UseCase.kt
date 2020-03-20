@@ -7,6 +7,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
 import kotlinx.android.parcel.Parcelize
 
@@ -37,6 +38,10 @@ private val coroutinesUseCases =
             UseCase(
                 "Perform variable amount of network requests concurrently",
                 VariableAmountOfNetworkRequestsConcurrentlyActivity::class.java
+            ),
+            UseCase(
+                "Network request with TimeOut",
+                NetworkRequestWithTimeoutActivity::class.java
             )
         )
     )

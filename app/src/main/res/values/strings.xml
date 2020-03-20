@@ -5,4 +5,5 @@
     <string name="load_features_of_android_versions_sequentially">Load Features of Android Versions sequentially</string>
     <string name="load_features_of_android_versions_concurrently">Load Features of Android Versions concurrently</string>
     <string name="duration">Operation took %d ms</string>
+    <string name="timeout">TimeOut in ms: </string>
 </resources>

@@ -23,7 +23,10 @@
         <activity android:name=".usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity" />
         <activity android:name=".usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity" />
         <activity android:name=".usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity" />
+        <activity android:name=".usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity" />
+
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
+
         <activity android:name=".usecases.flow.usecase1.FlowUseCase1Activity" />
 
     </application>

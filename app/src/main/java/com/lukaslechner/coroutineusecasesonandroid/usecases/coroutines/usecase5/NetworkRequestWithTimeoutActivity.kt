@@ -1,21 +1,21 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5
 
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformsinglenetworkrequestBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityNetworkrequestwithtimeoutBinding
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
-class PerformSingleNetworkRequestActivity : BaseActivity() {
+class NetworkRequestWithTimeoutActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = "Perform Single Network Request"
+    override fun getToolbarTitle() = "Network Request with TimeOut"
 
-    private val binding by lazy { ActivityPerformsinglenetworkrequestBinding.inflate(layoutInflater) }
-    private val viewModel: PerformSingleNetworkRequestViewModel by viewModels()
+    private val binding by lazy { ActivityNetworkrequestwithtimeoutBinding.inflate(layoutInflater) }
+    private val viewModel: NetworkRequestWithTimeoutViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,10 @@ class PerformSingleNetworkRequestActivity : BaseActivity() {
             }
         })
         binding.btnPerformSingleNetworkRequest.setOnClickListener {
-            viewModel.performSingleNetworkRequest()
+            val timeOut = binding.editTextTimeOut.text.toString().toLongOrNull()
+            if (timeOut != null) {
+                viewModel.performNetworkRequest(timeOut)
+            }
         }
     }
 
