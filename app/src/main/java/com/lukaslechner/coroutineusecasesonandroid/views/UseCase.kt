@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.PerformVariableAmountOfNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
 import kotlinx.android.parcel.Parcelize
 
@@ -27,6 +29,14 @@ private val coroutinesUseCases =
             UseCase(
                 "Perform 2 network request sequentially",
                 Perform2SequentialNetworkRequestsActivity::class.java
+            ),
+            UseCase(
+                "Perform network requests concurrently",
+                PerformNetworkRequestsConcurrentlyActivity::class.java
+            ),
+            UseCase(
+                "Perform variable amount of network requests concurrently",
+                PerformVariableAmountOfNetworkRequestsConcurrentlyActivity::class.java
             )
         )
     )
