@@ -1,6 +1,7 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import com.google.gson.Gson
+import com.lukaslechner.coroutineusecasesonandroid.mockdata.AndroidVersion
 import com.lukaslechner.coroutineusecasesonandroid.mockdata.getMockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
 import okhttp3.OkHttpClient
@@ -13,8 +14,6 @@ interface MockApi {
     @GET("recent-android-versions")
     suspend fun getRecentAndroidVersions(): List<AndroidVersion>
 }
-
-data class AndroidVersion(val apiVersion: Int, val name: String)
 
 val mockApi: MockApi by lazy {
     val gson = Gson()
