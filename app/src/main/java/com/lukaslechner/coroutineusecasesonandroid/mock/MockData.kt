@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.mockdata
+package com.lukaslechner.coroutineusecasesonandroid.mock
 
 data class AndroidVersion(val apiVersion: Int, val name: String)
 

@@ -4,12 +4,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lukaslechner.coroutineusecasesonandroid.mockdata.AndroidVersion
+import com.google.gson.Gson
+import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
+import com.lukaslechner.coroutineusecasesonandroid.mock.createMockApi
+import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
+import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PerformSingleNetworkRequestViewModel : ViewModel() {
+
+    private val mockApi = createMockApi(
+        MockNetworkInterceptor()
+            .mock(
+                "http://localhost/recent-android-versions",
+                Gson().toJson(mockAndroidVersions),
+                200,
+                1500
+            )
+    )
 
     fun performSingleNetworkRequest() {
         viewModelScope.launch {

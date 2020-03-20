@@ -57,8 +57,8 @@ class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
     private fun onSuccess(uiState: UiState.Success) {
         binding.progressBar.visibility = View.GONE
         binding.textViewResult.text = fromHtml(
-            "<b>Features of most recent Android Version \" ${uiState.mostRecentVersion.name} \"</b><br>" +
-                    uiState.featuresOfMostRecentVersion.joinToString(
+            "<b>Features of most recent Android Version \" ${uiState.versionFeatures.androidVersion.name} \"</b><br>" +
+                    uiState.versionFeatures.features.joinToString(
                         prefix = "- ",
                         separator = "<br>- "
                     )

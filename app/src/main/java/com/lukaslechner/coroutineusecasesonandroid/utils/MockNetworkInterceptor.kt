@@ -77,7 +77,7 @@ class MockNetworkInterceptor : Interceptor {
         status: Int,
         delayInMs: Long = 250,
         persist: Boolean = true
-    ) {
+    ) = apply {
         val mockResponse =
             MockResponse(
                 path,

@@ -4,12 +4,33 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lukaslechner.coroutineusecasesonandroid.mockdata.AndroidVersion
+import com.google.gson.Gson
+import com.lukaslechner.coroutineusecasesonandroid.mock.VersionFeatures
+import com.lukaslechner.coroutineusecasesonandroid.mock.createMockApi
+import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
+import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
+import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Perform2SequentialNetworkRequestsViewModel : ViewModel() {
+
+    private val mockApi = createMockApi(
+        MockNetworkInterceptor()
+            .mock(
+                "http://localhost/recent-android-versions",
+                Gson().toJson(mockAndroidVersions),
+                200,
+                1500
+            )
+            .mock(
+                "http://localhost/android-version-features/29",
+                Gson().toJson(mockVersionFeaturesAndroid10),
+                200,
+                1500
+            )
+    )
 
     // loads all recent Android versions
     // then loads all new features of the most recent Android version
@@ -27,7 +48,7 @@ class Perform2SequentialNetworkRequestsViewModel : ViewModel() {
 
                     withContext(Dispatchers.Main) {
                         uiState.value =
-                            UiState.Success(mostRecentVersion, featuresOfMostRecentVersion)
+                            UiState.Success(featuresOfMostRecentVersion)
                     }
 
                 } catch (exception: Exception) {
@@ -45,8 +66,7 @@ class Perform2SequentialNetworkRequestsViewModel : ViewModel() {
     sealed class UiState {
         object Loading : UiState()
         data class Success(
-            val mostRecentVersion: AndroidVersion,
-            val featuresOfMostRecentVersion: List<String>
+            val versionFeatures: VersionFeatures
         ) : UiState()
 
         data class Error(val message: String) : UiState()
