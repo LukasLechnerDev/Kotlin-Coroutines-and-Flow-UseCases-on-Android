@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.lukaslechner.coroutineusecasesonandroid.mockdata.VersionFeatures
 import kotlinx.coroutines.*
 
-class PerformVariableAmountOfNetworkRequestsConcurrentlyViewModel : ViewModel() {
+class VariableAmountOfNetworkRequestsConcurrentlyViewModel : ViewModel() {
 
     fun performNetworkRequestsSequentially() {
         viewModelScope.launch {
@@ -18,8 +18,7 @@ class PerformVariableAmountOfNetworkRequestsConcurrentlyViewModel : ViewModel() 
                     val recentVersions = mockApi.getRecentAndroidVersions()
 
                     val versionFeatures = recentVersions.map { androidVersion ->
-                        val features = mockApi.getAndroidVersionFeatures(androidVersion.apiVersion)
-                        VersionFeatures(androidVersion, features)
+                        mockApi.getAndroidVersionFeatures(androidVersion.apiVersion)
                     }
 
                     withContext(Dispatchers.Main) {
@@ -42,21 +41,13 @@ class PerformVariableAmountOfNetworkRequestsConcurrentlyViewModel : ViewModel() 
             withContext(Dispatchers.IO) {
                 try {
                     val recentVersions = mockApi.getRecentAndroidVersions()
-
-
                     val versionFeatures = recentVersions
                         .map { androidVersion ->
                             async { mockApi.getAndroidVersionFeatures(androidVersion.apiVersion) }
                         }.awaitAll()
-                    //.map {  }
-
-                    val versionFeaturesFM = recentVersions
-                        .flatMap {
-                            mockApi.getAndroidVersionFeatures(it.apiVersion)
-                        }
 
                     withContext(Dispatchers.Main) {
-                        // uiState.value = UiState.Success(versionFeatures)
+                        uiState.value = UiState.Success(versionFeatures)
                     }
 
                 } catch (exception: Exception) {

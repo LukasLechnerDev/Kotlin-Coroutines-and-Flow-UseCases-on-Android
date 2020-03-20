@@ -4,13 +4,15 @@ data class AndroidVersion(val apiVersion: Int, val name: String)
 
 data class VersionFeatures(val androidVersion: AndroidVersion, val features: List<String>)
 
-fun getMockAndroidVersions() = listOf(
-    AndroidVersion(27, "Oreo"),
-    AndroidVersion(28, "Pie"),
-    AndroidVersion(29, "Android 10")
+val mockAndroidVersionOreo = AndroidVersion(27, "Oreo")
+val mockAndroidVersionPie = AndroidVersion(28, "Pie")
+val mockAndroidVersionAndroid10 = AndroidVersion(29, "Android 10")
+
+val mockAndroidVersions = listOf(
+    mockAndroidVersionOreo, mockAndroidVersionPie, mockAndroidVersionAndroid10
 )
 
-fun getFeaturesOfOreo() = listOf(
+val featuresOfOreo = listOf(
     "Neural networks API.",
     "Shared memory API.",
     "WallpaperColors API.",
@@ -25,7 +27,7 @@ fun getFeaturesOfOreo() = listOf(
     "New Easter egg in the form of an official Oreo cookie picture."
 )
 
-fun getFeaturesOfPie() = listOf(
+val featuresOfPie = listOf(
     "New user interface for the quick settings menu.",
     "The clock has moved to the left of the notification bar.",
     "The \"dock\" now has a semi-transparent background.",
@@ -51,7 +53,7 @@ fun getFeaturesOfPie() = listOf(
     "Vulkan 1.1 support."
 )
 
-fun getFeaturesOfAndroid10() = listOf(
+val featuresOfAndroid10 = listOf(
     "New permissions to access location in background and to access photo, video and audio files",
     "Background apps can no longer jump into the foreground",
     "Limited access to non-resettable device identifiers",
@@ -67,4 +69,19 @@ fun getFeaturesOfAndroid10() = listOf(
     "Support for Notification Bubbles",
     "New system-wide dark theme/mode",
     "Project Mainline, allows core OS components to be updated via the Google Play Store, without requiring a complete system update"
+)
+
+val mockVersionFeaturesOreo = VersionFeatures(
+    mockAndroidVersionOreo,
+    featuresOfOreo
+)
+
+val mockVersionFeaturesPie = VersionFeatures(
+    mockAndroidVersionPie,
+    featuresOfPie
+)
+
+val mockVersionFeaturesAndroid10 = VersionFeatures(
+    mockAndroidVersionAndroid10,
+    featuresOfAndroid10
 )

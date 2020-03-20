@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lukaslechner.coroutineusecasesonandroid.mockdata.AndroidVersion
 import com.lukaslechner.coroutineusecasesonandroid.mockdata.VersionFeatures
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -23,11 +22,7 @@ class PerformNetworkRequestsConcurrentlyViewModel : ViewModel() {
                     val pieFeatures = mockApi.getAndroidVersionFeatures(28)
                     val android10Features = mockApi.getAndroidVersionFeatures(29)
 
-                    val versionFeatures = listOf(
-                        VersionFeatures(AndroidVersion(27, "Oreo"), oreoFeatures),
-                        VersionFeatures(AndroidVersion(28, "Pie"), pieFeatures),
-                        VersionFeatures(AndroidVersion(29, "Android10"), android10Features)
-                    )
+                    val versionFeatures = listOf(oreoFeatures, pieFeatures, android10Features)
 
                     withContext(Dispatchers.Main) {
                         uiState.value =
@@ -57,11 +52,7 @@ class PerformNetworkRequestsConcurrentlyViewModel : ViewModel() {
                     val pieFeatures = pieFeaturesDeferred.await()
                     val android10Features = android10FeaturesDeferred.await()
 
-                    val versionFeatures = listOf(
-                        VersionFeatures(AndroidVersion(27, "Oreo"), oreoFeatures),
-                        VersionFeatures(AndroidVersion(28, "Pie"), pieFeatures),
-                        VersionFeatures(AndroidVersion(29, "Android10"), android10Features)
-                    )
+                    val versionFeatures = listOf(oreoFeatures, pieFeatures, android10Features)
 
                     withContext(Dispatchers.Main) {
                         uiState.value =

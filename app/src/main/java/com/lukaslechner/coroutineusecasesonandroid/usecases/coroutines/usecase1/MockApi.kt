@@ -2,7 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import com.google.gson.Gson
 import com.lukaslechner.coroutineusecasesonandroid.mockdata.AndroidVersion
-import com.lukaslechner.coroutineusecasesonandroid.mockdata.getMockAndroidVersions
+import com.lukaslechner.coroutineusecasesonandroid.mockdata.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -22,7 +22,7 @@ val mockApi: MockApi by lazy {
 
     mockNetworkInterceptor.mock(
         "http://localhost/recent-android-versions",
-        gson.toJson(getMockAndroidVersions()),
+        gson.toJson(mockAndroidVersions),
         200,
         1500
     )

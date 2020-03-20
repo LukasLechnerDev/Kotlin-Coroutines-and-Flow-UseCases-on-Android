@@ -33,11 +33,9 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
             }
         })
         binding.btnRequestsSequentially.setOnClickListener {
-            operationStartTime = System.currentTimeMillis()
             viewModel.performNetworkRequestsSequentially()
         }
         binding.btnRequestsConcurrently.setOnClickListener {
-            operationStartTime = System.currentTimeMillis()
             viewModel.performNetworkRequestsConcurrently()
         }
     }
@@ -57,6 +55,7 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
     }
 
     private fun onLoad() {
+        operationStartTime = System.currentTimeMillis()
         binding.progressBar.visibility = View.VISIBLE
         binding.textViewDuration.text = ""
         binding.textViewResult.text = ""
@@ -84,6 +83,7 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
         binding.progressBar.visibility = View.GONE
         binding.textViewDuration.visibility = View.GONE
         toast(uiState.message)
+        enableButtons()
     }
 
     private fun enableButtons() {

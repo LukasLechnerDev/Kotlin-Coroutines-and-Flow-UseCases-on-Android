@@ -2,8 +2,8 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import com.google.gson.Gson
 import com.lukaslechner.coroutineusecasesonandroid.mockdata.AndroidVersion
-import com.lukaslechner.coroutineusecasesonandroid.mockdata.getFeaturesOfAndroid10
-import com.lukaslechner.coroutineusecasesonandroid.mockdata.getMockAndroidVersions
+import com.lukaslechner.coroutineusecasesonandroid.mockdata.featuresOfAndroid10
+import com.lukaslechner.coroutineusecasesonandroid.mockdata.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -26,14 +26,14 @@ val mockApi: MockApi by lazy {
 
     mockNetworkInterceptor.mock(
         "http://localhost/recent-android-versions",
-        gson.toJson(getMockAndroidVersions()),
+        gson.toJson(mockAndroidVersions),
         200,
         1500
     )
 
     mockNetworkInterceptor.mock(
         "http://localhost/android-version-features/29",
-        gson.toJson(getFeaturesOfAndroid10()),
+        gson.toJson(featuresOfAndroid10),
         200,
         1500
     )

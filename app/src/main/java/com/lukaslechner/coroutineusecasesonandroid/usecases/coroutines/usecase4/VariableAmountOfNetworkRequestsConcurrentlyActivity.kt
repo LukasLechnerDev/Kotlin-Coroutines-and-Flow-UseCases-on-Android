@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.PerformVariableAmountOfNetworkRequestsConcurrentlyViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
-class PerformVariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
+class VariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
 
     private val binding by lazy {
         ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding.inflate(
@@ -18,9 +19,10 @@ class PerformVariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity(
         )
     }
 
-    private val viewModelVariableAmountOf: PerformVariableAmountOfNetworkRequestsConcurrentlyViewModel by viewModels()
-
+    private val viewModelVariableAmountOf: VariableAmountOfNetworkRequestsConcurrentlyViewModel by viewModels()
     override fun getToolbarTitle() = "Perform variable amount of Network Requests Concurrently"
+
+    private var operationStartTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,12 +59,18 @@ class PerformVariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity(
     }
 
     private fun onLoad() {
+        operationStartTime = System.currentTimeMillis()
         binding.progressBar.visibility = View.VISIBLE
         binding.textViewResult.text = ""
+        binding.textViewDuration.text = ""
+        disableButtons()
     }
 
     private fun onSuccess(uiState: UiState.Success) {
+        enableButtons()
         binding.progressBar.visibility = View.GONE
+        val duration = System.currentTimeMillis() - operationStartTime
+        binding.textViewDuration.text = getString(R.string.duration, duration)
 
         val versionFeatures = uiState.versionFeatures
 
@@ -79,5 +87,16 @@ class PerformVariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity(
     private fun onError(uiState: UiState.Error) {
         binding.progressBar.visibility = View.GONE
         toast(uiState.message)
+        enableButtons()
+    }
+
+    private fun enableButtons() {
+        binding.btnRequestsSequentially.isEnabled = true
+        binding.btnRequestsConcurrently.isEnabled = true
+    }
+
+    private fun disableButtons() {
+        binding.btnRequestsSequentially.isEnabled = false
+        binding.btnRequestsConcurrently.isEnabled = false
     }
 }

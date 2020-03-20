@@ -15,7 +15,7 @@ interface MockApi {
     suspend fun getRecentAndroidVersions(): List<AndroidVersion>
 
     @GET("android-version-features/{apiVersion}")
-    suspend fun getAndroidVersionFeatures(@Path("apiVersion") apiVersion: Int): List<String>
+    suspend fun getAndroidVersionFeatures(@Path("apiVersion") apiVersion: Int): VersionFeatures
 }
 
 val mockApi: MockApi by lazy {
@@ -24,28 +24,28 @@ val mockApi: MockApi by lazy {
 
     mockNetworkInterceptor.mock(
         "http://localhost/recent-android-versions",
-        gson.toJson(getMockAndroidVersions()),
+        gson.toJson(mockAndroidVersions),
         200,
         1000
     )
 
     mockNetworkInterceptor.mock(
         "http://localhost/android-version-features/27",
-        gson.toJson(getFeaturesOfOreo()),
+        gson.toJson(mockVersionFeaturesOreo),
         200,
         1000
     )
 
     mockNetworkInterceptor.mock(
         "http://localhost/android-version-features/28",
-        gson.toJson(getFeaturesOfPie()),
+        gson.toJson(mockVersionFeaturesPie),
         200,
         1000
     )
 
     mockNetworkInterceptor.mock(
         "http://localhost/android-version-features/29",
-        gson.toJson(getFeaturesOfAndroid10()),
+        gson.toJson(mockVersionFeaturesAndroid10),
         200,
         1000
     )

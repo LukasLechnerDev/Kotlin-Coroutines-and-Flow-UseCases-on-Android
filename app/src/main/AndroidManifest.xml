@@ -22,7 +22,7 @@
         <activity android:name=".usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity" />
         <activity android:name=".usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity" />
         <activity android:name=".usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity" />
-        <activity android:name=".usecases.coroutines.usecase4.PerformVariableAmountOfNetworkRequestsConcurrentlyActivity" />
+        <activity android:name=".usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity" />
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
         <activity android:name=".usecases.flow.usecase1.FlowUseCase1Activity" />
 
