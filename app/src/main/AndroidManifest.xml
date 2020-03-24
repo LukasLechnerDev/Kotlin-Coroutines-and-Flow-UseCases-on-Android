@@ -24,7 +24,7 @@
         <activity android:name=".usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity" />
         <activity android:name=".usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity" />
         <activity android:name=".usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity" />
-        <activity android:name=".usecases.coroutines.usecase6.NetworkRequestWithRetryActivity" />
+        <activity android:name=".usecases.coroutines.usecase6.RetryNetworkRequestActivity" />
 
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
 
