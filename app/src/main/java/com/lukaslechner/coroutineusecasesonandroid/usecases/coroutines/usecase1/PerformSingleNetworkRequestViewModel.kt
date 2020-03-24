@@ -28,19 +28,17 @@ class PerformSingleNetworkRequestViewModel : ViewModel() {
     fun performSingleNetworkRequest() {
         viewModelScope.launch {
             uiState.value = UiState.Loading
-            withContext(Dispatchers.IO) {
-                try {
-                    val recentVersions = mockApi.getRecentAndroidVersions()
-                    withContext(Dispatchers.Main) {
-                        uiState.value = UiState.Success(recentVersions)
-                    }
-                } catch (exception: Exception) {
-                    withContext(Dispatchers.Main) {
-                        uiState.value = UiState.Error("Network Request failed")
-                    }
-                }
+            try {
+                val recentVersions = getRecentAndroidVersions()
+                uiState.value = UiState.Success(recentVersions)
+            } catch (exception: Exception) {
+                uiState.value = UiState.Error("Network Request failed")
             }
         }
+    }
+
+    private suspend fun getRecentAndroidVersions() = withContext(Dispatchers.IO) {
+        mockApi.getRecentAndroidVersions()
     }
 
     fun uiState(): LiveData<UiState> = uiState
