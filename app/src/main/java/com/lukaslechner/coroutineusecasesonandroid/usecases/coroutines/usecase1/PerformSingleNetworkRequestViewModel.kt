@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
+import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.createMockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
@@ -13,17 +14,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PerformSingleNetworkRequestViewModel : ViewModel() {
-
-    private val mockApi = createMockApi(
-        MockNetworkInterceptor()
-            .mock(
-                "http://localhost/recent-android-versions",
-                Gson().toJson(mockAndroidVersions),
-                200,
-                1500
-            )
-    )
+class PerformSingleNetworkRequestViewModel(
+    private val mockApi: MockApi = mockApi()
+) : ViewModel() {
 
     fun performSingleNetworkRequest() {
         viewModelScope.launch {
@@ -43,6 +36,19 @@ class PerformSingleNetworkRequestViewModel : ViewModel() {
 
     fun uiState(): LiveData<UiState> = uiState
     private val uiState: MutableLiveData<UiState> = MutableLiveData()
+
+    companion object {
+        fun mockApi() =
+            createMockApi(
+                MockNetworkInterceptor()
+                    .mock(
+                        "http://localhost/recent-android-versions",
+                        Gson().toJson(mockAndroidVersions),
+                        200,
+                        1500
+                    )
+            )
+    }
 
     sealed class UiState {
         object Loading : UiState()
