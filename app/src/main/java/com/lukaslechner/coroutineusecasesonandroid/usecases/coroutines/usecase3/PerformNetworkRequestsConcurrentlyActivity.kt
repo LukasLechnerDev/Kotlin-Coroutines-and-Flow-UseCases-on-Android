@@ -1,13 +1,14 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformnetworkrequestsconcurrentlyBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
+import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
+import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
@@ -56,7 +57,7 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
 
     private fun onLoad() {
         operationStartTime = System.currentTimeMillis()
-        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.setVisible()
         binding.textViewDuration.text = ""
         binding.textViewResult.text = ""
         disableButtons()
@@ -64,7 +65,7 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
 
     private fun onSuccess(uiState: UiState.Success) {
         enableButtons()
-        binding.progressBar.visibility = View.GONE
+        binding.progressBar.setGone()
         val duration = System.currentTimeMillis() - operationStartTime
         binding.textViewDuration.text = getString(R.string.duration, duration)
 
@@ -80,8 +81,8 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
     }
 
     private fun onError(uiState: UiState.Error) {
-        binding.progressBar.visibility = View.GONE
-        binding.textViewDuration.visibility = View.GONE
+        binding.progressBar.setGone()
+        binding.textViewDuration.setGone()
         toast(uiState.message)
         enableButtons()
     }

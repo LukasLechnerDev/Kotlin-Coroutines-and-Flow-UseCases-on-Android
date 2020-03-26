@@ -11,7 +11,7 @@ Currently, it is in heavy "Work in Progress". Most of the examples aren't implem
 4. Performing a variable amount of network requests, depending on the amount of data sets received from the first network request
 5. Performing a network request with a timeout
 6. Retrying network requests
-7. Query data from a room database
+7. Room and Coroutines
 8. Load data from a cache first, then from the network request using LiveData
 9. Offload a heavy calculation from the main thread
 10. Offload a heavy calculation to several Coroutines

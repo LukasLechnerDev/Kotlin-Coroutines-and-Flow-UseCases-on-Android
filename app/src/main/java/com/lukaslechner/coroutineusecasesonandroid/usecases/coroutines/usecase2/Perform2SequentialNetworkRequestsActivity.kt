@@ -1,12 +1,13 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerform2sequentialnetworkrequestsBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
+import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
+import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
@@ -50,12 +51,12 @@ class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
     }
 
     private fun onLoad() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.setVisible()
         binding.textViewResult.text = ""
     }
 
     private fun onSuccess(uiState: UiState.Success) {
-        binding.progressBar.visibility = View.GONE
+        binding.progressBar.setGone()
         binding.textViewResult.text = fromHtml(
             "<b>Features of most recent Android Version \" ${uiState.versionFeatures.androidVersion.name} \"</b><br>" +
                     uiState.versionFeatures.features.joinToString(
@@ -66,7 +67,7 @@ class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
     }
 
     private fun onError(uiState: UiState.Error) {
-        binding.progressBar.visibility = View.GONE
+        binding.progressBar.setGone()
         toast(uiState.message)
     }
 }

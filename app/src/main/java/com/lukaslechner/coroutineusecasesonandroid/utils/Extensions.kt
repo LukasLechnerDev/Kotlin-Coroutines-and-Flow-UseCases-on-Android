@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.view.View
 import android.widget.Toast
 
 /**
@@ -19,4 +20,16 @@ fun fromHtml(source: String): Spanned {
         @Suppress("DEPRECATION")
         Html.fromHtml(source)
     }
+}
+
+fun View.setVisible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.setInvisible() {
+    this.visibility = View.INVISIBLE
+}
+
+fun View.setGone() {
+    this.visibility = View.GONE
 }

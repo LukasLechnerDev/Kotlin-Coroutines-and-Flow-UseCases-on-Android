@@ -1,10 +1,10 @@
 package com.lukaslechner.coroutineusecasesonandroid.views
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.lukaslechner.coroutineusecasesonandroid.R
+import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ abstract class BaseActivity : AppCompatActivity() {
     private fun getToolbar(): TextView = findViewById(R.id.toolbarTitle)
 
     fun hideUpButton() {
-        getUpButton().visibility = View.GONE
+        getUpButton().setGone()
     }
 
     private fun setToolbarTitle(toolbarTitle: String) {

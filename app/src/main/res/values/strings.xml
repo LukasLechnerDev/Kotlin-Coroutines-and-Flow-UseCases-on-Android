@@ -6,4 +6,8 @@
     <string name="load_features_of_android_versions_concurrently">Load Features of Android Versions concurrently</string>
     <string name="duration">Operation took %d ms</string>
     <string name="timeout">TimeOut in ms: </string>
+    <string name="load_android_versions">Load Android Versions</string>
+    <string name="clear_database">Clear Database</string>
+    <string name="loading_data_from_database">loading data from database</string>
+    <string name="loading_data_from_network">loading data from network</string>
 </resources>
