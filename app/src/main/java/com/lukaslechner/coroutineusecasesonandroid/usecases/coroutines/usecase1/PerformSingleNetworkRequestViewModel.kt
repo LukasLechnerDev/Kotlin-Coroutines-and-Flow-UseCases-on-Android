@@ -10,12 +10,14 @@ import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.createMockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PerformSingleNetworkRequestViewModel(
-    private val mockApi: MockApi = mockApi()
+    private val mockApi: MockApi = mockApi(),
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     fun performSingleNetworkRequest() {
@@ -30,7 +32,7 @@ class PerformSingleNetworkRequestViewModel(
         }
     }
 
-    private suspend fun getRecentAndroidVersions() = withContext(Dispatchers.IO) {
+    private suspend fun getRecentAndroidVersions() = withContext(ioDispatcher) {
         mockApi.getRecentAndroidVersions()
     }
 
