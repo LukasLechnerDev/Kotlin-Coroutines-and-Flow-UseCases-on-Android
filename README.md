@@ -11,15 +11,14 @@ Currently, it is in heavy "Work in Progress". Most of the examples aren't implem
 4. Performing a variable amount of network requests, depending on the amount of data sets received from the first network request
 5. Performing a network request with a timeout
 6. Retrying network requests
-7. Room and Coroutines
-8. Load data from a cache first, then from the network request using LiveData
-9. Offload a heavy calculation from the main thread
-10. Offload a heavy calculation to several Coroutines
-11. Handling Exceptions
-12. Coroutine Cancellation
-13. Continue Coroutine execution even when the user has already left the screen
-14. Using WorkManager together with Coroutines
-15. [Wrapping Callback based API](#15-wrapping-callback-based-api)
+7. [Room and Coroutines](#7-room-and-coroutines)
+8. Offload a heavy calculation from the main thread
+9. Offload a heavy calculation to several Coroutines
+10. Handling Exceptions
+11. Coroutine Cancellation
+12. Continue Coroutine execution even when the user has already left the screen
+13. Using WorkManager together with Coroutines
+14. [Wrapping Callback based API](#15-wrapping-callback-based-api)
 
 ## Channels Use Cases
 WIP
@@ -37,6 +36,12 @@ Almost every real Android application needs to do some networking.
 ### 2. Performing two sequential network requests
 
 Performs one network request after the other.
+
+### 7. Room and Coroutines
+
+This example stores the response data of each network request in a Room database. This is essential for any "offline-first" app.
+If the `View` requests data, the `ViewModel` first checks if there is data available in the database. If so, this data is returned before performing
+a network request to get fresh data.
 
 ### 15. Wrapping callback based API
 
