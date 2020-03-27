@@ -10,4 +10,5 @@
     <string name="clear_database">Clear Database</string>
     <string name="loading_data_from_database">loading data from database</string>
     <string name="loading_data_from_network">loading data from network</string>
+    <string name="load_recent_android_versions_and_do_some_calculations">Load Recent Android Versions and do some calculations</string>
 </resources>

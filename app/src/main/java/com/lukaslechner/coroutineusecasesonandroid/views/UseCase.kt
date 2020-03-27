@@ -10,6 +10,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6.RetryNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.RoomAndCoroutinesActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.DebuggingCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
 import kotlinx.android.parcel.Parcelize
 
@@ -52,6 +53,10 @@ private val coroutinesUseCases =
             UseCase(
                 "Room and Coroutines",
                 RoomAndCoroutinesActivity::class.java
+            ),
+            UseCase(
+                "Debugging Coroutines",
+                DebuggingCoroutinesActivity::class.java
             )
         )
     )

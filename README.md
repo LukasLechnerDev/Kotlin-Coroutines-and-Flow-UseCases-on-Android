@@ -12,6 +12,7 @@ Currently, it is in heavy "Work in Progress". Most of the examples aren't implem
 5. Performing a network request with a timeout
 6. Retrying network requests
 7. [Room and Coroutines](#7-room-and-coroutines)
+8. [Debugging Coroutines](#8-debugging-coroutines)
 8. Offload a heavy calculation from the main thread
 9. Offload a heavy calculation to several Coroutines
 10. Handling Exceptions
@@ -42,6 +43,15 @@ Performs one network request after the other.
 This example stores the response data of each network request in a Room database. This is essential for any "offline-first" app.
 If the `View` requests data, the `ViewModel` first checks if there is data available in the database. If so, this data is returned before performing
 a network request to get fresh data.
+
+### 8. Debugging Coroutines
+
+Shows how you can add additional debug information about the Coroutine that is currently running to your logs.
+It will add the Coroutine name next to the thread name when calling `Thread.currentThread.name()`
+This is done by enabling Coroutine Debug mode by setting the property `kotlinx.coroutines.debug` to `true`.
+This is how it will look like in LogCat:
+
+![DebuggingCoroutines](documentation/images/debugging_coroutines.png)
 
 ### 15. Wrapping callback based API
 

@@ -33,3 +33,8 @@ fun View.setInvisible() {
 fun View.setGone() {
     this.visibility = View.GONE
 }
+
+fun logWithThreadAndCoroutineInfo(message: String) =
+    println("[${Thread.currentThread().name}] $message")
+
+fun addCoroutineDebugInfo(message: String) = "[${Thread.currentThread().name}] $message"
