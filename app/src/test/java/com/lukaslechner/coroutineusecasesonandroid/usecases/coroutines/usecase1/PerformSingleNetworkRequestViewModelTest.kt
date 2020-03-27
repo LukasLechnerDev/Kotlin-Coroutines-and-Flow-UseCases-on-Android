@@ -3,16 +3,13 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.fakes.FakeApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import kotlinx.coroutines.Dispatchers
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -24,67 +21,57 @@ class PerformSingleNetworkRequestViewModelTest {
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
+    @get: Rule
+    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+
     private val testDispatcher = TestCoroutineDispatcher()
 
-    private val receivedUiStates: MutableList<PerformSingleNetworkRequestViewModel.UiState> =
+    private val receivedUiStates: MutableList<UiState> =
         arrayListOf()
 
-    @Before
-    fun setUp() {
-        // TODO: Move to JUnit Rule
-        Dispatchers.setMain(testDispatcher)
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
-
-        // looks for Coroutine leaks
-        testDispatcher.cleanupTestCoroutines()
-
-        receivedUiStates.clear()
-    }
-
     @Test
-    fun `should return Success when network request is successful`() = runBlockingTest {
+    fun `should return Success when network request is successful`() =
+        coroutineTestRule.runBlockingTest {
 
-        val simpleFakeApi = FakeApi()
-        val viewModel = PerformSingleNetworkRequestViewModel(simpleFakeApi, testDispatcher)
+            val fakeApi = FakeApi()
+            val viewModel = PerformSingleNetworkRequestViewModel(fakeApi, testDispatcher)
         observeViewModel(viewModel)
 
         assertTrue(receivedUiStates.isEmpty())
 
         viewModel.performSingleNetworkRequest()
-        assertEquals(1, receivedUiStates.size)
-        assertEquals(PerformSingleNetworkRequestViewModel.UiState.Loading, receivedUiStates.first())
+            assertEquals(listOf(UiState.Loading), receivedUiStates)
 
-        simpleFakeApi.sendResponseToGetRecentAndroidVersionsRequest(mockAndroidVersions)
-        assertEquals(2, receivedUiStates.size)
+            fakeApi.sendResponseToGetRecentAndroidVersionsRequest(mockAndroidVersions)
         assertEquals(
-            PerformSingleNetworkRequestViewModel.UiState.Success(mockAndroidVersions),
-            receivedUiStates[1]
+            listOf(
+                UiState.Loading,
+                UiState.Success(mockAndroidVersions)
+            ),
+            receivedUiStates
         )
     }
 
     @Test
-    fun `should return Error when network request fails`() = runBlockingTest {
+    fun `should return Error when network request fails`() = coroutineTestRule.runBlockingTest {
 
-        val simpleFakeApi = FakeApi()
+        val fakeApi = FakeApi()
 
-        val viewModel = PerformSingleNetworkRequestViewModel(simpleFakeApi, testDispatcher)
+        val viewModel = PerformSingleNetworkRequestViewModel(fakeApi, testDispatcher)
         observeViewModel(viewModel)
 
         assertTrue(receivedUiStates.isEmpty())
 
         viewModel.performSingleNetworkRequest()
-        assertEquals(1, receivedUiStates.size)
-        assertEquals(PerformSingleNetworkRequestViewModel.UiState.Loading, receivedUiStates.first())
+        assertEquals(listOf(UiState.Loading), receivedUiStates)
 
-        simpleFakeApi.sendErrorToGetRecentAndroidVersionsRequest(IOException())
-        assertEquals(2, receivedUiStates.size)
+        fakeApi.sendErrorToGetRecentAndroidVersionsRequest(IOException())
         assertEquals(
-            PerformSingleNetworkRequestViewModel.UiState.Error("Network Request failed"),
-            receivedUiStates[1]
+            listOf(
+                UiState.Loading,
+                UiState.Error("Network Request failed")
+            ),
+            receivedUiStates
         )
     }
 
