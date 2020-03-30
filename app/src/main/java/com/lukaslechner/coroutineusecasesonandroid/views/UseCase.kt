@@ -11,6 +11,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6.RetryNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.RoomAndCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.DebuggingCoroutinesActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.CalculationInBackgroundActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
 import kotlinx.android.parcel.Parcelize
 
@@ -57,6 +58,10 @@ private val coroutinesUseCases =
             UseCase(
                 "Debugging Coroutines",
                 DebuggingCoroutinesActivity::class.java
+            ),
+            UseCase(
+                "Perform Calculation in the background",
+                CalculationInBackgroundActivity::class.java
             )
         )
     )

@@ -27,6 +27,7 @@
         <activity android:name=".usecases.coroutines.usecase6.RetryNetworkRequestActivity" />
         <activity android:name=".usecases.coroutines.usecase7.RoomAndCoroutinesActivity" />
         <activity android:name=".usecases.coroutines.usecase8.DebuggingCoroutinesActivity" />
+        <activity android:name=".usecases.coroutines.usecase9.CalculationInBackgroundActivity" />
 
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
 
