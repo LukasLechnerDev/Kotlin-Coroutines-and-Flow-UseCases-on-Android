@@ -19,8 +19,6 @@ class CalculationInBackgroundActivity : BaseActivity() {
     private val binding by lazy { ActivityCalculationinbackgroundBinding.inflate(layoutInflater) }
     private val viewModel: CalculationInBackgroundViewModel by viewModels()
 
-    private var calculationStartTime = 0L
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -32,7 +30,6 @@ class CalculationInBackgroundActivity : BaseActivity() {
         binding.btnCalculate.setOnClickListener {
             val factorialOf = binding.editTextFactorialOf.text.toString().toIntOrNull()
             if (factorialOf != null) {
-                calculationStartTime = System.currentTimeMillis()
                 viewModel.performCalculation(factorialOf)
             }
         }
@@ -61,11 +58,11 @@ class CalculationInBackgroundActivity : BaseActivity() {
     }
 
     private fun onSuccess(uiState: UiState.Success) {
-        val duration = System.currentTimeMillis() - calculationStartTime
-        binding.textViewDuration.text = getString(R.string.duration, duration)
+        binding.textViewDuration.text =
+            getString(R.string.duration_calculation, uiState.computationDuration)
         binding.progressBar.setGone()
         binding.btnCalculate.isEnabled = true
-        binding.textViewResult.text = uiState.result.toString()
+        binding.textViewResult.text = uiState.result
     }
 
     private fun onError(uiState: UiState.Error) {

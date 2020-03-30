@@ -18,8 +18,10 @@ class CalculationInBackgroundViewModel(
         viewModelScope.launch {
             uiState.value = UiState.Loading
             try {
+                val computationStart = System.currentTimeMillis()
                 val result = calculateFactorialOf(factorialOf)
-                uiState.value = UiState.Success(result)
+                val computationDuration = System.currentTimeMillis() - computationStart
+                uiState.value = UiState.Success(result.toString(), computationDuration)
             } catch (exception: Exception) {
                 uiState.value = UiState.Error("Network Request failed")
             }
@@ -41,7 +43,7 @@ class CalculationInBackgroundViewModel(
 
     sealed class UiState {
         object Loading : UiState()
-        data class Success(val result: BigInteger) : UiState()
+        data class Success(val result: String, val computationDuration: Long) : UiState()
         data class Error(val message: String) : UiState()
     }
 }

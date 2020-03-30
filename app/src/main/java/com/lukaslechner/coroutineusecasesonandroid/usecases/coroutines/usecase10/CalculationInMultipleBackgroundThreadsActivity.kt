@@ -23,8 +23,6 @@ class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
     }
     private val viewModel: CalculationInMultipleBackgroundThreadsViewModel by viewModels()
 
-    private var calculationStartTime = 0L
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -39,7 +37,6 @@ class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
             val factorialOf = binding.editTextFactorialOf.text.toString().toIntOrNull()
             val numberOfThreads = binding.editTextNumberOfThreads.text.toString().toIntOrNull()
             if (factorialOf != null && numberOfThreads != null) {
-                calculationStartTime = System.currentTimeMillis()
                 viewModel.performCalculation(factorialOf, numberOfThreads)
             }
         }
@@ -68,11 +65,11 @@ class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
     }
 
     private fun onSuccess(uiState: UiState.Success) {
-        val duration = System.currentTimeMillis() - calculationStartTime
-        binding.textViewDuration.text = getString(R.string.duration, duration)
+        binding.textViewDuration.text =
+            getString(R.string.duration_calculation, uiState.computationDuration)
         binding.progressBar.setGone()
         binding.btnCalculate.isEnabled = true
-        binding.textViewResult.text = uiState.result.toString()
+        binding.textViewResult.text = uiState.result
     }
 
     private fun onError(uiState: UiState.Error) {

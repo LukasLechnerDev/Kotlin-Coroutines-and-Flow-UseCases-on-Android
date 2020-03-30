@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import java.math.BigInteger
 
 class CalculationInMultipleBackgroundThreadsViewModel(
     private val factorialCalculator: FactorialCalculator = FactorialCalculator()
@@ -14,9 +13,13 @@ class CalculationInMultipleBackgroundThreadsViewModel(
     fun performCalculation(factorialOf: Int, numberOfThreads: Int) {
         viewModelScope.launch {
             uiState.value = UiState.Loading
+
+            val computationStart = System.currentTimeMillis()
             val factorialResult =
                 factorialCalculator.calculateFactorial(factorialOf, numberOfThreads)
-            uiState.value = UiState.Success(factorialResult)
+            val computationDuration = System.currentTimeMillis() - computationStart
+
+            uiState.value = UiState.Success(factorialResult.toString(), computationDuration)
         }
     }
 
@@ -25,7 +28,7 @@ class CalculationInMultipleBackgroundThreadsViewModel(
 
     sealed class UiState {
         object Loading : UiState()
-        data class Success(val result: BigInteger) : UiState()
+        data class Success(val result: String, val computationDuration: Long) : UiState()
         data class Error(val message: String) : UiState()
     }
 }
