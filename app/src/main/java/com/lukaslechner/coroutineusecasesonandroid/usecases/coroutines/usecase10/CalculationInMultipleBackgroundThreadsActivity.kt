@@ -1,29 +1,35 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
-import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCalculationinbackgroundBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.CalculationInBackgroundViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCalculationinmultiplebackgroundthreadsBinding
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CalculationInMultipleBackgroundThreadsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
-class CalculationInBackgroundActivity : BaseActivity() {
+class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
 
     override fun getToolbarTitle() = "Perform Single Network Request"
 
-    private val binding by lazy { ActivityCalculationinbackgroundBinding.inflate(layoutInflater) }
-    private val viewModel: CalculationInBackgroundViewModel by viewModels()
+    private val binding by lazy {
+        ActivityCalculationinmultiplebackgroundthreadsBinding.inflate(
+            layoutInflater
+        )
+    }
+    private val viewModel: CalculationInMultipleBackgroundThreadsViewModel by viewModels()
 
     private var calculationStartTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val numberOfCores = Runtime.getRuntime().availableProcessors()
+        binding.textViewNumberOfCores.text = getString(R.string.device_cores, numberOfCores)
         viewModel.uiState().observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
@@ -31,9 +37,10 @@ class CalculationInBackgroundActivity : BaseActivity() {
         })
         binding.btnCalculate.setOnClickListener {
             val factorialOf = binding.editTextFactorialOf.text.toString().toIntOrNull()
-            if (factorialOf != null) {
+            val numberOfThreads = binding.editTextNumberOfThreads.text.toString().toIntOrNull()
+            if (factorialOf != null && numberOfThreads != null) {
                 calculationStartTime = System.currentTimeMillis()
-                viewModel.performCalculation(factorialOf)
+                viewModel.performCalculation(factorialOf, numberOfThreads)
             }
         }
     }
