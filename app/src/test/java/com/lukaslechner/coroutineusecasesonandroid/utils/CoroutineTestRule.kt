@@ -13,7 +13,7 @@ import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
 class CoroutineTestRule(
-    private val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+    val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 ) : TestWatcher(),
     TestCoroutineScope by TestCoroutineScope(testDispatcher) {
 
