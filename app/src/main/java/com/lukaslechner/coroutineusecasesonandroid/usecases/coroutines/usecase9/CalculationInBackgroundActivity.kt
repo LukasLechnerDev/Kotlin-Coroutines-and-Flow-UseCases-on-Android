@@ -14,7 +14,7 @@ import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class CalculationInBackgroundActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = "Perform Single Network Request"
+    override fun getToolbarTitle() = "Calculation in the background"
 
     private val binding by lazy { ActivityCalculationinbackgroundBinding.inflate(layoutInflater) }
     private val viewModel: CalculationInBackgroundViewModel by viewModels()

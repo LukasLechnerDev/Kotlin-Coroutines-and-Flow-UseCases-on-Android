@@ -14,7 +14,7 @@ import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = "Perform Single Network Request"
+    override fun getToolbarTitle() = "Calculation in multiple background threads"
 
     private val binding by lazy {
         ActivityCalculationinmultiplebackgroundthreadsBinding.inflate(
