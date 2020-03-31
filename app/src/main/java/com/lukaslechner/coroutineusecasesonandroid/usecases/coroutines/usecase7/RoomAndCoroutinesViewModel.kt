@@ -21,7 +21,7 @@ class RoomAndCoroutinesViewModel(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    fun performSingleNetworkRequest() {
+    fun loadData() {
         viewModelScope.launch {
             uiState.value = UiState.Loading.LoadFromDb
 

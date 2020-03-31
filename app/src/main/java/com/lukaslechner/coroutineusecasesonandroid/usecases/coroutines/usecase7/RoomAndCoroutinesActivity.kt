@@ -33,7 +33,7 @@ class RoomAndCoroutinesActivity : BaseActivity() {
             }
         })
         binding.btnLoadData.setOnClickListener {
-            viewModel.performSingleNetworkRequest()
+            viewModel.loadData()
         }
         binding.btnClearDatabase.setOnClickListener {
             viewModel.clearDatabase()
@@ -92,7 +92,6 @@ class RoomAndCoroutinesActivity : BaseActivity() {
     }
 
     private fun onError(uiState: UiState.Error) {
-
         when (uiState.dataSource) {
             is DataSource.Network -> {
                 binding.progressBarLoadFromNetwork.setGone()
