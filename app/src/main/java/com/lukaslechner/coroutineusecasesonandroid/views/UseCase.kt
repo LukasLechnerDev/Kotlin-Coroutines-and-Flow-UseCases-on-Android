@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CalculationInMultipleBackgroundThreadsActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.ExceptionHandlingActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ContinueCoroutineWhenUserLeavesScreenActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity
@@ -67,6 +69,14 @@ private val coroutinesUseCases =
             UseCase(
                 "Perform Calculation in multiple background threads",
                 CalculationInMultipleBackgroundThreadsActivity::class.java
+            ),
+            UseCase(
+                "Exception Handling",
+                ExceptionHandlingActivity::class.java
+            ),
+            UseCase(
+                "Continue Coroutine when User leaves screen",
+                ContinueCoroutineWhenUserLeavesScreenActivity::class.java
             )
         )
     )

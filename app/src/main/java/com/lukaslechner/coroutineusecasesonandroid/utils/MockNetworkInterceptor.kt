@@ -43,7 +43,7 @@ class MockNetworkInterceptor : Interceptor {
             .code(500)
             .request(request)
             .protocol(Protocol.HTTP_1_1)
-            .message("Bad server day")
+            .message("Internal Server Error")
             .body(
                 ResponseBody.create(
                     MediaType.get("application/json"),
@@ -87,6 +87,10 @@ class MockNetworkInterceptor : Interceptor {
                 persist
             )
         mockResponses.add(mockResponse)
+    }
+
+    companion object {
+        const val INTERNAL_SERVER_ERROR_HTTP_CODE = 500
     }
 }
 
