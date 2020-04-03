@@ -33,6 +33,9 @@ class CalculationInBackgroundActivity : BaseActivity() {
                 viewModel.performCalculation(factorialOf)
             }
         }
+        binding.btnCancel.setOnClickListener {
+            viewModel.cancelCalculation()
+        }
     }
 
     private fun render(uiState: UiState) {
@@ -52,22 +55,35 @@ class CalculationInBackgroundActivity : BaseActivity() {
     private fun onLoad() {
         binding.progressBar.setVisible()
         binding.textViewResult.text = ""
-        binding.textViewDuration.text = ""
+        binding.textViewCalculationDuration.text = ""
+        binding.textViewStringConversionDuration.text = ""
         binding.btnCalculate.isEnabled = false
+        binding.btnCancel.isEnabled = true
         binding.textViewResult.hideKeyboard()
     }
 
     private fun onSuccess(uiState: UiState.Success) {
-        binding.textViewDuration.text =
+        binding.textViewCalculationDuration.text =
             getString(R.string.duration_calculation, uiState.computationDuration)
+
+        binding.textViewStringConversionDuration.text =
+            getString(R.string.duration_stringconversion, uiState.stringConversionDuration)
+
         binding.progressBar.setGone()
         binding.btnCalculate.isEnabled = true
-        binding.textViewResult.text = uiState.result
+        binding.btnCancel.isEnabled = false
+
+        binding.textViewResult.text = if (uiState.result.length <= 150) {
+            uiState.result
+        } else {
+            "${uiState.result.substring(0, 147)}..."
+        }
     }
 
     private fun onError(uiState: UiState.Error) {
         binding.progressBar.setGone()
         binding.btnCalculate.isEnabled = true
+        binding.btnCancel.isEnabled = false
         toast(uiState.message)
     }
 }

@@ -8,6 +8,8 @@ import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityQueryfromroomdatabaseBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ContinueCoroutineWhenUserLeavesScreenViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
+import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
+import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
@@ -37,7 +39,7 @@ class ContinueCoroutineWhenUserLeavesScreenActivity : BaseActivity() {
         }
     }
 
-    private fun render(uiState: ContinueCoroutineWhenUserLeavesScreenViewModel.UiState) {
+    private fun render(uiState: UiState) {
         when (uiState) {
             is UiState.Loading -> {
                 onLoad(uiState)

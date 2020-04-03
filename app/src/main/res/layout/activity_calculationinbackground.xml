@@ -30,7 +30,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:text="15000" />
+                android:text="50000" />
 
         </LinearLayout>
 
@@ -39,8 +39,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:text="@string/calculate" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:enabled="true"
+            android:text="@string/cancel" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -51,7 +58,12 @@
             android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/textViewDuration"
+            android:id="@+id/textViewCalculationDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textViewStringConversionDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
@@ -65,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_text"
+                android:maxLength="150"
                 android:textSize="16sp" />
 
         </ScrollView>

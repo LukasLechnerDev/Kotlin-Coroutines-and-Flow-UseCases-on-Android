@@ -6,6 +6,7 @@
     <string name="load_features_of_android_versions_concurrently">Load Features of Android Versions concurrently</string>
     <string name="duration">Operation took %d ms</string>
     <string name="duration_calculation">Calculation took %d ms</string>
+    <string name="duration_stringconversion">Converting BigInteger to String took %d ms</string>
     <string name="timeout">TimeOut in ms: </string>
     <string name="load_android_versions">Load Android Versions</string>
     <string name="clear_database">Clear Database</string>
@@ -16,4 +17,5 @@
     <string name="calculate">Calculate</string>
     <string name="number_of_threads">Number of threads:</string>
     <string name="device_cores">Your device has %d cores</string>
+    <string name="cancel">Cancel</string>
 </resources>
