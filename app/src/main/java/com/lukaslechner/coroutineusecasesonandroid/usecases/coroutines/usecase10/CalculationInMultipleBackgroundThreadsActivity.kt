@@ -56,20 +56,27 @@ class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
         }
     }
 
-    private fun onLoad() {
-        binding.progressBar.setVisible()
-        binding.textViewResult.text = ""
-        binding.textViewDuration.text = ""
-        binding.btnCalculate.isEnabled = false
-        binding.textViewResult.hideKeyboard()
+    private fun onLoad() = with(binding) {
+        progressBar.setVisible()
+        textViewResult.text = ""
+        textViewDuration.text = ""
+        textViewStringConversionDuration.text = ""
+        btnCalculate.isEnabled = false
+        textViewResult.hideKeyboard()
     }
 
-    private fun onSuccess(uiState: UiState.Success) {
-        binding.textViewDuration.text =
+    private fun onSuccess(uiState: UiState.Success) = with(binding) {
+        textViewDuration.text =
             getString(R.string.duration_calculation, uiState.computationDuration)
-        binding.progressBar.setGone()
-        binding.btnCalculate.isEnabled = true
-        binding.textViewResult.text = uiState.result
+        textViewStringConversionDuration.text =
+            getString(R.string.duration_stringconversion, uiState.stringConversionDuration)
+        progressBar.setGone()
+        btnCalculate.isEnabled = true
+        textViewResult.text = if (uiState.result.length <= 150) {
+            uiState.result
+        } else {
+            "${uiState.result.substring(0, 147)}..."
+        }
     }
 
     private fun onError(uiState: UiState.Error) {

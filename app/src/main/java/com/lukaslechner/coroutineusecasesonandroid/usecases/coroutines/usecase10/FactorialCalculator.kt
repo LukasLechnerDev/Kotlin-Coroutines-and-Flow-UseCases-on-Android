@@ -7,27 +7,27 @@ class FactorialCalculator(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
 
-    suspend fun calculateFactorial(factorialOf: Int, numberOfThreads: Int): BigInteger =
-        coroutineScope {
-            val subRanges = createSubRangeList(factorialOf, numberOfThreads)
-            withContext(Dispatchers.Default) {
-                val result = subRanges.map { subRange ->
-                    async {
-                        val result = calculateFactorialOfSubRange(
-                            subRange
-                        )
-                        result
-                    }
-                }.awaitAll().fold(BigInteger.ONE, BigInteger::multiply)
-                return@withContext result
-            }
+    suspend fun calculateFactorial(factorialOf: Int, numberOfThreads: Int): BigInteger {
+        val subRanges = createSubRangeList(factorialOf, numberOfThreads)
+        return withContext(defaultDispatcher) {
+            subRanges.map { subRange ->
+                async {
+                    val result = calculateFactorialOfSubRange(subRange)
+                    result
+                }
+            }.awaitAll()
+                .fold(BigInteger.ONE, { acc, element ->
+                    yield()
+                    acc.multiply(element)
+                })
         }
-
+    }
 
     suspend fun calculateFactorialOfSubRange(subRange: SubRange): BigInteger {
         return withContext(defaultDispatcher) {
             var factorial = BigInteger.ONE
             for (i in subRange.start..subRange.end) {
+                yield()
                 factorial = factorial.multiply(BigInteger.valueOf(i.toLong()))
             }
             factorial
@@ -36,7 +36,7 @@ class FactorialCalculator(
 
     suspend fun createSubRangeList(factorialOf: Int, numberOfSubRanges: Int): List<SubRange> =
         withContext(defaultDispatcher) {
-            val floor = factorialOf.div(numberOfSubRanges)
+            val quotient = factorialOf.div(numberOfSubRanges)
             val rangesList = mutableListOf<SubRange>()
 
             var curStartIndex = 1
@@ -44,10 +44,10 @@ class FactorialCalculator(
                 rangesList.add(
                     SubRange(
                         curStartIndex,
-                        curStartIndex + (floor - 1)
+                        curStartIndex + (quotient - 1)
                     )
                 )
-                curStartIndex += floor
+                curStartIndex += quotient
             }
             rangesList.add(SubRange(curStartIndex, factorialOf))
             rangesList

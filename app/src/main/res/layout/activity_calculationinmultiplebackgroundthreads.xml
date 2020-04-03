@@ -82,6 +82,11 @@
         <TextView
             android:id="@+id/textViewDuration"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textViewStringConversionDuration"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
 

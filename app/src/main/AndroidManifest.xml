@@ -32,10 +32,14 @@
             android:name=".usecases.coroutines.usecase9.CalculationInBackgroundActivity"
             android:exported="true" />
 
-        <activity android:name=".usecases.coroutines.usecase10.CalculationInMultipleBackgroundThreadsActivity" />
+        <activity
+            android:name=".usecases.coroutines.usecase10.CalculationInMultipleBackgroundThreadsActivity"
+            android:exported="true" />
+
         <activity
             android:name=".usecases.coroutines.usecase11.ExceptionHandlingActivity"
             android:exported="true" />
+
         <activity android:name=".usecases.coroutines.usecase12.ContinueCoroutineWhenUserLeavesScreenActivity" />
 
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
