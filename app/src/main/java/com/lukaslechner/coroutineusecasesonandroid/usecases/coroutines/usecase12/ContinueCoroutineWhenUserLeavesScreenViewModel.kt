@@ -8,14 +8,14 @@ import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
 import kotlinx.coroutines.launch
 
 class ContinueCoroutineWhenUserLeavesScreenViewModel(
-    var database: AndroidVersionDao? = null
+    private var repository: AndroidVersionRepository
 ) : ViewModel() {
 
     fun loadData() {
-        viewModelScope.launch {
-            uiState.value = UiState.Loading.LoadFromDb
+        uiState.value = UiState.Loading.LoadFromDb
 
-            val localVersions = AndroidVersionRepository.getLocalAndroidVersions()
+        viewModelScope.launch {
+            val localVersions = repository.getLocalAndroidVersions()
             if (localVersions.isNotEmpty()) {
                 uiState.value =
                     UiState.Success(DataSource.Database, localVersions)
@@ -29,7 +29,7 @@ class ContinueCoroutineWhenUserLeavesScreenViewModel(
             try {
                 uiState.value = UiState.Success(
                     DataSource.Network,
-                    AndroidVersionRepository.loadRecentAndroidVersions()
+                    repository.loadRemoteAndroidVersions()
                 )
             } catch (exception: Exception) {
                 uiState.value = UiState.Error(DataSource.Network, "Network Request failed")
@@ -38,9 +38,7 @@ class ContinueCoroutineWhenUserLeavesScreenViewModel(
     }
 
     fun clearDatabase() {
-        viewModelScope.launch {
-            database!!.clear()
-        }
+        repository.clearDatabase()
     }
 
     fun uiState(): LiveData<UiState> = uiState

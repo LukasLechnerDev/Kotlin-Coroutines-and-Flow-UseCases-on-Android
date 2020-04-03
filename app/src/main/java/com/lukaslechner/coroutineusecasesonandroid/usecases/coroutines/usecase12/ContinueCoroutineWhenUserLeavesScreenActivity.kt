@@ -3,12 +3,11 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.lukaslechner.coroutineusecasesonandroid.CoroutineUsecasesOnAndroidApplication
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityQueryfromroomdatabaseBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ContinueCoroutineWhenUserLeavesScreenViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
-import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
-import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
@@ -17,16 +16,14 @@ class ContinueCoroutineWhenUserLeavesScreenActivity : BaseActivity() {
     override fun getToolbarTitle() = "Continue Coroutine when user leaves screen"
 
     private val binding by lazy { ActivityQueryfromroomdatabaseBinding.inflate(layoutInflater) }
-    private val viewModel: ContinueCoroutineWhenUserLeavesScreenViewModel by viewModels()
+
+    private val viewModel: ContinueCoroutineWhenUserLeavesScreenViewModel by viewModels {
+        ViewModelFactory((application as CoroutineUsecasesOnAndroidApplication).androidVersionRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        // ugly setter injection of the database
-        // could be improved to use constructor injection by using ViewModelFactory
-        viewModel.database =
-            AndroidVersionDatabase.getInstance(applicationContext).androidVersionDao()
         viewModel.uiState().observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)

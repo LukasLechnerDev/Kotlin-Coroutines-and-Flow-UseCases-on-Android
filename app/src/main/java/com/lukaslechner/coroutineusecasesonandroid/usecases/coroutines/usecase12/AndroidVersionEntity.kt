@@ -14,3 +14,7 @@ fun List<AndroidVersionEntity>.mapToUiModelList() = map {
 }
 
 fun AndroidVersion.mapToEntity() = AndroidVersionEntity(this.apiVersion, this.name)
+
+fun List<AndroidVersion>.mapToEntityList() = map {
+    it.mapToEntity()
+}

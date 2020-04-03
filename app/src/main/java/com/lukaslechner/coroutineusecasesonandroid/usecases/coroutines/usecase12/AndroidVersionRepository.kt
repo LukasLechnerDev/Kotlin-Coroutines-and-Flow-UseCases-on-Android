@@ -2,44 +2,53 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import com.google.gson.Gson
 import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
+import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.createMockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
 import kotlinx.coroutines.*
+import timber.log.Timber
 
-object AndroidVersionRepository {
-
-    private var database: AndroidVersionDao? = null
-    private val scope = CoroutineScope(SupervisorJob())
-    private val ioDispatcher = Dispatchers.IO
-    private val mockApi = mockApi()
+class AndroidVersionRepository(
+    private var database: AndroidVersionDao,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + ioDispatcher),
+    private val mockApi: MockApi = mockApi()
+) {
 
     suspend fun getLocalAndroidVersions(): List<AndroidVersion> {
-        return database!!.getAndroidVersions().mapToUiModelList()
+        return database.getAndroidVersions().mapToUiModelList()
     }
 
-    suspend fun loadRecentAndroidVersions(): List<AndroidVersion> {
+    suspend fun loadRemoteAndroidVersions(): List<AndroidVersion> {
         return scope.async {
             val recentVersions = getRecentAndroidVersions()
             for (recentVersion in recentVersions) {
-                database!!.insert(recentVersion.mapToEntity())
+                Timber.d("Insert $recentVersion to database")
+                database.insert(recentVersion.mapToEntity())
             }
             recentVersions
         }.await()
     }
 
-    private suspend fun getRecentAndroidVersions() = withContext(ioDispatcher) {
-        mockApi.getRecentAndroidVersions()
+    private suspend fun getRecentAndroidVersions() = mockApi.getRecentAndroidVersions()
+
+    fun clearDatabase() {
+        scope.launch {
+            database.clear()
+        }
     }
 
-    fun mockApi() =
-        createMockApi(
-            MockNetworkInterceptor()
-                .mock(
-                    "http://localhost/recent-android-versions",
-                    Gson().toJson(mockAndroidVersions),
-                    200,
-                    5000
-                )
-        )
+    companion object {
+        fun mockApi() =
+            createMockApi(
+                MockNetworkInterceptor()
+                    .mock(
+                        "http://localhost/recent-android-versions",
+                        Gson().toJson(mockAndroidVersions),
+                        200,
+                        5000
+                    )
+            )
+    }
 }

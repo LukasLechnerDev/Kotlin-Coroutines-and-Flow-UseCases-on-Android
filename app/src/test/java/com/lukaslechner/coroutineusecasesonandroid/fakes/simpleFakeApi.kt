@@ -9,8 +9,6 @@ class FakeApi : MockApi {
 
     private var recentAndroidVersionsCompletable = CompletableDeferred<List<AndroidVersion>>()
 
-    private var androidVersionFeaturesCompletable = CompletableDeferred<VersionFeatures>()
-
     private val versionFeaturesCompletables = mapOf(
         27 to CompletableDeferred<VersionFeatures>(),
         28 to CompletableDeferred<VersionFeatures>(),
