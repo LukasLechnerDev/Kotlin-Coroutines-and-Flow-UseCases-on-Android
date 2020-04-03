@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CooperativeCancellationActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ExceptionHandlingActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity
@@ -65,6 +66,10 @@ private val coroutinesUseCases =
             UseCase(
                 "Perform Calculation in the background",
                 CalculationInBackgroundActivity::class.java
+            ),
+            UseCase(
+                "Cooperative Cancellation",
+                CooperativeCancellationActivity::class.java
             ),
             UseCase(
                 "Perform Calculation in multiple background threads",

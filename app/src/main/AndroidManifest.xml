@@ -33,6 +33,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".usecases.coroutines.usecase10.CooperativeCancellationActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsActivity"
             android:exported="true" />
 

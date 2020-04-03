@@ -1,23 +1,23 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
-import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCalculationinbackgroundBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.CalculationInBackgroundViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCooperativecancellationBinding
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CooperativeCancellationViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
-class CalculationInBackgroundActivity : BaseActivity() {
+class CooperativeCancellationActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = "Calculation in the background"
+    override fun getToolbarTitle() = "Cooperative Cancellation"
 
-    private val binding by lazy { ActivityCalculationinbackgroundBinding.inflate(layoutInflater) }
-    private val viewModel: CalculationInBackgroundViewModel by viewModels()
+    private val binding by lazy { ActivityCooperativecancellationBinding.inflate(layoutInflater) }
+    private val viewModel: CooperativeCancellationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +32,9 @@ class CalculationInBackgroundActivity : BaseActivity() {
             if (factorialOf != null) {
                 viewModel.performCalculation(factorialOf)
             }
+        }
+        binding.btnCancel.setOnClickListener {
+            viewModel.cancelCalculation()
         }
     }
 
@@ -55,6 +58,7 @@ class CalculationInBackgroundActivity : BaseActivity() {
         textViewCalculationDuration.text = ""
         textViewStringConversionDuration.text = ""
         btnCalculate.isEnabled = false
+        btnCancel.isEnabled = true
         textViewResult.hideKeyboard()
     }
 
@@ -65,8 +69,10 @@ class CalculationInBackgroundActivity : BaseActivity() {
         textViewStringConversionDuration.text =
             getString(R.string.duration_stringconversion, uiState.stringConversionDuration)
 
-        progressBar.setGone()
+        binding.progressBar.setGone()
         btnCalculate.isEnabled = true
+        btnCancel.isEnabled = false
+
         textViewResult.text = if (uiState.result.length <= 150) {
             uiState.result
         } else {
@@ -74,9 +80,10 @@ class CalculationInBackgroundActivity : BaseActivity() {
         }
     }
 
-    private fun onError(uiState: UiState.Error) {
-        binding.progressBar.setGone()
-        binding.btnCalculate.isEnabled = true
+    private fun onError(uiState: UiState.Error) = with(binding) {
+        progressBar.setGone()
+        btnCalculate.isEnabled = true
+        btnCancel.isEnabled = false
         toast(uiState.message)
     }
 }
