@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11
 
 import kotlinx.coroutines.*
 import java.math.BigInteger

@@ -33,14 +33,14 @@
             android:exported="true" />
 
         <activity
-            android:name=".usecases.coroutines.usecase10.CalculationInMultipleBackgroundThreadsActivity"
+            android:name=".usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsActivity"
             android:exported="true" />
 
         <activity
-            android:name=".usecases.coroutines.usecase11.ExceptionHandlingActivity"
+            android:name=".usecases.coroutines.usecase12.ExceptionHandlingActivity"
             android:exported="true" />
 
-        <activity android:name=".usecases.coroutines.usecase12.ContinueCoroutineWhenUserLeavesScreenActivity" />
+        <activity android:name=".usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity" />
 
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
 

@@ -1,11 +1,11 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCalculationinmultiplebackgroundthreadsBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CalculationInMultipleBackgroundThreadsViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible

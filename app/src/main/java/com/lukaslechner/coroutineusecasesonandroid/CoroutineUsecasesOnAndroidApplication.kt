@@ -1,8 +1,8 @@
 package com.lukaslechner.coroutineusecasesonandroid
 
 import android.app.Application
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.AndroidVersionDatabase
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.AndroidVersionRepository
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.AndroidVersionDatabase
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.AndroidVersionRepository
 import timber.log.Timber
 
 class CoroutineUsecasesOnAndroidApplication : Application() {

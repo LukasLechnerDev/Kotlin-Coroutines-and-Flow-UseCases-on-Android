@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13
 
 import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
 import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi

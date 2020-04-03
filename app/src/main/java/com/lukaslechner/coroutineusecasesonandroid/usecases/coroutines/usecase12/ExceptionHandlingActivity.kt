@@ -1,11 +1,11 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityExceptionhandlingBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.ExceptionHandlingViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ExceptionHandlingViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible

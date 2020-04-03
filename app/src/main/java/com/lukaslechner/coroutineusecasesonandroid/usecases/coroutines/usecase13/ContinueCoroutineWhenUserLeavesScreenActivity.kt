@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.CoroutineUsecasesOnAndroidApplication
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityQueryfromroomdatabaseBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ContinueCoroutineWhenUserLeavesScreenViewModel.UiState
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
