@@ -1,3 +1,5 @@
+![CoroutineUsecasesOnAndroid](CoroutinesUsecasesGithubLogo.png)
+
 # Coroutine Use Cases on Android
 
 This project contains a lot of real-world Android use cases implemented with Kotlin Coroutines, Channels and Flow.
