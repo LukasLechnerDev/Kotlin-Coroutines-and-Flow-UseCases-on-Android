@@ -7,7 +7,7 @@ Learning Coroutines for Android by Example. Sample Implementations for Common An
 This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine implementations.
 
 Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contains all the interesting Coroutine related code.
-`Activities` only render received `UiState`s from the `ViewModel`.
+`Activities` listen to `LiveData` events of the `ViewModel` and render received `UiState`s.
 
 Unit Tests exist for most use cases.
 
@@ -15,11 +15,11 @@ This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. 
 Everything can be configured: http status codes, response data and delays. Every use case defines its own Mock API.
 
 ## Use Cases
-1. [Performing a single network request](#1-performing-a-single-network-request)
-2. [Performing two sequential network request](#2-performing-two-sequential-network-requests)
-3. Performing several network requests concurrently
-4. Performing a variable amount of network requests, depending on the amount of data sets received from the first network request
-5. Performing a network request with a timeout
+1. [Perform single network request](#1-perform-a-single-network-request)
+2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
+3. Perform several network requests concurrently
+4. Perform a variable amount of network requests, depending on the amount of data sets received from the first network request
+5. Perform a network request with a timeout
 6. Retrying network requests
 7. [Room and Coroutines](#7-room-and-coroutines)
 8. [Debugging Coroutines](#8-debugging-coroutines)
@@ -32,13 +32,13 @@ Everything can be configured: http status codes, response data and delays. Every
 
 ## Description
 
-### 1. Performing a single network request
+### 1. Perform single network request
 
-Performs a single network request and returns the result back to the `Activity`.
+Performs a single network request to get the latest Android Versions.
 
-### 2. Performing two sequential network requests
+### 2. Perform two sequential network requests
 
-Performs one network request after the other.
+Performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
 
 ### 7. Room and Coroutines
 

@@ -30,6 +30,7 @@ data class UseCase(
 data class UseCaseCategory(val categoryName: String, val useCases: List<UseCase>) : Parcelable
 
 const val useCase1Description = "#1 Perform single network request"
+const val useCase2Description = "#2 Perform two sequential network requests"
 
 private val coroutinesUseCases =
     UseCaseCategory(
@@ -39,7 +40,7 @@ private val coroutinesUseCases =
                 PerformSingleNetworkRequestActivity::class.java
             ),
             UseCase(
-                "Perform 2 network request sequentially",
+                useCase2Description,
                 Perform2SequentialNetworkRequestsActivity::class.java
             ),
             UseCase(

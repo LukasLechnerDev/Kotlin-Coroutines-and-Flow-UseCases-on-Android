@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase2Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerform2sequentialnetworkrequestsBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
@@ -21,7 +22,7 @@ class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
 
     private val viewModel: Perform2SequentialNetworkRequestsViewModel by viewModels()
 
-    override fun getToolbarTitle() = "Perform 2 Sequential Network Requests"
+    override fun getToolbarTitle() = useCase2Description
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,14 +51,14 @@ class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
         }
     }
 
-    private fun onLoad() {
-        binding.progressBar.setVisible()
-        binding.textViewResult.text = ""
+    private fun onLoad() = with(binding) {
+        progressBar.setVisible()
+        textViewResult.text = ""
     }
 
-    private fun onSuccess(uiState: UiState.Success) {
-        binding.progressBar.setGone()
-        binding.textViewResult.text = fromHtml(
+    private fun onSuccess(uiState: UiState.Success) = with(binding) {
+        progressBar.setGone()
+        textViewResult.text = fromHtml(
             "<b>Features of most recent Android Version \" ${uiState.versionFeatures.androidVersion.name} \"</b><br>" +
                     uiState.versionFeatures.features.joinToString(
                         prefix = "- ",
@@ -66,8 +67,9 @@ class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
         )
     }
 
-    private fun onError(uiState: UiState.Error) {
-        binding.progressBar.setGone()
+    private fun onError(uiState: UiState.Error) = with(binding) {
+        progressBar.setGone()
+        btnRequestsSequentially.isEnabled = true
         toast(uiState.message)
     }
 }

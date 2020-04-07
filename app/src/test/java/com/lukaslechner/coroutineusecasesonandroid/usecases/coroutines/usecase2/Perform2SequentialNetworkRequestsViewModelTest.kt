@@ -6,6 +6,7 @@ import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
 import org.junit.Rule
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.rules.TestRule
 import java.io.IOException
 
+@ExperimentalCoroutinesApi
 class Perform2SequentialNetworkRequestsViewModelTest {
 
     @get:Rule
