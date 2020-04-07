@@ -21,14 +21,14 @@ class AndroidVersionRepository(
     }
 
     suspend fun loadRemoteAndroidVersions(): List<AndroidVersion> {
-        return scope.async {
+        return withContext(scope.coroutineContext) {
             val recentVersions = getRecentAndroidVersions()
             for (recentVersion in recentVersions) {
                 Timber.d("Insert $recentVersion to database")
                 database.insert(recentVersion.mapToEntity())
             }
             recentVersions
-        }.await()
+        }
     }
 
     private suspend fun getRecentAndroidVersions() = mockApi.getRecentAndroidVersions()
