@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.views
+package com.lukaslechner.coroutineusecasesonandroid.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

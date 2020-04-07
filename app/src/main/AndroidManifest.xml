@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".views.UseCaseActivity" />
+        <activity android:name=".base.UseCaseActivity" />
         <activity android:name=".usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity" />
         <activity android:name=".usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity" />
         <activity android:name=".usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity" />

@@ -1,8 +1,8 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1
 
 import android.os.Bundle
+import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityFlowUsecase1Binding
-import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class FlowUseCase1Activity : BaseActivity() {
 

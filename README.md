@@ -34,7 +34,7 @@ Everything can be configured: http status codes, response data and delays. Every
 
 ### 1. Performing a single network request
 
-Almost every real Android application needs to do some networking.
+Performs a single network request and returns the result back to the `Activity`.
 
 ### 2. Performing two sequential network requests
 

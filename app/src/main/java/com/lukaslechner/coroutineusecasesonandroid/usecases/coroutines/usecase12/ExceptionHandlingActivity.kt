@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
+import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityExceptionhandlingBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ExceptionHandlingViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
-import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class ExceptionHandlingActivity : BaseActivity() {
 

@@ -2,8 +2,8 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityWorkmangerBinding
-import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class WorkManagerActivity : BaseActivity() {
 

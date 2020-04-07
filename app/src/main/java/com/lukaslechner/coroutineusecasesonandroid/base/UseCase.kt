@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.views
+package com.lukaslechner.coroutineusecasesonandroid.base
 
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
@@ -29,11 +29,13 @@ data class UseCase(
 @Parcelize
 data class UseCaseCategory(val categoryName: String, val useCases: List<UseCase>) : Parcelable
 
+const val useCase1Description = "#1 Perform single network request"
+
 private val coroutinesUseCases =
     UseCaseCategory(
         "Coroutine Use Cases", listOf(
             UseCase(
-                "Perform single network request",
+                useCase1Description,
                 PerformSingleNetworkRequestActivity::class.java
             ),
             UseCase(

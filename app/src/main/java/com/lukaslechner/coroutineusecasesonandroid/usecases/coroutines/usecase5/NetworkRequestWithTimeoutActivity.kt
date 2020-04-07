@@ -3,13 +3,13 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityNetworkrequestwithtimeoutBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
-import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class NetworkRequestWithTimeoutActivity : BaseActivity() {
 

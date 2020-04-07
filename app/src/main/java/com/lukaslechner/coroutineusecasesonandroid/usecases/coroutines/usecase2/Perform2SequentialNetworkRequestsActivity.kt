@@ -3,13 +3,13 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerform2sequentialnetworkrequestsBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
-import com.lukaslechner.coroutineusecasesonandroid.views.BaseActivity
 
 class Perform2SequentialNetworkRequestsActivity : BaseActivity() {
 
