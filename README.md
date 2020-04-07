@@ -4,7 +4,8 @@
 
 Learning Coroutines for Android by Example. Sample Implementations for Common Android Use Cases. Unit Tests included!
 
-This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine implementations.
+This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine Android implementations.
+In the `playground` package you can play around with Coroutines examples that run directly on the JVM.
 
 Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contains all the interesting Coroutine related code.
 `Activities` listen to `LiveData` events of the `ViewModel` and render received `UiState`s.
