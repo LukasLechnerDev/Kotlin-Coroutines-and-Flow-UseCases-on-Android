@@ -2,11 +2,19 @@
 
 # Coroutine Use Cases on Android
 
-This project contains a lot of real-world Android use cases implemented with Kotlin Coroutines, Channels and Flow.
+Learning Coroutines for Android by Example. Sample Implementations for Common Android Use Cases. Unit Tests included!
 
-Currently, it is in heavy "Work in Progress". Most of the examples aren't implemented yet.
+This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine implementations.
 
-## Coroutines Use Cases
+Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contains all the interesting Coroutine related code.
+`Activities` only render received `UiState`s from the `ViewModel`.
+
+Unit Tests exist for most use cases.
+
+This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. This lets you define how the API should behave.
+Everything can be configured: http status codes, response data and delays. Every use case defines its own Mock API.
+
+## Use Cases
 1. [Performing a single network request](#1-performing-a-single-network-request)
 2. [Performing two sequential network request](#2-performing-two-sequential-network-requests)
 3. Performing several network requests concurrently
@@ -22,7 +30,7 @@ Currently, it is in heavy "Work in Progress". Most of the examples aren't implem
 12. Continue Coroutine execution even when the user has already left the screen
 14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
 
-## Coroutines Use Cases Description
+## Description
 
 ### 1. Performing a single network request
 
@@ -52,6 +60,10 @@ This is how it will look like in LogCat:
 Demonstrates how you can use WorkManager together with Coroutines. When creating a subclass of `CoroutineWorker` instead of `Worker`,
 the `doWork()` function is now a `suspend function` which means that we can now call other suspend functions. In this
 example, we are sending an analytics request when the user enters the screen, which is a nice use case for using WorkManager.
+
+## Contributing
+
+I am currently learning Coroutines myself. So if you have any ideas for or improvements or other use cases, feel free to create a pull request or an issue.
 
 ## License
 

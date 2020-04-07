@@ -114,7 +114,7 @@ private val flowUseCases =
     )
 
 val useCaseCategories = listOf(
-    coroutinesUseCases,
+    coroutinesUseCases /*,
     channelsUseCases,
-    flowUseCases
+    flowUseCases */
 )
