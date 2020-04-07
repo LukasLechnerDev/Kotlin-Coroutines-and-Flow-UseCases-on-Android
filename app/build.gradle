@@ -63,6 +63,10 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
+    def work_manager_version = "2.3.4"
+    implementation "androidx.work:work-runtime:$work_manager_version"
+    implementation "androidx.work:work-runtime-ktx:$work_manager_version"
+
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     def room_version = "2.2.5"

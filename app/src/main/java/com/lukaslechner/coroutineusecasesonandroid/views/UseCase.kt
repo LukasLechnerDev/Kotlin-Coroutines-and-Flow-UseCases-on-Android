@@ -8,6 +8,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ExceptionHandlingActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14.WorkManagerActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity
@@ -82,6 +83,10 @@ private val coroutinesUseCases =
             UseCase(
                 "Continue Coroutine when User leaves screen",
                 ContinueCoroutineWhenUserLeavesScreenActivity::class.java
+            ),
+            UseCase(
+                "Using WorkManager with Coroutines",
+                WorkManagerActivity::class.java
             )
         )
     )

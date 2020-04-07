@@ -45,6 +45,7 @@
             android:exported="true" />
 
         <activity android:name=".usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity" />
+        <activity android:name=".usecases.coroutines.usecase14.WorkManagerActivity" />
 
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
 

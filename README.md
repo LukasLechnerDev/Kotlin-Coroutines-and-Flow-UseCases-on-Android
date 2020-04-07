@@ -20,15 +20,7 @@ Currently, it is in heavy "Work in Progress". Most of the examples aren't implem
 10. Handling Exceptions
 11. Coroutine Cancellation
 12. Continue Coroutine execution even when the user has already left the screen
-13. Using WorkManager together with Coroutines
-14. [Wrapping Callback based API](#15-wrapping-callback-based-api)
-
-## Channels Use Cases
-WIP
-
-## Flow Use Cases
-WIP
-
+14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
 
 ## Coroutines Use Cases Description
 
@@ -55,9 +47,11 @@ This is how it will look like in LogCat:
 
 ![DebuggingCoroutines](documentation/images/debugging_coroutines.png)
 
-### 15. Wrapping callback based API
+### 14. Using WorkManager with Coroutines
 
-See e.g. https://medium.com/androiddevelopers/suspending-over-views-19de9ebd7020
+Demonstrates how you can use WorkManager together with Coroutines. When creating a subclass of `CoroutineWorker` instead of `Worker`,
+the `doWork()` function is now a `suspend function` which means that we can now call other suspend functions. In this
+example, we are sending an analytics request when the user enters the screen, which is a nice use case for using WorkManager.
 
 ## License
 

@@ -18,4 +18,5 @@
     <string name="number_of_threads">Number of threads:</string>
     <string name="device_cores">Your device has %d cores</string>
     <string name="cancel">Cancel</string>
+    <string name="workmanager_request">A work manager worker was requested to send an analytics request.</string>
 </resources>
