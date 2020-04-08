@@ -3,7 +3,6 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.fakes.FakeApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -32,7 +31,7 @@ class PerformSingleNetworkRequestViewModelTest {
 
             val fakeApi = FakeApi()
             val viewModel =
-                PerformSingleNetworkRequestViewModel(fakeApi, coroutineTestRule.testDispatcher)
+                PerformSingleNetworkRequestViewModel(fakeApi)
             observeViewModel(viewModel)
 
             assertTrue(receivedUiStates.isEmpty())
@@ -56,7 +55,7 @@ class PerformSingleNetworkRequestViewModelTest {
         val fakeApi = FakeApi()
 
         val viewModel =
-            PerformSingleNetworkRequestViewModel(fakeApi, coroutineTestRule.testDispatcher)
+            PerformSingleNetworkRequestViewModel(fakeApi)
         observeViewModel(viewModel)
 
         assertTrue(receivedUiStates.isEmpty())
@@ -68,7 +67,7 @@ class PerformSingleNetworkRequestViewModelTest {
         assertEquals(
             listOf(
                 UiState.Loading,
-                UiState.Error("Network Request failed")
+                UiState.Error("Network Request failed!")
             ),
             receivedUiStates
         )
