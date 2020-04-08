@@ -7,13 +7,15 @@ Learning Coroutines for Android by Example. Sample Implementations for Common An
 This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine Android implementations.
 In the `playground` package you can play around with Coroutines examples that run directly on the JVM.
 
+## Project Setup
+
 Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contains all the interesting Coroutine related code.
 `Activities` listen to `LiveData` events of the `ViewModel` and render received `UiState`s.
 
-Unit Tests exist for most use cases.
-
 This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. This lets you define how the API should behave.
 Everything can be configured: http status codes, response data and delays. Every use case defines its own Mock API.
+
+Unit Tests exist for most use cases.
 
 ## Use Cases
 1. [Perform single network request](#1-perform-a-single-network-request)
