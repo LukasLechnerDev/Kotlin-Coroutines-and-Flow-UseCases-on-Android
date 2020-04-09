@@ -42,6 +42,7 @@ Performs a single network request to get the latest Android Versions.
 ### 2. Perform two sequential network requests
 
 Performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
+There also exists an alternative implementation for this use case which uses traditional callbacks. It should demonstrate how much shorter and more readable the Coroutine version is compared to the approach with callbacks.
 
 ### 7. Room and Coroutines
 

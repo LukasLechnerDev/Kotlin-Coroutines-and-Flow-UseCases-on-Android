@@ -10,6 +10,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14.WorkManagerActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.usingcallbacks.SequentialNetworkRequestsCallbacksActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity
@@ -31,6 +32,7 @@ data class UseCaseCategory(val categoryName: String, val useCases: List<UseCase>
 
 const val useCase1Description = "#1 Perform single network request"
 const val useCase2Description = "#2 Perform two sequential network requests"
+const val useCase2UsingCallbacksDescription = "#2 using Callbacks"
 const val useCase3Description = "#3 Perform several network requests concurrently"
 
 private val coroutinesUseCases =
@@ -43,6 +45,10 @@ private val coroutinesUseCases =
             UseCase(
                 useCase2Description,
                 Perform2SequentialNetworkRequestsActivity::class.java
+            ),
+            UseCase(
+                useCase2UsingCallbacksDescription,
+                SequentialNetworkRequestsCallbacksActivity::class.java
             ),
             UseCase(
                 useCase3Description,
