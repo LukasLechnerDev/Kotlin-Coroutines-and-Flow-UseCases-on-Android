@@ -13,14 +13,16 @@ Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewMod
 `Activities` listen to `LiveData` events of the `ViewModel` and render received `UiState`s.
 
 This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. This lets you define how the API should behave.
-Everything can be configured: http status codes, response data and delays. Every use case defines its own Mock API.
+Everything can be configured: http status codes, response data and delays. Every use case defines a certain behaviour of the Mock API.
+The API has 2 endpoints. One returns the names of the most recent Android versions and the other one returns the features of a certain
+Android version.
 
 Unit Tests exist for most use cases.
 
 ## Use Cases
 1. [Perform single network request](#1-perform-a-single-network-request)
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
-3. Perform several network requests concurrently
+3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
 4. Perform a variable amount of network requests, depending on the amount of data sets received from the first network request
 5. Perform a network request with a timeout
 6. Retrying network requests
@@ -43,6 +45,12 @@ Performs a single network request to get the latest Android Versions.
 
 Performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
 There also exists an alternative implementation for this use case which uses traditional callbacks. It should demonstrate how much shorter and more readable the Coroutine version is compared to the approach with callbacks.
+
+### 3. Perform several network requests concurrently
+
+Performs three network requests concurrently. It loads the feature information of the 3 most recent Android Versions. Additionally, an implementation
+that performs the requests sequentially is included. The UI shows how much time each implementation takes to load the data so you can see that the network
+requests in the concurrent version are actually performed in parallel.
 
 ### 7. Room and Coroutines
 

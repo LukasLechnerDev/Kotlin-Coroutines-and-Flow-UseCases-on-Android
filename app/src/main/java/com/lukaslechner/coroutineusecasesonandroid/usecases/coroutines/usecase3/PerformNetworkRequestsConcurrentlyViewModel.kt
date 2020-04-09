@@ -3,20 +3,21 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3
 import androidx.lifecycle.viewModelScope
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
 import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
-import com.lukaslechner.coroutineusecasesonandroid.mock.VersionFeatures
-import kotlinx.coroutines.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class PerformNetworkRequestsConcurrentlyViewModel(
     private val mockApi: MockApi = mockApi()
-) : BaseViewModel<PerformNetworkRequestsConcurrentlyViewModel.UiState>() {
+) : BaseViewModel<UiState>() {
 
     fun performNetworkRequestsSequentially() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
             try {
-                val oreoFeatures = getAndroidVersionFeatures(27)
-                val pieFeatures = getAndroidVersionFeatures(28)
-                val android10Features = getAndroidVersionFeatures(29)
+                val oreoFeatures = mockApi.getAndroidVersionFeatures(27)
+                val pieFeatures = mockApi.getAndroidVersionFeatures(28)
+                val android10Features = mockApi.getAndroidVersionFeatures(29)
 
                 val versionFeatures = listOf(oreoFeatures, pieFeatures, android10Features)
                 uiState.value = UiState.Success(versionFeatures)
@@ -28,14 +29,13 @@ class PerformNetworkRequestsConcurrentlyViewModel(
     }
 
     fun performNetworkRequestsConcurrently() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
-
             try {
                 coroutineScope {
-                    val oreoFeaturesDeferred = async { getAndroidVersionFeatures(27) }
-                    val pieFeaturesDeferred = async { getAndroidVersionFeatures(28) }
-                    val android10FeaturesDeferred = async { getAndroidVersionFeatures(29) }
+                    val oreoFeaturesDeferred = async { mockApi.getAndroidVersionFeatures(27) }
+                    val pieFeaturesDeferred = async { mockApi.getAndroidVersionFeatures(28) }
+                    val android10FeaturesDeferred = async { mockApi.getAndroidVersionFeatures(29) }
 
                     val oreoFeatures = oreoFeaturesDeferred.await()
                     val pieFeatures = pieFeaturesDeferred.await()
@@ -53,18 +53,5 @@ class PerformNetworkRequestsConcurrentlyViewModel(
                 uiState.value = UiState.Error("Network Request failed")
             }
         }
-    }
-
-    private suspend fun getAndroidVersionFeatures(apiVersion: Int) = withContext(Dispatchers.IO) {
-        mockApi.getAndroidVersionFeatures(apiVersion)
-    }
-
-    sealed class UiState {
-        object Loading : UiState()
-        data class Success(
-            val versionFeatures: List<VersionFeatures>
-        ) : UiState()
-
-        data class Error(val message: String) : UiState()
     }
 }
