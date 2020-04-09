@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase3Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformnetworkrequestsconcurrentlyBinding
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
@@ -21,7 +22,7 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
     }
 
     private val viewModel: PerformNetworkRequestsConcurrentlyViewModel by viewModels()
-    override fun getToolbarTitle() = "Perform network requests concurrently"
+    override fun getToolbarTitle() = useCase3Description
 
     private var operationStartTime = 0L
 
@@ -55,19 +56,19 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
         }
     }
 
-    private fun onLoad() {
+    private fun onLoad() = with(binding) {
         operationStartTime = System.currentTimeMillis()
-        binding.progressBar.setVisible()
-        binding.textViewDuration.text = ""
-        binding.textViewResult.text = ""
+        progressBar.setVisible()
+        textViewDuration.text = ""
+        textViewResult.text = ""
         disableButtons()
     }
 
-    private fun onSuccess(uiState: UiState.Success) {
+    private fun onSuccess(uiState: UiState.Success) = with(binding) {
         enableButtons()
-        binding.progressBar.setGone()
+        progressBar.setGone()
         val duration = System.currentTimeMillis() - operationStartTime
-        binding.textViewDuration.text = getString(R.string.duration, duration)
+        textViewDuration.text = getString(R.string.duration, duration)
 
         val versionFeatures = uiState.versionFeatures
         val versionFeaturesString = versionFeatures.joinToString(separator = "<br><br>") {
@@ -77,7 +78,7 @@ class PerformNetworkRequestsConcurrentlyActivity : BaseActivity() {
             )}"
         }
 
-        binding.textViewResult.text = fromHtml(versionFeaturesString)
+        textViewResult.text = fromHtml(versionFeaturesString)
     }
 
     private fun onError(uiState: UiState.Error) {

@@ -31,6 +31,7 @@ data class UseCaseCategory(val categoryName: String, val useCases: List<UseCase>
 
 const val useCase1Description = "#1 Perform single network request"
 const val useCase2Description = "#2 Perform two sequential network requests"
+const val useCase3Description = "#3 Perform several network requests concurrently"
 
 private val coroutinesUseCases =
     UseCaseCategory(
@@ -44,7 +45,7 @@ private val coroutinesUseCases =
                 Perform2SequentialNetworkRequestsActivity::class.java
             ),
             UseCase(
-                "Perform network requests concurrently",
+                useCase3Description,
                 PerformNetworkRequestsConcurrentlyActivity::class.java
             ),
             UseCase(
