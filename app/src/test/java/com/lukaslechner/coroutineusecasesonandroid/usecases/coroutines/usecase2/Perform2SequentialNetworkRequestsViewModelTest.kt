@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.fakes.FakeApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -33,8 +32,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
             val fakeApi = FakeApi()
             val viewModel =
                 Perform2SequentialNetworkRequestsViewModel(
-                    fakeApi,
-                    coroutineTestRule.testDispatcher
+                    fakeApi
                 )
             observeViewModel(viewModel)
 
@@ -65,8 +63,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
             val fakeApi = FakeApi()
             val viewModel =
                 Perform2SequentialNetworkRequestsViewModel(
-                    fakeApi,
-                    coroutineTestRule.testDispatcher
+                    fakeApi
                 )
             observeViewModel(viewModel)
 
@@ -96,8 +93,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
             val fakeApi = FakeApi()
             val viewModel =
                 Perform2SequentialNetworkRequestsViewModel(
-                    fakeApi,
-                    coroutineTestRule.testDispatcher
+                    fakeApi
                 )
             observeViewModel(viewModel)
 
