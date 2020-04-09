@@ -11,8 +11,8 @@ import timber.log.Timber
 
 class AndroidVersionRepository(
     private var database: AndroidVersionDao,
+    private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + ioDispatcher),
     private val mockApi: MockApi = mockApi()
 ) {
 
@@ -20,14 +20,17 @@ class AndroidVersionRepository(
         return database.getAndroidVersions().mapToUiModelList()
     }
 
-    suspend fun loadRemoteAndroidVersions(): List<AndroidVersion> {
-        return withContext(scope.coroutineContext) {
-            val recentVersions = getRecentAndroidVersions()
-            for (recentVersion in recentVersions) {
-                Timber.d("Insert $recentVersion to database")
-                database.insert(recentVersion.mapToEntity())
-            }
-            recentVersions
+    suspend fun loadAndStoreRemoteAndroidVersions(): List<AndroidVersion> {
+        return withContext(ioDispatcher) {
+            scope.async {
+                val recentVersions = getRecentAndroidVersions()
+                Timber.d("Recent Android versions loaded")
+                for (recentVersion in recentVersions) {
+                    Timber.d("Insert $recentVersion to database")
+                    database.insert(recentVersion.mapToEntity())
+                }
+                recentVersions
+            }.await()
         }
     }
 

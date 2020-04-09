@@ -28,11 +28,11 @@ Unit Tests exist for most use cases.
 6. Retrying network requests
 7. [Room and Coroutines](#7-room-and-coroutines)
 8. [Debugging Coroutines](#8-debugging-coroutines)
-8. Offload a heavy calculation from the main thread
-9. Offload a heavy calculation to several Coroutines
-10. Handling Exceptions
-11. Coroutine Cancellation
-12. Continue Coroutine execution even when the user has already left the screen
+9. Offload a heavy calculation from the main thread
+10. Cooperative Cancellation
+11. Offload a heavy calculation to several Coroutines
+12. Exception Handling
+13. [Continue Coroutine execution even when the user leaves the screen](#13-continue-coroutine-execution-when-the-user-leaves-the-screen)
 14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
 
 ## Description
@@ -66,6 +66,15 @@ This is done by enabling Coroutine Debug mode by setting the property `kotlinx.c
 This is how it will look like in LogCat:
 
 ![DebuggingCoroutines](documentation/images/debugging_coroutines.png)
+
+### 13. Continue Coroutine execution when the user leaves the screen
+
+Sometimes we don't want a certain coroutine operation to be cancelled when the user leaves the screen and therefore the ViewModel
+gets cleared. In this use case, we want the network request to keep running and the result still to be inserted into the database
+cache when the user leaves the screen. This makes sense in real world application as we don't want to cancel an already started background "cache sync".
+You can test this in the UI by clearing the database, then loading the android version and instantly close the screen. You will see in LogCat that the response
+still gets executed and the result still gets stored. The existing Unit Test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
+
 
 ### 14. Using WorkManager with Coroutines
 

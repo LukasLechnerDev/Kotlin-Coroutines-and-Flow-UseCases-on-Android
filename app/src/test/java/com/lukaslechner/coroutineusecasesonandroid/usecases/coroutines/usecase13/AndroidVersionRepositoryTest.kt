@@ -38,7 +38,7 @@ class AndroidVersionRepositoryTest {
         coroutineTestRule.runBlockingTest {
             val fakeDatabase = createFakeDatabase()
 
-            val repository = AndroidVersionRepository(fakeDatabase)
+            val repository = AndroidVersionRepository(fakeDatabase, coroutineTestRule)
             assertEquals(mockAndroidVersions, repository.getLocalAndroidVersions())
         }
 
@@ -49,10 +49,11 @@ class AndroidVersionRepositoryTest {
             val fakeApi = createFakeApi()
             val repository = AndroidVersionRepository(
                 fakeDatabase,
+                coroutineTestRule,
                 coroutineTestRule.testDispatcher,
                 mockApi = fakeApi
             )
-            assertEquals(mockAndroidVersions, repository.loadRemoteAndroidVersions())
+            assertEquals(mockAndroidVersions, repository.loadAndStoreRemoteAndroidVersions())
         }
 
     @Test
@@ -62,15 +63,19 @@ class AndroidVersionRepositoryTest {
             val fakeApi = createFakeApi()
             val repository = AndroidVersionRepository(
                 fakeDatabase,
+                coroutineTestRule,
                 coroutineTestRule.testDispatcher,
                 mockApi = fakeApi
             )
+
             val testScope = TestCoroutineScope(Job())
 
-            testScope.launch {
-                val loadedVersions = repository.loadRemoteAndroidVersions()
-                fail("Scope should be cancelled before versions are loaded!")
-            }
+            testScope
+                .launch {
+                    println("running coroutine!")
+                    val loadedVersions = repository.loadAndStoreRemoteAndroidVersions()
+                    fail("Scope should be cancelled before versions are loaded!")
+                }
 
             testScope.cancel()
 
