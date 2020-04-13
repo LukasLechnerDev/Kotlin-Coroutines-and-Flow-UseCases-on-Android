@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase12Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityExceptionhandlingBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ExceptionHandlingViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
@@ -21,7 +21,7 @@ class ExceptionHandlingActivity : BaseActivity() {
     }
 
     private val viewModel: ExceptionHandlingViewModel by viewModels()
-    override fun getToolbarTitle() = "Perform network requests concurrently"
+    override fun getToolbarTitle() = useCase12Description
 
     private var operationStartTime = 0L
 
@@ -61,19 +61,19 @@ class ExceptionHandlingActivity : BaseActivity() {
         }
     }
 
-    private fun onLoad() {
+    private fun onLoad() = with(binding) {
         operationStartTime = System.currentTimeMillis()
-        binding.progressBar.setVisible()
-        binding.textViewDuration.text = ""
-        binding.textViewResult.text = ""
+        progressBar.setVisible()
+        textViewDuration.text = ""
+        textViewResult.text = ""
         disableButtons()
     }
 
-    private fun onSuccess(uiState: UiState.Success) {
+    private fun onSuccess(uiState: UiState.Success) = with(binding) {
         enableButtons()
-        binding.progressBar.setGone()
+        progressBar.setGone()
         val duration = System.currentTimeMillis() - operationStartTime
-        binding.textViewDuration.text = getString(R.string.duration, duration)
+        textViewDuration.text = getString(R.string.duration, duration)
 
         val versionFeatures = uiState.versionFeatures
         val versionFeaturesString = versionFeatures.joinToString(separator = "<br><br>") {
@@ -83,27 +83,27 @@ class ExceptionHandlingActivity : BaseActivity() {
             )}"
         }
 
-        binding.textViewResult.text = fromHtml(versionFeaturesString)
+        textViewResult.text = fromHtml(versionFeaturesString)
     }
 
-    private fun onError(uiState: UiState.Error) {
-        binding.progressBar.setGone()
-        binding.textViewDuration.setGone()
+    private fun onError(uiState: UiState.Error) = with(binding) {
+        progressBar.setGone()
+        textViewDuration.setGone()
         toast(uiState.message)
         enableButtons()
     }
 
-    private fun enableButtons() {
-        binding.btnExceptionTryCatch.isEnabled = true
-        binding.btnCoroutineExceptionHandler.isEnabled = true
-        binding.btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = true
-        binding.btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = true
+    private fun enableButtons() = with(binding) {
+        btnExceptionTryCatch.isEnabled = true
+        btnCoroutineExceptionHandler.isEnabled = true
+        btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = true
+        btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = true
     }
 
-    private fun disableButtons() {
-        binding.btnExceptionTryCatch.isEnabled = false
-        binding.btnCoroutineExceptionHandler.isEnabled = false
-        binding.btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = false
-        binding.btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = false
+    private fun disableButtons() = with(binding) {
+        btnExceptionTryCatch.isEnabled = false
+        btnCoroutineExceptionHandler.isEnabled = false
+        btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = false
+        btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = false
     }
 }

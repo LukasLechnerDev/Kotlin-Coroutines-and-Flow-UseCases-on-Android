@@ -1,15 +1,12 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
+import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class ContinueCoroutineWhenUserLeavesScreenViewModel(
     private var repository: AndroidVersionRepository
-) : ViewModel() {
+) : BaseViewModel<UiState>() {
 
     // more information in this blogpost about "Coroutines & Patterns for work that shouldn't
     // be cancelled" =>
@@ -43,22 +40,6 @@ class ContinueCoroutineWhenUserLeavesScreenViewModel(
 
     fun clearDatabase() {
         repository.clearDatabase()
-    }
-
-    fun uiState(): LiveData<UiState> = uiState
-
-    private val uiState: MutableLiveData<UiState> = MutableLiveData()
-
-    sealed class UiState {
-        sealed class Loading : UiState() {
-            object LoadFromDb : Loading()
-            object LoadFromNetwork : Loading()
-        }
-
-        data class Success(val dataSource: DataSource, val recentVersions: List<AndroidVersion>) :
-            UiState()
-
-        data class Error(val dataSource: DataSource, val message: String) : UiState()
     }
 }
 

@@ -1,9 +1,7 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,7 +10,7 @@ import java.math.BigInteger
 
 class CalculationInBackgroundViewModel(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
-) : ViewModel() {
+) : BaseViewModel<UiState>() {
 
     fun performCalculation(factorialOf: Int) {
         viewModelScope.launch {
@@ -48,18 +46,4 @@ class CalculationInBackgroundViewModel(
         withContext(defaultDispatcher) {
             number.toString()
         }
-
-    fun uiState(): LiveData<UiState> = uiState
-
-    private val uiState: MutableLiveData<UiState> = MutableLiveData()
-
-    sealed class UiState {
-        object Loading : UiState()
-        data class Success(
-            val result: String,
-            val computationDuration: Long,
-            val stringConversionDuration: Long
-        ) : UiState()
-        data class Error(val message: String) : UiState()
-    }
 }

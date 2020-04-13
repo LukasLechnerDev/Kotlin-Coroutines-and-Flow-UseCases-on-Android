@@ -50,8 +50,7 @@ class AndroidVersionRepositoryTest {
             val repository = AndroidVersionRepository(
                 fakeDatabase,
                 coroutineTestRule,
-                coroutineTestRule.testDispatcher,
-                mockApi = fakeApi
+                api = fakeApi
             )
             assertEquals(mockAndroidVersions, repository.loadAndStoreRemoteAndroidVersions())
         }
@@ -64,8 +63,7 @@ class AndroidVersionRepositoryTest {
             val repository = AndroidVersionRepository(
                 fakeDatabase,
                 coroutineTestRule,
-                coroutineTestRule.testDispatcher,
-                mockApi = fakeApi
+                api = fakeApi
             )
 
             val testScope = TestCoroutineScope(Job())

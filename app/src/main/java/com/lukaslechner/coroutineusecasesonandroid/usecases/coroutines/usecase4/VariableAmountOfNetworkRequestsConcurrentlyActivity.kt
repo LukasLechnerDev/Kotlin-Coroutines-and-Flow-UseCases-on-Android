@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase4Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
@@ -20,8 +20,9 @@ class VariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
         )
     }
 
-    private val viewModelVariableAmountOf: VariableAmountOfNetworkRequestsConcurrentlyViewModel by viewModels()
-    override fun getToolbarTitle() = "Perform variable amount of Network Requests Concurrently"
+    private val viewModel: VariableAmountOfNetworkRequestsConcurrentlyViewModel by viewModels()
+
+    override fun getToolbarTitle() = useCase4Description
 
     private var operationStartTime = 0L
 
@@ -29,18 +30,18 @@ class VariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModelVariableAmountOf.uiState().observe(this, Observer { uiState ->
+        viewModel.uiState().observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
             }
         })
 
         binding.btnRequestsSequentially.setOnClickListener {
-            viewModelVariableAmountOf.performNetworkRequestsSequentially()
+            viewModel.performNetworkRequestsSequentially()
         }
 
         binding.btnRequestsConcurrently.setOnClickListener {
-            viewModelVariableAmountOf.performNetworkRequestsConcurrently()
+            viewModel.performNetworkRequestsConcurrently()
         }
 
     }
@@ -59,19 +60,19 @@ class VariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
         }
     }
 
-    private fun onLoad() {
+    private fun onLoad() = with(binding) {
         operationStartTime = System.currentTimeMillis()
-        binding.progressBar.setVisible()
-        binding.textViewResult.text = ""
-        binding.textViewDuration.text = ""
+        progressBar.setVisible()
+        textViewResult.text = ""
+        textViewDuration.text = ""
         disableButtons()
     }
 
-    private fun onSuccess(uiState: UiState.Success) {
+    private fun onSuccess(uiState: UiState.Success) = with(binding) {
         enableButtons()
-        binding.progressBar.setGone()
+        progressBar.setGone()
         val duration = System.currentTimeMillis() - operationStartTime
-        binding.textViewDuration.text = getString(R.string.duration, duration)
+        textViewDuration.text = getString(R.string.duration, duration)
 
         val versionFeatures = uiState.versionFeatures
 
@@ -82,22 +83,22 @@ class VariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
             )}"
         }.joinToString(separator = "<br><br>")
 
-        binding.textViewResult.text = fromHtml(versionFeaturesString)
+        textViewResult.text = fromHtml(versionFeaturesString)
     }
 
-    private fun onError(uiState: UiState.Error) {
-        binding.progressBar.setGone()
+    private fun onError(uiState: UiState.Error) = with(binding) {
+        progressBar.setGone()
         toast(uiState.message)
         enableButtons()
     }
 
-    private fun enableButtons() {
-        binding.btnRequestsSequentially.isEnabled = true
-        binding.btnRequestsConcurrently.isEnabled = true
+    private fun enableButtons() = with(binding) {
+        btnRequestsSequentially.isEnabled = true
+        btnRequestsConcurrently.isEnabled = true
     }
 
-    private fun disableButtons() {
-        binding.btnRequestsSequentially.isEnabled = false
-        binding.btnRequestsConcurrently.isEnabled = false
+    private fun disableButtons() = with(binding) {
+        btnRequestsSequentially.isEnabled = false
+        btnRequestsConcurrently.isEnabled = false
     }
 }

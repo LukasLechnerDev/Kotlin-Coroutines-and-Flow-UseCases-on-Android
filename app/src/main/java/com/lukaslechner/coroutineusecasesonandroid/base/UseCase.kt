@@ -34,6 +34,17 @@ const val useCase1Description = "#1 Perform single network request"
 const val useCase2Description = "#2 Perform two sequential network requests"
 const val useCase2UsingCallbacksDescription = "#2 using Callbacks"
 const val useCase3Description = "#3 Perform several network requests concurrently"
+const val useCase4Description = "#4 Perform variable amount network requests concurrently"
+const val useCase5Description = "#5 Network request with TimeOut"
+const val useCase6Description = "#6 Retry Network request"
+const val useCase7Description = "#7 Room and Coroutines"
+const val useCase8Description = "#8 Debugging Coroutines"
+const val useCase9Description = "#9 Perform Calculation in the background"
+const val useCase10Description = "#10 Cooperative Cancellation"
+const val useCase11Description = "#11 Perform Calculation in multiple background threads"
+const val useCase12Description = "#12 Exception Handling"
+const val useCase13Description = "#13 Continue Coroutine when User leaves screen"
+const val useCase14Description = "#14 Using WorkManager with Coroutines"
 
 private val coroutinesUseCases =
     UseCaseCategory(
@@ -55,47 +66,47 @@ private val coroutinesUseCases =
                 PerformNetworkRequestsConcurrentlyActivity::class.java
             ),
             UseCase(
-                "Perform variable amount of network requests concurrently",
+                useCase4Description,
                 VariableAmountOfNetworkRequestsConcurrentlyActivity::class.java
             ),
             UseCase(
-                "Network request with TimeOut",
+                useCase5Description,
                 NetworkRequestWithTimeoutActivity::class.java
             ),
             UseCase(
-                "Retry Network request",
+                useCase6Description,
                 RetryNetworkRequestActivity::class.java
             ),
             UseCase(
-                "Room and Coroutines",
+                useCase7Description,
                 RoomAndCoroutinesActivity::class.java
             ),
             UseCase(
-                "Debugging Coroutines",
+                useCase8Description,
                 DebuggingCoroutinesActivity::class.java
             ),
             UseCase(
-                "Perform Calculation in the background",
+                useCase9Description,
                 CalculationInBackgroundActivity::class.java
             ),
             UseCase(
-                "Cooperative Cancellation",
+                useCase10Description,
                 CooperativeCancellationActivity::class.java
             ),
             UseCase(
-                "Perform Calculation in multiple background threads",
+                useCase11Description,
                 CalculationInMultipleBackgroundThreadsActivity::class.java
             ),
             UseCase(
-                "Exception Handling",
+                useCase12Description,
                 ExceptionHandlingActivity::class.java
             ),
             UseCase(
-                "Continue Coroutine when User leaves screen",
+                useCase13Description,
                 ContinueCoroutineWhenUserLeavesScreenActivity::class.java
             ),
             UseCase(
-                "Using WorkManager with Coroutines",
+                useCase14Description,
                 WorkManagerActivity::class.java
             )
         )

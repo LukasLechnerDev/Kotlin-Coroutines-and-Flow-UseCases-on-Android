@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase11Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCalculationinmultiplebackgroundthreadsBinding
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsViewModel.UiState
 import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
@@ -14,7 +14,7 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
 class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = "Calculation in multiple background threads"
+    override fun getToolbarTitle() = useCase11Description
 
     private val binding by lazy {
         ActivityCalculationinmultiplebackgroundthreadsBinding.inflate(
@@ -79,9 +79,9 @@ class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
         }
     }
 
-    private fun onError(uiState: UiState.Error) {
-        binding.progressBar.setGone()
-        binding.btnCalculate.isEnabled = true
+    private fun onError(uiState: UiState.Error) = with(binding) {
+        progressBar.setGone()
+        btnCalculate.isEnabled = true
         toast(uiState.message)
     }
 }

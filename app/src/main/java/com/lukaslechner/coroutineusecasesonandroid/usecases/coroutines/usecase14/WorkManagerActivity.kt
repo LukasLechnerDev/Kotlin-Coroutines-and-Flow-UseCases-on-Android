@@ -3,11 +3,12 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase14Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityWorkmangerBinding
 
 class WorkManagerActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = "Using WorkManager with Coroutines"
+    override fun getToolbarTitle() = useCase14Description
 
     private val binding by lazy { ActivityWorkmangerBinding.inflate(layoutInflater) }
     private val viewModel: WorkManagerViewModel by viewModels {

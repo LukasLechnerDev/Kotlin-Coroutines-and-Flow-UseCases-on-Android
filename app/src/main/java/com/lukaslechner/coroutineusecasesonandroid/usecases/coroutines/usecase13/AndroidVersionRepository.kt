@@ -1,19 +1,16 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13
 
-import com.google.gson.Gson
 import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
 import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
-import com.lukaslechner.coroutineusecasesonandroid.mock.createMockApi
-import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.utils.MockNetworkInterceptor
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class AndroidVersionRepository(
     private var database: AndroidVersionDao,
     private val scope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val mockApi: MockApi = mockApi()
+    private val api: MockApi = mockApi()
 ) {
 
     suspend fun getLocalAndroidVersions(): List<AndroidVersion> {
@@ -21,9 +18,8 @@ class AndroidVersionRepository(
     }
 
     suspend fun loadAndStoreRemoteAndroidVersions(): List<AndroidVersion> {
-        return withContext(ioDispatcher) {
-            scope.async {
-                val recentVersions = getRecentAndroidVersions()
+        return scope.async {
+            val recentVersions = api.getRecentAndroidVersions()
                 Timber.d("Recent Android versions loaded")
                 for (recentVersion in recentVersions) {
                     Timber.d("Insert $recentVersion to database")
@@ -32,26 +28,10 @@ class AndroidVersionRepository(
                 recentVersions
             }.await()
         }
-    }
-
-    private suspend fun getRecentAndroidVersions() = mockApi.getRecentAndroidVersions()
 
     fun clearDatabase() {
         scope.launch {
             database.clear()
         }
-    }
-
-    companion object {
-        fun mockApi() =
-            createMockApi(
-                MockNetworkInterceptor()
-                    .mock(
-                        "http://localhost/recent-android-versions",
-                        Gson().toJson(mockAndroidVersions),
-                        200,
-                        5000
-                    )
-            )
     }
 }
