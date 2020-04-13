@@ -7,7 +7,9 @@ import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesPie
 import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.*
+import org.junit.Assert
+import org.junit.Rule
+import org.junit.Test
 import org.junit.rules.TestRule
 
 @ExperimentalCoroutinesApi
@@ -22,13 +24,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
     private val receivedUiStates: MutableList<UiState> =
         arrayListOf()
 
-    @Before
-    fun setUp() {
-    }
 
-    @After
-    fun tearDown() {
-    }
 
     @Test
     fun `performNetworkRequestsSequentially should return data after 3 times the response delay`() =
