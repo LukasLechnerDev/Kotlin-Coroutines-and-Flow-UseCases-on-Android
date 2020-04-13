@@ -32,6 +32,8 @@ class PerformNetworkRequestsConcurrentlyViewModel(
         uiState.value = UiState.Loading
         viewModelScope.launch {
             try {
+                // we need to wrap this code with a coroutineScope block
+                // otherwise the app would crash on unsuccessful network requests
                 coroutineScope {
                     val oreoFeaturesDeferred = async { mockApi.getAndroidVersionFeatures(27) }
                     val pieFeaturesDeferred = async { mockApi.getAndroidVersionFeatures(28) }

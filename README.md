@@ -50,7 +50,8 @@ There also exists an alternative implementation for this use case which uses tra
 
 Performs three network requests concurrently. It loads the feature information of the 3 most recent Android Versions. Additionally, an implementation
 that performs the requests sequentially is included. The UI shows how much time each implementation takes to load the data so you can see that the network
-requests in the concurrent version are actually performed in parallel.
+requests in the concurrent version are actually performed in parallel. The included unit test is also interesting, as it shows how you can use virtual time to
+verify that the concurrent version really gets performed in parallel.
 
 ### 7. Room and Coroutines
 
