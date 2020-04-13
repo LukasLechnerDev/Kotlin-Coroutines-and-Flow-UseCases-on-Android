@@ -23,7 +23,7 @@ Unit Tests exist for most use cases.
 1. [Perform single network request](#1-perform-a-single-network-request)
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
 3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
-4. Perform a variable amount of network requests, depending on the amount of data sets received from the first network request
+4. [Perform variable amount of network requests](#4-perform-variable-amount-of-network-requests)
 5. Perform a network request with a timeout
 6. Retrying network requests
 7. [Room and Coroutines](#7-room-and-coroutines)
@@ -53,6 +53,12 @@ that performs the requests sequentially is included. The UI shows how much time 
 requests in the concurrent version are actually performed in parallel. The included unit test is also interesting, as it shows how you can use virtual time to
 verify that the concurrent version really gets performed in parallel.
 
+### 4. Perform variable amount of network requests
+
+Demonstrates the simple usage of `map()` to perform a dynamic amount of network requests. At first, this use case performs a network request to load all Android versions.
+Then it performs a network request for each Android version to load its features. It contains an implementation that performs the network requests sequentially and another one that performs them concurrently.
+
+
 ### 7. Room and Coroutines
 
 This example stores the response data of each network request in a Room database. This is essential for any "offline-first" app.
@@ -73,7 +79,7 @@ This is how it will look like in LogCat:
 Sometimes we don't want a certain coroutine operation to be cancelled when the user leaves the screen and therefore the ViewModel
 gets cleared. In this use case, we want the network request to keep running and the result still to be inserted into the database
 cache when the user leaves the screen. This makes sense in real world application as we don't want to cancel an already started background "cache sync".
-You can test this in the UI by clearing the database, then loading the android version and instantly close the screen. You will see in LogCat that the response
+You can test this in the UI by clearing the database, then loading the Android version and instantly close the screen. You will see in LogCat that the response
 still gets executed and the result still gets stored. The existing Unit Test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
 
 

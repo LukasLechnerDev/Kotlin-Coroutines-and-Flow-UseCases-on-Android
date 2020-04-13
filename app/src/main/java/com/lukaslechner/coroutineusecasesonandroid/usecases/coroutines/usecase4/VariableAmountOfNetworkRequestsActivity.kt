@@ -12,7 +12,7 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
-class VariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
+class VariableAmountOfNetworkRequestsActivity : BaseActivity() {
 
     private val binding by lazy {
         ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding.inflate(
@@ -20,7 +20,7 @@ class VariableAmountOfNetworkRequestsConcurrentlyActivity : BaseActivity() {
         )
     }
 
-    private val viewModel: VariableAmountOfNetworkRequestsConcurrentlyViewModel by viewModels()
+    private val viewModel: VariableAmountOfNetworkRequestsViewModel by viewModels()
 
     override fun getToolbarTitle() = useCase4Description
 

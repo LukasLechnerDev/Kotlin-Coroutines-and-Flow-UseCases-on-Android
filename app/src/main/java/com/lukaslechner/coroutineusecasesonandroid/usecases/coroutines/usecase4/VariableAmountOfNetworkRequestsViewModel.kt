@@ -7,7 +7,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
-class VariableAmountOfNetworkRequestsConcurrentlyViewModel(
+class VariableAmountOfNetworkRequestsViewModel(
     private val mockApi: MockApi = mockApi()
 ) : BaseViewModel<UiState>() {
 

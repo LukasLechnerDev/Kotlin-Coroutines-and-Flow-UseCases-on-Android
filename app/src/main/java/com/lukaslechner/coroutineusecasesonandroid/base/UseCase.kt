@@ -12,7 +12,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.usingcallbacks.SequentialNetworkRequestsCallbacksActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsConcurrentlyActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6.RetryNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.RoomAndCoroutinesActivity
@@ -34,7 +34,7 @@ const val useCase1Description = "#1 Perform single network request"
 const val useCase2Description = "#2 Perform two sequential network requests"
 const val useCase2UsingCallbacksDescription = "#2 using Callbacks"
 const val useCase3Description = "#3 Perform several network requests concurrently"
-const val useCase4Description = "#4 Perform variable amount network requests concurrently"
+const val useCase4Description = "#4 Perform variable amount network requests"
 const val useCase5Description = "#5 Network request with TimeOut"
 const val useCase6Description = "#6 Retry Network request"
 const val useCase7Description = "#7 Room and Coroutines"
@@ -67,7 +67,7 @@ private val coroutinesUseCases =
             ),
             UseCase(
                 useCase4Description,
-                VariableAmountOfNetworkRequestsConcurrentlyActivity::class.java
+                VariableAmountOfNetworkRequestsActivity::class.java
             ),
             UseCase(
                 useCase5Description,
