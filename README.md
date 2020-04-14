@@ -79,10 +79,10 @@ Demonstrates the usage of higher order functions together with coroutines. The h
 It uses an exponential backoff for retries, which means that the delay between retries increases exponentially. The behavior of the Mock API is defined in a way that it responses
 with 2 unsuccessful responses followed by a successful response.
 
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase6/RetryNetworkRequestViewModel.kt)]
+
 Unit tests verify the amount of request that are performed in different scenarios. Furthermore they check if the exponential backoff is working properly
 by asserting the amount of elapsed virtual time.
-
-[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase6/RetryNetworkRequestViewModel.kt)]
 
 ### 7. Room and Coroutines
 
@@ -94,7 +94,7 @@ a network request to get fresh data.
 
 ### 8. Debugging Coroutines
 
-Shows how you can add additional debug information about the Coroutine that is currently running to your logs.
+This use case shows how you can add additional debug information about the Coroutine that is currently running to your logs.
 It will add the Coroutine name next to the thread name when calling `Thread.currentThread.name()`
 This is done by enabling Coroutine Debug mode by setting the property `kotlinx.coroutines.debug` to `true`.
 This is how it will look like in LogCat:
@@ -105,7 +105,11 @@ This is how it will look like in LogCat:
 
 ### 9. Offload expensive calculation to background thread
 
+This use case calculates the factorial of a number. The calculation is performed on a background thread using the default Dispatcher.
+
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase9/CalculationInBackgroundViewModel.kt)]
+
+In the respective unit test, we have to pass the testDispatcher to the ViewModel, so that the calculation is not performed on a background thread but on the main thread.
 
 ### 10. Cooperative cancellation
 
