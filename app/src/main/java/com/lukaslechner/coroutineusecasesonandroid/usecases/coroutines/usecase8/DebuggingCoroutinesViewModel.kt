@@ -12,6 +12,7 @@ class DebuggingCoroutinesViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun performSingleNetworkRequest() {
+        uiState.value = UiState.Loading
 
         // This property needs to be set so that the coroutine name is printed when logging Thread.currentName()
         // System.setProperty("kotlinx.coroutines.debug", if (BuildConfig.DEBUG) "on" else "off")
@@ -19,7 +20,6 @@ class DebuggingCoroutinesViewModel(
 
         viewModelScope.launch(CoroutineName("Initial Coroutine")) {
             Timber.d(addCoroutineDebugInfo("Initial coroutine launched"))
-            uiState.value = UiState.Loading
             try {
                 val recentVersions = api.getRecentAndroidVersions()
                 Timber.d(addCoroutineDebugInfo("Recent Android Versions returned"))

@@ -14,8 +14,8 @@ class ExceptionHandlingViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun handleExceptionWithTryCatch() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
             try {
                 api.getAndroidVersionFeatures(27)
 
@@ -30,15 +30,15 @@ class ExceptionHandlingViewModel(
             uiState.value = UiState.Error("Network Request failed!! $exception")
         }
 
+        uiState.value = UiState.Loading
         viewModelScope.launch(exceptionHandler) {
-            uiState.value = UiState.Loading
             api.getAndroidVersionFeatures(27)
         }
     }
 
     fun showResultsEvenIfChildCoroutineFails() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
 
             supervisorScope {
                 val oreoFeaturesDeferred = async { api.getAndroidVersionFeatures(27) }
@@ -72,8 +72,8 @@ class ExceptionHandlingViewModel(
     }
 
     fun showResultsEvenIfChildCoroutineFailsRunCatching() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
 
             supervisorScope {
                 val oreoFeaturesDeferred = async { api.getAndroidVersionFeatures(27) }

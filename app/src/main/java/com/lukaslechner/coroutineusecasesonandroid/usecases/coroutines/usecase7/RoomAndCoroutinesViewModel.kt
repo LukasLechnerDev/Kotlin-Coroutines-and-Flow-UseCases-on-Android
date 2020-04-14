@@ -11,8 +11,8 @@ class RoomAndCoroutinesViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun loadData() {
+        uiState.value = UiState.Loading.LoadFromDb
         viewModelScope.launch {
-            uiState.value = UiState.Loading.LoadFromDb
 
             val localVersions = database!!.getAndroidVersions()
             if (localVersions.isNotEmpty()) {

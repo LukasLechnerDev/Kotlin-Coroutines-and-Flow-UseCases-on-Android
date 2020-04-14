@@ -11,8 +11,8 @@ class NetworkRequestWithTimeoutViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun performNetworkRequest(timeOut: Long) {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
             try {
                 withTimeout(timeOut) {
                     val recentVersions = api.getRecentAndroidVersions()

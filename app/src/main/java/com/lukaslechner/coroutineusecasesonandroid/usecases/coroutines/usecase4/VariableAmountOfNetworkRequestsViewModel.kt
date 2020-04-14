@@ -12,8 +12,8 @@ class VariableAmountOfNetworkRequestsViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun performNetworkRequestsSequentially() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
             try {
                 val recentVersions = mockApi.getRecentAndroidVersions()
                 val versionFeatures = recentVersions.map { androidVersion ->
@@ -27,8 +27,8 @@ class VariableAmountOfNetworkRequestsViewModel(
     }
 
     fun performNetworkRequestsConcurrently() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
             try {
                 val recentVersions = mockApi.getRecentAndroidVersions()
                 val versionFeatures = recentVersions

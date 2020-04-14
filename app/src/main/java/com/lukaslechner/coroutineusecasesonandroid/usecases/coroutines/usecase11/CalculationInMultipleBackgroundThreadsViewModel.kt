@@ -14,8 +14,8 @@ class CalculationInMultipleBackgroundThreadsViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun performCalculation(factorialOf: Int, numberOfThreads: Int) {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
 
             val computationStart = System.currentTimeMillis()
             val factorialResult =

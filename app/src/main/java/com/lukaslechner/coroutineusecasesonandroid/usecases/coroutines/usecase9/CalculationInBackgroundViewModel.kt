@@ -13,8 +13,8 @@ class CalculationInBackgroundViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun performCalculation(factorialOf: Int) {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
             try {
                 val computationStart = System.currentTimeMillis()
                 val result = calculateFactorialOf(factorialOf)
@@ -27,7 +27,7 @@ class CalculationInBackgroundViewModel(
                 uiState.value =
                     UiState.Success(resultString, computationDuration, stringConversionDuration)
             } catch (exception: Exception) {
-                    UiState.Error("Error while calculating result")
+                UiState.Error("Error while calculating result")
             }
         }
     }

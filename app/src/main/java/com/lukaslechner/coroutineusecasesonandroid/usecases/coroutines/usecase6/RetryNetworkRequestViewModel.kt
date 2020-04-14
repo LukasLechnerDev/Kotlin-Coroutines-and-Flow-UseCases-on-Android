@@ -13,8 +13,8 @@ class RetryNetworkRequestViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun performSingleNetworkRequest() {
+        uiState.value = UiState.Loading
         viewModelScope.launch {
-            uiState.value = UiState.Loading
             val numberOfRetries = 2
             try {
                 retryNetworkRequest(times = numberOfRetries) {

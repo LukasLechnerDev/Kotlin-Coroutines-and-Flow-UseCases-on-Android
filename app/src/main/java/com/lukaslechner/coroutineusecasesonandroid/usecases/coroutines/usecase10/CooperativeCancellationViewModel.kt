@@ -14,8 +14,8 @@ class CooperativeCancellationViewModel(
     private var calculationJob: Job? = null
 
     fun performCalculation(factorialOf: Int) {
+        uiState.value = UiState.Loading
         calculationJob = viewModelScope.launch {
-            uiState.value = UiState.Loading
             try {
 
                 val computationStart = System.currentTimeMillis()
