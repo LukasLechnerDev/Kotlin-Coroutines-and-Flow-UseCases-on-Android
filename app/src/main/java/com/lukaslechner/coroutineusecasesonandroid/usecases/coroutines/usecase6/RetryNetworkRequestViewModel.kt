@@ -5,19 +5,18 @@ import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
 import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import timber.log.Timber
 
 class RetryNetworkRequestViewModel(
     private val api: MockApi = mockApi()
 ) : BaseViewModel<UiState>() {
 
-    fun performSingleNetworkRequest() {
+    fun performNetworkRequest() {
         uiState.value = UiState.Loading
         viewModelScope.launch {
             val numberOfRetries = 2
             try {
-                retryNetworkRequest(times = numberOfRetries) {
+                retry(times = numberOfRetries) {
                     val recentVersions = api.getRecentAndroidVersions()
                     uiState.value = UiState.Success(recentVersions)
                 }
@@ -29,8 +28,8 @@ class RetryNetworkRequestViewModel(
 
     // retry with exponential backoff
     // inspired by https://stackoverflow.com/questions/46872242/how-to-exponential-backoff-retry-on-kotlin-coroutines
-    private suspend fun <T> retryNetworkRequest(
-        times: Int = 2,
+    private suspend fun <T> retry(
+        times: Int,
         initialDelayMillis: Long = 100,
         maxDelayMillis: Long = 1000,
         factor: Double = 2.0,
@@ -40,8 +39,8 @@ class RetryNetworkRequestViewModel(
         repeat(times) {
             try {
                 return block()
-            } catch (httpException: HttpException) {
-                Timber.e(httpException)
+            } catch (exception: Exception) {
+                Timber.e(exception)
             }
             delay(currentDelay)
             currentDelay = (currentDelay * factor).toLong().coerceAtMost(maxDelayMillis)

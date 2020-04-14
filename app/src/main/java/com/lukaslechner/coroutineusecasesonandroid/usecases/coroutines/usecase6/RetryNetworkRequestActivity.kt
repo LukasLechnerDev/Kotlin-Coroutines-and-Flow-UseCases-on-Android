@@ -27,7 +27,7 @@ class RetryNetworkRequestActivity : BaseActivity() {
             }
         })
         binding.btnPerformSingleNetworkRequest.setOnClickListener {
-            viewModel.performSingleNetworkRequest()
+            viewModel.performNetworkRequest()
         }
     }
 

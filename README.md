@@ -75,6 +75,13 @@ You can set the duration of the request in the UI and check the behaviour when t
 
 ### 6. Retrying network requests
 
+Demonstrates the usage of higher order functions together with coroutines. The higher order function `retry()` retries a certain suspending operation for a given amount of times.
+It uses an exponential backoff for retries, which means that the delay between retries increases exponentially. The behavior of the Mock API is defined in a way that it responses
+with 2 unsuccessful responses followed by a successful response.
+
+Unit tests verify the amount of request that are performed in different scenarios. Furthermore they check if the exponential backoff is working properly
+by asserting the amount of elapsed virtual time.
+
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase6/RetryNetworkRequestViewModel.kt)]
 
 ### 7. Room and Coroutines
