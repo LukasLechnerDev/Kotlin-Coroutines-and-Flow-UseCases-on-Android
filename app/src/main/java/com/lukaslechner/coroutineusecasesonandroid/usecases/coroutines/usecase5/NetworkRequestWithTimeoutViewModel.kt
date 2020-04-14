@@ -3,6 +3,7 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5
 import androidx.lifecycle.viewModelScope
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
 import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 
@@ -18,8 +19,10 @@ class NetworkRequestWithTimeoutViewModel(
                     val recentVersions = api.getRecentAndroidVersions()
                     uiState.value = UiState.Success(recentVersions)
                 }
+            } catch (timeoutCancellationException: TimeoutCancellationException) {
+                uiState.value = UiState.Error("Network Request timed out!")
             } catch (exception: Exception) {
-                uiState.value = UiState.Error("Network Request failed")
+                uiState.value = UiState.Error("Network Request failed!")
             }
         }
     }

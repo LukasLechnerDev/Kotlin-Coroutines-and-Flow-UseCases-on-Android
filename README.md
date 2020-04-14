@@ -1,8 +1,8 @@
 ![CoroutineUsecasesOnAndroid](CoroutinesUsecasesGithubLogo.png)
 
-# Coroutine Use Cases on Android
+# Kotlin Coroutines - Use Cases on Android
 
-Learning Coroutines for Android by Example. Sample Implementations for Common Android Use Cases. Unit Tests included!
+Learning Kotlin Coroutines for Android by Example. Sample Implementations for Common Android Use Cases. Unit Tests included!
 
 This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine Android implementations.
 In the `playground` package you can play around with Coroutines examples that run directly on the JVM.
@@ -24,7 +24,7 @@ Unit Tests exist for most use cases.
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
 3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
 4. [Perform variable amount of network requests](#4-perform-variable-amount-of-network-requests)
-5. Perform a network request with a timeout
+5. [Perform a network request with timeout](#5-perform-network-request-with-timeout)
 6. Retrying network requests
 7. [Room and Coroutines](#7-room-and-coroutines)
 8. [Debugging Coroutines](#8-debugging-coroutines)
@@ -58,6 +58,11 @@ verify that the concurrent version really gets performed in parallel.
 Demonstrates the simple usage of `map()` to perform a dynamic amount of network requests. At first, this use case performs a network request to load all Android versions.
 Then it performs a network request for each Android version to load its features. It contains an implementation that performs the network requests sequentially and another one that performs them concurrently.
 
+### 5. Perform network request with timeout
+
+This use case uses the suspending function `withTimeout()` from the coroutines-core library. It throws a `TimeoutCancellationException` if the timeout was exceeded.
+You can set the duration of the request in the UI and check the behaviour when the response time is bigger than the timeout.
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase5/NetworkRequestWithTimeoutViewModel.kt)]
 
 ### 7. Room and Coroutines
 
