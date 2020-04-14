@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import java.math.BigInteger
+import kotlin.system.measureTimeMillis
 
 class CooperativeCancellationViewModel(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
@@ -18,13 +19,15 @@ class CooperativeCancellationViewModel(
         calculationJob = viewModelScope.launch {
             try {
 
-                val computationStart = System.currentTimeMillis()
-                val result = calculateFactorialOf(factorialOf)
-                val computationDuration = System.currentTimeMillis() - computationStart
+                var result: BigInteger = BigInteger.ZERO
+                val computationDuration = measureTimeMillis {
+                    result = calculateFactorialOf(factorialOf)
+                }
 
-                val stringConversionStart = System.currentTimeMillis()
-                val resultString = convertToString(result)
-                val stringConversionDuration = System.currentTimeMillis() - stringConversionStart
+                var resultString = ""
+                val stringConversionDuration = measureTimeMillis {
+                    resultString = convertToString(result)
+                }
 
                 uiState.value =
                     UiState.Success(resultString, computationDuration, stringConversionDuration)

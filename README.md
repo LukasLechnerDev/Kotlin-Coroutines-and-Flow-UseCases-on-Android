@@ -113,6 +113,13 @@ In the respective unit test, we have to pass the testDispatcher to the ViewModel
 
 ### 10. Cooperative cancellation
 
+UseCase#9 has a problem. It is not able to prematurely cancel the calculation because it is not cooperative regarding cancellation. This leads to wasted device resources and
+memory leaks, as the calculation is not stopped and ViewModel is retained longer than necessary. This use case now fixes this issue. The UI now also has a "Cancel Calculation"
+Button. Note: Only the calculation can be cancelled prematurely but not the `toString()` conversion.
+
+There are several ways to make your coroutines cooperative regarding cancellation: You can use either use `isActive()`, `ensureActive()` or `yield()`.
+More information about cancellation can be found [here](https://medium.com/androiddevelopers/exceptions-in-coroutines-ce8da1ec060c)
+
 [[code](https://github.com/LukasLechnerDev/Kotlin-Coroutine-Use-Cases-on-Android/blob/master/app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase10/CooperativeCancellationViewModel.kt)]
 
 ### 11. Offload expensive calculation to several Coroutines
