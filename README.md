@@ -25,13 +25,13 @@ Unit Tests exist for most use cases.
 3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
 4. [Perform variable amount of network requests](#4-perform-variable-amount-of-network-requests)
 5. [Perform a network request with timeout](#5-perform-network-request-with-timeout)
-6. Retrying network requests
+6. [Retrying network requests](#6-retrying-network-requests)
 7. [Room and Coroutines](#7-room-and-coroutines)
 8. [Debugging Coroutines](#8-debugging-coroutines)
-9. Offload a heavy calculation from the main thread
-10. Cooperative Cancellation
-11. Offload a heavy calculation to several Coroutines
-12. Exception Handling
+9. [Offload expensive calculation to background thread](#9-offload-expensive-calculation-to-background-thread)
+10. [Cooperative Cancellation](#10-cooperative-cancellation)
+11. [Offload expensive calculation to several Coroutines](#11-offload-expensive-calculation-to-several-coroutines)
+12. [Exception Handling](#12-exception-handling)
 13. [Continue Coroutine execution even when the user leaves the screen](#13-continue-coroutine-execution-when-the-user-leaves-the-screen)
 14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
 
@@ -41,10 +41,14 @@ Unit Tests exist for most use cases.
 
 Performs a single network request to get the latest Android Versions.
 
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase1/PerformSingleNetworkRequestViewModel.kt)]
+
 ### 2. Perform two sequential network requests
 
 Performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
 There also exists an alternative implementation for this use case which uses traditional callbacks. It should demonstrate how much shorter and more readable the Coroutine version is compared to the approach with callbacks.
+
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/Perform2SequentialNetworkRequestsViewModel.kt)]
 
 ### 3. Perform several network requests concurrently
 
@@ -53,22 +57,33 @@ that performs the requests sequentially is included. The UI shows how much time 
 requests in the concurrent version are actually performed in parallel. The included unit test is also interesting, as it shows how you can use virtual time to
 verify that the concurrent version really gets performed in parallel.
 
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase3/PerformNetworkRequestsConcurrentlyViewModel.kt)]
+
 ### 4. Perform variable amount of network requests
 
 Demonstrates the simple usage of `map()` to perform a dynamic amount of network requests. At first, this use case performs a network request to load all Android versions.
 Then it performs a network request for each Android version to load its features. It contains an implementation that performs the network requests sequentially and another one that performs them concurrently.
 
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase4/VariableAmountOfNetworkRequestsViewModel.kt)]
+
 ### 5. Perform network request with timeout
 
 This use case uses the suspending function `withTimeout()` from the coroutines-core library. It throws a `TimeoutCancellationException` if the timeout was exceeded.
 You can set the duration of the request in the UI and check the behaviour when the response time is bigger than the timeout.
+
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase5/NetworkRequestWithTimeoutViewModel.kt)]
+
+### 6. Retrying network requests
+
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase6/RetryNetworkRequestViewModel.kt)]
 
 ### 7. Room and Coroutines
 
 This example stores the response data of each network request in a Room database. This is essential for any "offline-first" app.
 If the `View` requests data, the `ViewModel` first checks if there is data available in the database. If so, this data is returned before performing
 a network request to get fresh data.
+
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase7/RoomAndCoroutinesViewModel.kt)]
 
 ### 8. Debugging Coroutines
 
@@ -79,6 +94,25 @@ This is how it will look like in LogCat:
 
 ![DebuggingCoroutines](documentation/images/debugging_coroutines.png)
 
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase8/DebuggingCoroutinesViewModel.kt)]
+
+### 9. Offload expensive calculation to background thread
+
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase9/CalculationInBackgroundViewModel.kt)]
+
+### 10. Cooperative cancellation
+
+[[code](https://github.com/LukasLechnerDev/Kotlin-Coroutine-Use-Cases-on-Android/blob/master/app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase10/CooperativeCancellationViewModel.kt)]
+
+### 11. Offload expensive calculation to several Coroutines
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase11/CalculationInMultipleBackgroundThreadsViewModel.kt)]
+[[code factorial calculator](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase11/FactorialCalculator.kt)]
+
+### 12. Exception Handling
+
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/ExceptionHandlingViewModel.kt)]
+
 ### 13. Continue Coroutine execution when the user leaves the screen
 
 Sometimes we don't want a certain coroutine operation to be cancelled when the user leaves the screen and therefore the ViewModel
@@ -87,12 +121,17 @@ cache when the user leaves the screen. This makes sense in real world applicatio
 You can test this in the UI by clearing the database, then loading the Android version and instantly close the screen. You will see in LogCat that the response
 still gets executed and the result still gets stored. The existing Unit Test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
 
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/ContinueCoroutineWhenUserLeavesScreenViewModel.kt)]
+[[code repository](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/AndroidVersionRepository.kt)]
 
 ### 14. Using WorkManager with Coroutines
 
 Demonstrates how you can use WorkManager together with Coroutines. When creating a subclass of `CoroutineWorker` instead of `Worker`,
 the `doWork()` function is now a `suspend function` which means that we can now call other suspend functions. In this
 example, we are sending an analytics request when the user enters the screen, which is a nice use case for using WorkManager.
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/WorkManagerViewModel.kt)]
+[[code worker](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/AnalyticsWorker.kt)]
 
 ## Contributing
 
