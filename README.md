@@ -125,6 +125,8 @@ More information about cancellation can be found [here](https://medium.com/andro
 
 ### 11. Offload expensive calculation to several Coroutines
 
+The factorial calculation here is not performed by a single coroutine, but by an amount of coroutines that can be defined in the UI. Each coroutine calculates the factorial of a sub-range.
+
 [[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase11/CalculationInMultipleBackgroundThreadsViewModel.kt)]
 [[code factorial calculator](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase11/FactorialCalculator.kt)]
 
