@@ -38,7 +38,15 @@ class PerformanceAnalysisViewModel(
             }
 
             uiState.value =
-                UiState.Success(resultString, computationDuration, stringConversionDuration)
+                UiState.Success(
+                    resultString,
+                    computationDuration,
+                    stringConversionDuration,
+                    factorialOf,
+                    numberOfCoroutines,
+                    dispatcher.toString(),
+                    yieldDuringCalculation
+                )
         }
     }
 

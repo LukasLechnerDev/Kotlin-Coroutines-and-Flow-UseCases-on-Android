@@ -113,10 +113,14 @@ class PerformanceAnalysisActivity : BaseActivity() {
         progressBar.setGone()
         btnCalculate.isEnabled = true
         textViewResult.text = if (uiState.result.length <= 150) {
-            uiState.result
+            "Result: ${uiState.result}"
         } else {
-            "${uiState.result.substring(0, 147)}..."
+            "Result: ${uiState.result.substring(0, 147)}..."
         }
+        textViewResultFactorialOf.text = "Calculated factorial of ${uiState.factorialOf}"
+        textViewResultNumberCoroutines.text = "Coroutines: ${uiState.numberOfCoroutines}"
+        textViewResultDispatcher.text = "Dispatcher: ${uiState.dispatcherName}"
+        textViewResultYield.text = "yield(): ${uiState.yieldDuringCalculation}"
     }
 
     private fun onError(uiState: UiState.Error) = with(binding) {
