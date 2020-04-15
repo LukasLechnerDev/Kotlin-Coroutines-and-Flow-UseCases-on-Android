@@ -6,11 +6,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase11Description
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase15Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformanceanalysisBinding
-import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 
 class PerformanceAnalysisActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = useCase11Description
+    override fun getToolbarTitle() = useCase15Description
 
     private val binding by lazy {
         ActivityPerformanceanalysisBinding.inflate(
@@ -29,6 +29,7 @@ class PerformanceAnalysisActivity : BaseActivity() {
 
     private val viewModel: PerformanceAnalysisViewModel by viewModels()
     private lateinit var selectedDispatcher: CoroutineDispatcher
+    private val resultAdapter = ResultAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +81,16 @@ class PerformanceAnalysisActivity : BaseActivity() {
                     }
                 }
             }
+
+        initRecyclerView()
+    }
+
+    private fun initRecyclerView() {
+        binding.recyclerViewResults.apply {
+            adapter = resultAdapter
+            hasFixedSize()
+            layoutManager = LinearLayoutManager(this@PerformanceAnalysisActivity)
+        }
     }
 
     private fun render(uiState: UiState) {
@@ -98,29 +109,13 @@ class PerformanceAnalysisActivity : BaseActivity() {
 
     private fun onLoad() = with(binding) {
         progressBar.setVisible()
-        textViewResult.text = ""
-        textViewDuration.text = ""
-        textViewStringConversionDuration.text = ""
         btnCalculate.isEnabled = false
-        textViewResult.hideKeyboard()
     }
 
     private fun onSuccess(uiState: UiState.Success) = with(binding) {
-        textViewDuration.text =
-            getString(R.string.duration_calculation, uiState.computationDuration)
-        textViewStringConversionDuration.text =
-            getString(R.string.duration_stringconversion, uiState.stringConversionDuration)
         progressBar.setGone()
         btnCalculate.isEnabled = true
-        textViewResult.text = if (uiState.result.length <= 150) {
-            "Result: ${uiState.result}"
-        } else {
-            "Result: ${uiState.result.substring(0, 147)}..."
-        }
-        textViewResultFactorialOf.text = "Calculated factorial of ${uiState.factorialOf}"
-        textViewResultNumberCoroutines.text = "Coroutines: ${uiState.numberOfCoroutines}"
-        textViewResultDispatcher.text = "Dispatcher: ${uiState.dispatcherName}"
-        textViewResultYield.text = "yield(): ${uiState.yieldDuringCalculation}"
+        resultAdapter.addResult(uiState)
     }
 
     private fun onError(uiState: UiState.Error) = with(binding) {

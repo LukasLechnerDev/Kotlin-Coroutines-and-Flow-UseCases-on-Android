@@ -30,7 +30,7 @@ class FactorialCalculator {
         }
     }
 
-    suspend fun calculateFactorialOfSubRange(
+    private suspend fun calculateFactorialOfSubRange(
         subRange: SubRange,
         yieldDuringCalculation: Boolean
     ): BigInteger {
@@ -45,7 +45,7 @@ class FactorialCalculator {
         return factorial
     }
 
-    suspend fun createSubRangeList(
+    private suspend fun createSubRangeList(
         factorialOf: Int,
         numberOfSubRanges: Int,
         dispatcher: CoroutineDispatcher

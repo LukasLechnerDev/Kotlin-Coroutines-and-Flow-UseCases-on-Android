@@ -34,7 +34,7 @@ Unit Tests exist for most use cases.
 12. [Exception Handling](#12-exception-handling)
 13. [Continue Coroutine execution even when the user leaves the screen](#13-continue-coroutine-execution-when-the-user-leaves-the-screen)
 14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
-15. Performance analysis of dispatchers, number of coroutines and yielding
+15. [Performance analysis of dispatchers, number of coroutines and yielding](#15-performance-analysis-of-dispatchers-number-of-coroutines-and-yielding)
 
 ## Description
 
@@ -153,6 +153,15 @@ example, we are sending an analytics request when the user enters the screen, wh
 
 [[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/WorkManagerViewModel.kt)]
 [[code worker](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/AnalyticsWorker.kt)]
+
+
+### 15. Performance analysis of dispatchers, number of coroutines and yielding
+
+This is an extension of use case #11 (Offload expensive calculation to several coroutines). Here it is possible to additionally define the dispatcher type you want
+the calculation to be performed on. Additionally, you can enable or disable the call to `yield()` during the calculation. A list of calculations is displayed on the bottom in order to be able to compare them in a convenient way.
+
+
+You can play around and check the performance of different configurations!
 
 ## Contributing
 

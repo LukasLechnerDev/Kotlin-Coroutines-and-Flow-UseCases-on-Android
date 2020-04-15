@@ -42,8 +42,8 @@ class PerformanceAnalysisViewModel(
                     resultString,
                     computationDuration,
                     stringConversionDuration,
-                    factorialOf,
-                    numberOfCoroutines,
+                    factorialOf.toString(),
+                    numberOfCoroutines.toString(),
                     dispatcher.toString(),
                     yieldDuringCalculation
                 )

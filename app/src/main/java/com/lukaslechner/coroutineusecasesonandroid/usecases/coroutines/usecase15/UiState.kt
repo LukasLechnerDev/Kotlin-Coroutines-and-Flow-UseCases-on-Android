@@ -6,8 +6,8 @@ sealed class UiState {
         val result: String,
         val computationDuration: Long,
         val stringConversionDuration: Long,
-        val factorialOf: Int,
-        val numberOfCoroutines: Int,
+        val factorialOf: String,
+        val numberOfCoroutines: String,
         val dispatcherName: String,
         val yieldDuringCalculation: Boolean
     ) : UiState()
