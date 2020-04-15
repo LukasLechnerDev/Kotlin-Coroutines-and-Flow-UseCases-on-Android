@@ -1,53 +1,56 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase15
 
 import com.lukaslechner.coroutineusecasesonandroid.utils.addCoroutineDebugInfo
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.math.BigInteger
 
-class FactorialCalculator(
-    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
-) {
+class FactorialCalculator {
 
     suspend fun calculateFactorial(
         factorialOf: Int,
-        numberOfThreads: Int
+        numberOfThreads: Int,
+        dispatcher: CoroutineDispatcher,
+        yieldDuringCalculation: Boolean
     ): BigInteger {
 
-        val subRanges = createSubRangeList(factorialOf, numberOfThreads)
-        return withContext(defaultDispatcher) {
+        val subRanges = createSubRangeList(factorialOf, numberOfThreads, dispatcher)
+        return withContext(dispatcher) {
             subRanges.map { subRange ->
                 async {
-                    calculateFactorialOfSubRange(subRange)
+                    calculateFactorialOfSubRange(subRange, yieldDuringCalculation)
                 }
             }.awaitAll()
                 .fold(BigInteger.ONE, { acc, element ->
-                    yield()
+                    if (yieldDuringCalculation) {
+                        yield()
+                    }
                     acc.multiply(element)
                 })
         }
     }
 
     suspend fun calculateFactorialOfSubRange(
-        subRange: SubRange
+        subRange: SubRange,
+        yieldDuringCalculation: Boolean
     ): BigInteger {
-        return withContext(defaultDispatcher) {
-            Timber.d(addCoroutineDebugInfo("Calculate factorial of $subRange"))
-            println(addCoroutineDebugInfo("Calculate factorial of $subRange"))
-            var factorial = BigInteger.ONE
-            for (i in subRange.start..subRange.end) {
+        Timber.d(addCoroutineDebugInfo("Calculate factorial of $subRange"))
+        var factorial = BigInteger.ONE
+        for (i in subRange.start..subRange.end) {
+            if (yieldDuringCalculation) {
                 yield()
-                factorial = factorial.multiply(BigInteger.valueOf(i.toLong()))
             }
-            factorial
+            factorial = factorial.multiply(BigInteger.valueOf(i.toLong()))
         }
+        return factorial
     }
 
     suspend fun createSubRangeList(
         factorialOf: Int,
-        numberOfSubRanges: Int
+        numberOfSubRanges: Int,
+        dispatcher: CoroutineDispatcher
     ): List<SubRange> =
-        withContext(defaultDispatcher) {
+        withContext(dispatcher) {
             val quotient = factorialOf.div(numberOfSubRanges)
             val rangesList = mutableListOf<SubRange>()
 

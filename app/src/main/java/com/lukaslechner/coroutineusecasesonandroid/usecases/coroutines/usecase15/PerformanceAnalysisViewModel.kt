@@ -1,22 +1,22 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase15
 
 import androidx.lifecycle.viewModelScope
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.math.BigInteger
 import kotlin.system.measureTimeMillis
 
-class CalculationInSeveralCoroutinesViewModel(
-    private val factorialCalculator: FactorialCalculator = FactorialCalculator(),
-    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
+class PerformanceAnalysisViewModel(
+    private val factorialCalculator: FactorialCalculator = FactorialCalculator()
 ) : BaseViewModel<UiState>() {
 
     fun performCalculation(
         factorialOf: Int,
-        numberOfCoroutines: Int
+        numberOfCoroutines: Int,
+        dispatcher: CoroutineDispatcher,
+        yieldDuringCalculation: Boolean = true
     ) {
         uiState.value = UiState.Loading
         viewModelScope.launch {
@@ -26,13 +26,15 @@ class CalculationInSeveralCoroutinesViewModel(
                 factorialResult =
                     factorialCalculator.calculateFactorial(
                         factorialOf,
-                        numberOfCoroutines
+                        numberOfCoroutines,
+                        dispatcher,
+                        yieldDuringCalculation
                     )
             }
 
             var resultString = ""
             val stringConversionDuration = measureTimeMillis {
-                resultString = convertToString(factorialResult)
+                resultString = convertToString(factorialResult, dispatcher)
             }
 
             uiState.value =
@@ -41,9 +43,10 @@ class CalculationInSeveralCoroutinesViewModel(
     }
 
     private suspend fun convertToString(
-        number: BigInteger
+        number: BigInteger,
+        dispatcher: CoroutineDispatcher
     ): String =
-        withContext(defaultDispatcher) {
+        withContext(dispatcher) {
             number.toString()
         }
 }

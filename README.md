@@ -34,7 +34,7 @@ Unit Tests exist for most use cases.
 12. [Exception Handling](#12-exception-handling)
 13. [Continue Coroutine execution even when the user leaves the screen](#13-continue-coroutine-execution-when-the-user-leaves-the-screen)
 14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
-15. Performance analyzation of dispatchers, number of coroutines and yielding
+15. Performance analysis of dispatchers, number of coroutines and yielding
 
 ## Description
 

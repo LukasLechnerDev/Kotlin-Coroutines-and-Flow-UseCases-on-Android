@@ -48,6 +48,10 @@
         <activity android:name=".usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity" />
         <activity android:name=".usecases.coroutines.usecase14.WorkManagerActivity" />
 
+        <activity
+            android:name=".usecases.coroutines.usecase15.PerformanceAnalysisActivity"
+            android:exported="true" />
+
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
 
         <activity android:name=".usecases.flow.usecase1.FlowUseCase1Activity" />
