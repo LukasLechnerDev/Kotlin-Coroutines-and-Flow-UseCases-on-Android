@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CooperativeCancellationActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CalculationInSeveralCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ExceptionHandlingActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14.WorkManagerActivity
@@ -95,7 +95,7 @@ private val coroutinesUseCases =
             ),
             UseCase(
                 useCase11Description,
-                CalculationInMultipleBackgroundThreadsActivity::class.java
+                CalculationInSeveralCoroutinesActivity::class.java
             ),
             UseCase(
                 useCase12Description,

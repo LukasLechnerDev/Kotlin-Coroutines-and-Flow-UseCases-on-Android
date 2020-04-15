@@ -2,7 +2,7 @@
 
 # Kotlin Coroutines - Use Cases on Android
 
-Learning Kotlin Coroutines for Android by Example. Sample Implementations for Common Android Use Cases. Unit Tests included!
+Learning Kotlin Coroutines for Android by example. Sample implementations for real-world Android use cases. Unit tests included!
 
 This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine Android implementations.
 In the `playground` package you can play around with Coroutines examples that run directly on the JVM.
@@ -34,6 +34,7 @@ Unit Tests exist for most use cases.
 12. [Exception Handling](#12-exception-handling)
 13. [Continue Coroutine execution even when the user leaves the screen](#13-continue-coroutine-execution-when-the-user-leaves-the-screen)
 14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
+15. Performance analyzation of dispatchers, number of coroutines and yielding
 
 ## Description
 

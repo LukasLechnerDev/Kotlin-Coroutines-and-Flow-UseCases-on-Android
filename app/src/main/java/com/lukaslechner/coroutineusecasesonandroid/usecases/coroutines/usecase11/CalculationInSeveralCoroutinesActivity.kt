@@ -1,6 +1,9 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
@@ -11,8 +14,10 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
-class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
+class CalculationInSeveralCoroutinesActivity : BaseActivity() {
 
     override fun getToolbarTitle() = useCase11Description
 
@@ -21,23 +26,57 @@ class CalculationInMultipleBackgroundThreadsActivity : BaseActivity() {
             layoutInflater
         )
     }
-    private val viewModel: CalculationInMultipleBackgroundThreadsViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val viewModel: CalculationInSeveralCoroutinesViewModel by viewModels()
+    private lateinit var selectedDispatcher: CoroutineDispatcher
+
+    override fun onCreate(savedInstanceState: Bundle?) = with(binding) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        setContentView(root)
         val numberOfCores = Runtime.getRuntime().availableProcessors()
-        binding.textViewNumberOfCores.text = getString(R.string.device_cores, numberOfCores)
-        viewModel.uiState().observe(this, Observer { uiState ->
+        textViewNumberOfCores.text = getString(R.string.device_cores, numberOfCores)
+        viewModel.uiState()
+            .observe(this@CalculationInSeveralCoroutinesActivity, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
             }
         })
-        binding.btnCalculate.setOnClickListener {
-            val factorialOf = binding.editTextFactorialOf.text.toString().toIntOrNull()
-            val numberOfThreads = binding.editTextNumberOfThreads.text.toString().toIntOrNull()
+        btnCalculate.setOnClickListener {
+            val factorialOf = editTextFactorialOf.text.toString().toIntOrNull()
+            val numberOfThreads = editTextNumberOfThreads.text.toString().toIntOrNull()
             if (factorialOf != null && numberOfThreads != null) {
-                viewModel.performCalculation(factorialOf, numberOfThreads)
+                viewModel.performCalculation(
+                    factorialOf,
+                    numberOfThreads,
+                    selectedDispatcher,
+                    switchYield.isChecked
+                )
+            }
+        }
+        ArrayAdapter.createFromResource(
+            this@CalculationInSeveralCoroutinesActivity,
+            R.array.dispatchers,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerDispatcher.adapter = adapter
+        }
+
+        spinnerDispatcher.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (parent?.getItemAtPosition(position)) {
+                    "Default" -> selectedDispatcher = Dispatchers.Default
+                    "IO" -> selectedDispatcher = Dispatchers.IO
+                    "Main" -> selectedDispatcher = Dispatchers.Main
+                    "Unconfined" -> selectedDispatcher = Dispatchers.Unconfined
+                }
             }
         }
     }

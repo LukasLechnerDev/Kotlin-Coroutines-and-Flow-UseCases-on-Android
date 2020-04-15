@@ -21,7 +21,7 @@ class FactorialCalculatorTest {
     }
 
     @Test
-    fun createRangesList() = runBlockingTest {
+    fun `createSubRangeList() should create correct range lists`() = runBlockingTest {
         assertEquals(
             listOf(
                 SubRange(1, 3),

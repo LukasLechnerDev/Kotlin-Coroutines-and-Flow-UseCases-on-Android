@@ -38,7 +38,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".usecases.coroutines.usecase11.CalculationInMultipleBackgroundThreadsActivity"
+            android:name=".usecases.coroutines.usecase11.CalculationInSeveralCoroutinesActivity"
             android:exported="true" />
 
         <activity

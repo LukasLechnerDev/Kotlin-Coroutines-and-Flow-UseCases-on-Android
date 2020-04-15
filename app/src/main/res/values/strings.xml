@@ -15,8 +15,17 @@
     <string name="load_recent_android_versions_and_do_some_calculations">Load Recent Android Versions and do some calculations</string>
     <string name="factorial_of">Factorial of:</string>
     <string name="calculate">Calculate</string>
-    <string name="number_of_threads">Number of threads:</string>
+    <string name="number_of_coroutines">Number of Coroutines:</string>
     <string name="device_cores">Your device has %d cores</string>
     <string name="cancel">Cancel</string>
     <string name="workmanager_request">A work manager worker was requested to send an analytics request.</string>
+    <string name="dispatcher">Coroutine Dispatcher:</string>
+    <string name="yield_during_calculation">yield() during calculation</string>
+
+    <string-array name="dispatchers">
+        <item>Default</item>
+        <item>IO</item>
+        <item>Main</item>
+        <item>Unconfined</item>
+    </string-array>
 </resources>
