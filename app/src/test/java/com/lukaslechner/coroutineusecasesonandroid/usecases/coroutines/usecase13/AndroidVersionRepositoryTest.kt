@@ -5,12 +5,12 @@ import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.VersionFeatures
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.EndpointShouldNotBeCalledException
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,11 +26,6 @@ class AndroidVersionRepositoryTest {
     @Before
     fun setUp() {
         insertedIntoDb = false
-    }
-
-    @After
-    fun tearDown() {
-
     }
 
     @Test
@@ -90,7 +85,7 @@ class AndroidVersionRepositoryTest {
             }
 
             override suspend fun getAndroidVersionFeatures(apiVersion: Int): VersionFeatures {
-                TODO("Not yet implemented")
+                throw EndpointShouldNotBeCalledException()
             }
         }
     }

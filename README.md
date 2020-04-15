@@ -95,12 +95,9 @@ a network request to get fresh data.
 
 ### 8. Debugging Coroutines
 
-This use case shows how you can add additional debug information about the Coroutine that is currently running to your logs.
+This is not really a use case, but I wanted to show how you can add additional debug information about the Coroutine that is currently running to your logs.
 It will add the Coroutine name next to the thread name when calling `Thread.currentThread.name()`
 This is done by enabling Coroutine Debug mode by setting the property `kotlinx.coroutines.debug` to `true`.
-This is how it will look like in LogCat:
-
-![DebuggingCoroutines](documentation/images/debugging_coroutines.png)
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase8/DebuggingCoroutinesViewModel.kt)]
 
@@ -139,11 +136,13 @@ its sibling coroutines. In the use case the results of the successful responses 
 
 ### 13. Continue Coroutine execution when the user leaves the screen
 
-Sometimes we don't want a certain coroutine operation to be cancelled when the user leaves the screen and therefore the ViewModel
-gets cleared. In this use case, we want the network request to keep running and the result still to be inserted into the database
+Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get cancelled. Sometimes we want a certain coroutine operation to be continued
+when the user leave the screen. In this use case, the network request keeps running and the results still get inserted into the database
 cache when the user leaves the screen. This makes sense in real world application as we don't want to cancel an already started background "cache sync".
-You can test this in the UI by clearing the database, then loading the Android version and instantly close the screen. You will see in LogCat that the response
-still gets executed and the result still gets stored. The existing Unit Test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
+
+
+You can test this behavior in the UI by clearing the database, then loading the Android version and instantly close the screen. You will see in LogCat that the response
+still gets executed and the result still gets stored. The respective unit test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
 
 [[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/ContinueCoroutineWhenUserLeavesScreenViewModel.kt)]
 [[code repository](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/AndroidVersionRepository.kt)]
