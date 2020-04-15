@@ -22,7 +22,7 @@ class FactorialCalculator(
                 }
             }.awaitAll()
                 .fold(BigInteger.ONE, { acc, element ->
-                    yield()
+                    ensureActive()
                     acc.multiply(element)
                 })
         }
@@ -33,10 +33,9 @@ class FactorialCalculator(
     ): BigInteger {
         return withContext(defaultDispatcher) {
             Timber.d(addCoroutineDebugInfo("Calculate factorial of $subRange"))
-            println(addCoroutineDebugInfo("Calculate factorial of $subRange"))
             var factorial = BigInteger.ONE
             for (i in subRange.start..subRange.end) {
-                yield()
+                ensureActive()
                 factorial = factorial.multiply(BigInteger.valueOf(i.toLong()))
             }
             factorial
