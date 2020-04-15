@@ -132,6 +132,9 @@ The factorial calculation here is not performed by a single coroutine, but by an
 
 ### 12. Exception Handling
 
+This use case demonstrates different ways of handling exceptions using `try/catch` and `CoroutineExceptionHandler`. It also demonstrates when you should to use `supervisorScope{}`: In situations when you don't want a failing coroutine to cancel
+its sibling coroutines. In the use case the results of the successful responses are shown even tough one response wasn't successful.
+
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/ExceptionHandlingViewModel.kt)]
 
 ### 13. Continue Coroutine execution when the user leaves the screen
