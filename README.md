@@ -181,6 +181,12 @@ You can play around and check the performance of different configurations!
 
 I am currently learning Coroutines myself. So if you have any ideas for or improvements or other use cases, feel free to create a pull request or an issue.
 
+## Author
+
+![LukasLechner](documentation/images/lukle.png)
+
+[Lukas Lechner](https://www.lukaslechner.com)
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License").
