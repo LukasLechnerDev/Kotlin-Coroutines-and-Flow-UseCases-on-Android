@@ -1,8 +1,6 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.lukaslechner.coroutineusecasesonandroid.fakes.FakeApi
-import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
 import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -11,7 +9,6 @@ import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
-import java.io.IOException
 
 @ExperimentalCoroutinesApi
 class Perform2SequentialNetworkRequestsViewModelTest {
@@ -28,8 +25,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
     @Test
     fun `should return Success when both network requests are successful`() =
         coroutineTestRule.runBlockingTest {
-
-            val fakeApi = FakeApi()
+            val fakeApi = FakeSuccessApi()
             val viewModel =
                 Perform2SequentialNetworkRequestsViewModel(
                     fakeApi
@@ -39,13 +35,6 @@ class Perform2SequentialNetworkRequestsViewModelTest {
             Assert.assertTrue(receivedUiStates.isEmpty())
 
             viewModel.perform2SequentialNetworkRequest()
-            Assert.assertEquals(
-                listOf(UiState.Loading),
-                receivedUiStates
-            )
-
-            fakeApi.sendResponseToGetRecentAndroidVersionsRequest(mockAndroidVersions)
-            fakeApi.sendResponseToGetAndroidVersionFeaturesRequest(29, mockVersionFeaturesAndroid10)
 
             Assert.assertEquals(
                 listOf(
@@ -60,7 +49,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
     fun `should return Error when first network requests fails`() =
         coroutineTestRule.runBlockingTest {
 
-            val fakeApi = FakeApi()
+            val fakeApi = FakeVersionsErrorApi()
             val viewModel =
                 Perform2SequentialNetworkRequestsViewModel(
                     fakeApi
@@ -70,12 +59,6 @@ class Perform2SequentialNetworkRequestsViewModelTest {
             Assert.assertTrue(receivedUiStates.isEmpty())
 
             viewModel.perform2SequentialNetworkRequest()
-            Assert.assertEquals(
-                listOf(UiState.Loading),
-                receivedUiStates
-            )
-
-            fakeApi.sendErrorToGetRecentAndroidVersionsRequest(IOException())
 
             Assert.assertEquals(
                 listOf(
@@ -90,7 +73,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
     fun `should return Error when second network requests fails`() =
         coroutineTestRule.runBlockingTest {
 
-            val fakeApi = FakeApi()
+            val fakeApi = FakeFeaturesErrorApi()
             val viewModel =
                 Perform2SequentialNetworkRequestsViewModel(
                     fakeApi
@@ -100,13 +83,6 @@ class Perform2SequentialNetworkRequestsViewModelTest {
             Assert.assertTrue(receivedUiStates.isEmpty())
 
             viewModel.perform2SequentialNetworkRequest()
-            Assert.assertEquals(
-                listOf(UiState.Loading),
-                receivedUiStates
-            )
-
-            fakeApi.sendResponseToGetRecentAndroidVersionsRequest(mockAndroidVersions)
-            fakeApi.sendErrorToGetAndroidVersionFeaturesRequest(29, IOException())
 
             Assert.assertEquals(
                 listOf(

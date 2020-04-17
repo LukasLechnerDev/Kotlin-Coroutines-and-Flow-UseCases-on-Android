@@ -1,22 +1,19 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import com.lukaslechner.coroutineusecasesonandroid.mock.*
-import kotlinx.coroutines.delay
 import java.io.IOException
 
-class FakeFeaturesErrorApi(private val responseDelay: Long) : MockApi {
+class FakeFeaturesErrorApi() : MockApi {
 
     override suspend fun getRecentAndroidVersions(): List<AndroidVersion> {
-        delay(responseDelay)
         return mockAndroidVersions
     }
 
     override suspend fun getAndroidVersionFeatures(apiVersion: Int): VersionFeatures {
-        delay(responseDelay)
         return when (apiVersion) {
             27 -> mockVersionFeaturesOreo
-            28 -> throw IOException()
-            29 -> mockVersionFeaturesAndroid10
+            28 -> mockVersionFeaturesPie
+            29 -> throw IOException()
             else -> throw IllegalArgumentException("apiVersion not found")
         }
     }
