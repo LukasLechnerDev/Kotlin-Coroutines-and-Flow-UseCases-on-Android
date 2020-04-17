@@ -23,7 +23,7 @@ Android version.
 
 Unit Tests exist for most use cases.
 
-## Use Cases
+## ⭐️ Use Cases
 1. [Perform single network request](#1-perform-a-single-network-request)
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
 3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
@@ -41,7 +41,7 @@ Unit Tests exist for most use cases.
 15. [Using WorkManager with Coroutines](#15-using-workmanager-with-coroutines)
 16. [Performance analysis of dispatchers, number of coroutines and yielding](#16-performance-analysis-of-dispatchers-number-of-coroutines-and-yielding)
 
-## Description
+## 📄 Description
 
 ### 1. Perform single network request
 
@@ -177,7 +177,7 @@ the calculation to be performed on. Additionally, you can enable or disable the 
 
 You can play around and check the performance of different configurations!
 
-## Contributing
+## 👷‍♀️ Contributing 👷‍♂️
 
 I am currently learning Coroutines myself. So if you have any ideas for or improvements or other use cases, feel free to create a pull request or an issue.
 
