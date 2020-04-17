@@ -26,30 +26,31 @@
         <activity android:name=".usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsActivity" />
         <activity android:name=".usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity" />
         <activity android:name=".usecases.coroutines.usecase6.RetryNetworkRequestActivity" />
-        <activity android:name=".usecases.coroutines.usecase7.RoomAndCoroutinesActivity" />
-        <activity android:name=".usecases.coroutines.usecase8.DebuggingCoroutinesActivity" />
+        <activity android:name=".usecases.coroutines.usecase7.TimeoutAndRetryActivity" />
+        <activity android:name=".usecases.coroutines.usecase8.RoomAndCoroutinesActivity" />
+        <activity android:name=".usecases.coroutines.usecase9.DebuggingCoroutinesActivity" />
 
         <activity
-            android:name=".usecases.coroutines.usecase9.CalculationInBackgroundActivity"
+            android:name=".usecases.coroutines.usecase10.CalculationInBackgroundActivity"
             android:exported="true" />
 
         <activity
-            android:name=".usecases.coroutines.usecase10.CooperativeCancellationActivity"
+            android:name=".usecases.coroutines.usecase11.CooperativeCancellationActivity"
             android:exported="true" />
 
         <activity
-            android:name=".usecases.coroutines.usecase11.CalculationInSeveralCoroutinesActivity"
+            android:name=".usecases.coroutines.usecase12.CalculationInSeveralCoroutinesActivity"
             android:exported="true" />
 
         <activity
-            android:name=".usecases.coroutines.usecase12.ExceptionHandlingActivity"
+            android:name=".usecases.coroutines.usecase13.ExceptionHandlingActivity"
             android:exported="true" />
 
-        <activity android:name=".usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity" />
-        <activity android:name=".usecases.coroutines.usecase14.WorkManagerActivity" />
+        <activity android:name=".usecases.coroutines.usecase14.ContinueCoroutineWhenUserLeavesScreenActivity" />
+        <activity android:name=".usecases.coroutines.usecase15.WorkManagerActivity" />
 
         <activity
-            android:name=".usecases.coroutines.usecase15.PerformanceAnalysisActivity"
+            android:name=".usecases.coroutines.usecase16.PerformanceAnalysisActivity"
             android:exported="true" />
 
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />

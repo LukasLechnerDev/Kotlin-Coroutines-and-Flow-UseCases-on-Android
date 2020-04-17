@@ -1,15 +1,12 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13
 
-import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
+import com.lukaslechner.coroutineusecasesonandroid.mock.VersionFeatures
 
 sealed class UiState {
-    sealed class Loading : UiState() {
-        object LoadFromDb : Loading()
-        object LoadFromNetwork : Loading()
-    }
+    object Loading : UiState()
+    data class Success(
+        val versionFeatures: List<VersionFeatures>
+    ) : UiState()
 
-    data class Success(val dataSource: DataSource, val recentVersions: List<AndroidVersion>) :
-        UiState()
-
-    data class Error(val dataSource: DataSource, val message: String) : UiState()
+    data class Error(val message: String) : UiState()
 }

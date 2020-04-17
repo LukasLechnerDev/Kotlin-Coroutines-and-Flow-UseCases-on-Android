@@ -26,15 +26,16 @@ Unit Tests exist for most use cases.
 4. [Perform variable amount of network requests](#4-perform-variable-amount-of-network-requests)
 5. [Perform a network request with timeout](#5-perform-network-request-with-timeout)
 6. [Retrying network requests](#6-retrying-network-requests)
-7. [Room and Coroutines](#7-room-and-coroutines)
-8. [Debugging Coroutines](#8-debugging-coroutines)
-9. [Offload expensive calculation to background thread](#9-offload-expensive-calculation-to-background-thread)
-10. [Cooperative Cancellation](#10-cooperative-cancellation)
-11. [Offload expensive calculation to several Coroutines](#11-offload-expensive-calculation-to-several-coroutines)
-12. [Exception Handling](#12-exception-handling)
-13. [Continue Coroutine execution even when the user leaves the screen](#13-continue-coroutine-execution-when-the-user-leaves-the-screen)
-14. [Using WorkManager with Coroutines](#14-using-workmanager-with-coroutines)
-15. [Performance analysis of dispatchers, number of coroutines and yielding](#15-performance-analysis-of-dispatchers-number-of-coroutines-and-yielding)
+7. [Network requests with timeout and retry](#7-network-requests-with-timeout-and-retry)
+8. [Room and Coroutines](#8-room-and-coroutines)
+9. [Debugging Coroutines](#9-debugging-coroutines)
+10. [Offload expensive calculation to background thread](#10-offload-expensive-calculation-to-background-thread)
+11. [Cooperative Cancellation](#11-cooperative-cancellation)
+12. [Offload expensive calculation to several Coroutines](#12-offload-expensive-calculation-to-several-coroutines)
+13. [Exception Handling](#13-exception-handling)
+14. [Continue Coroutine execution even when the user leaves the screen](#14-continue-coroutine-execution-when-the-user-leaves-the-screen)
+15. [Using WorkManager with Coroutines](#15-using-workmanager-with-coroutines)
+16. [Performance analysis of dispatchers, number of coroutines and yielding](#16-performance-analysis-of-dispatchers-number-of-coroutines-and-yielding)
 
 ## Description
 
@@ -85,56 +86,63 @@ with 2 unsuccessful responses followed by a successful response.
 Unit tests verify the amount of request that are performed in different scenarios. Furthermore they check if the exponential backoff is working properly
 by asserting the amount of elapsed virtual time.
 
-### 7. Room and Coroutines
+### 7. Network requests with timeout and retry
+
+Composes higher level functions `retry()` and `withTimeout()`. Demonstrates how simple and readable code written with Coroutines can be.
+The mock API first responds after the timeout and then returns an unsuccessful response. The third attempt is then successful.
+
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase7/TimeoutAndRetryViewModel.kt)]
+
+### 8. Room and Coroutines
 
 This example stores the response data of each network request in a Room database. This is essential for any "offline-first" app.
 If the `View` requests data, the `ViewModel` first checks if there is data available in the database. If so, this data is returned before performing
 a network request to get fresh data.
 
-[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase7/RoomAndCoroutinesViewModel.kt)]
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase8/RoomAndCoroutinesViewModel.kt)]
 
-### 8. Debugging Coroutines
+### 9. Debugging Coroutines
 
 This is not really a use case, but I wanted to show how you can add additional debug information about the Coroutine that is currently running to your logs.
 It will add the Coroutine name next to the thread name when calling `Thread.currentThread.name()`
 This is done by enabling Coroutine Debug mode by setting the property `kotlinx.coroutines.debug` to `true`.
 
-[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase8/DebuggingCoroutinesViewModel.kt)]
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase9/DebuggingCoroutinesViewModel.kt)]
 
-### 9. Offload expensive calculation to background thread
+### 10. Offload expensive calculation to background thread
 
 This use case calculates the factorial of a number. The calculation is performed on a background thread using the default Dispatcher.
 
-[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase9/CalculationInBackgroundViewModel.kt)]
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase10/CalculationInBackgroundViewModel.kt)]
 
 In the respective unit test, we have to pass the testDispatcher to the ViewModel, so that the calculation is not performed on a background thread but on the main thread.
 
-### 10. Cooperative cancellation
+### 11. Cooperative cancellation
 
-UseCase#9 has a problem. It is not able to prematurely cancel the calculation because it is not cooperative regarding cancellation. This leads to wasted device resources and
+UseCase#10 has a problem. It is not able to prematurely cancel the calculation because it is not cooperative regarding cancellation. This leads to wasted device resources and
 memory leaks, as the calculation is not stopped and ViewModel is retained longer than necessary. This use case now fixes this issue. The UI now also has a "Cancel Calculation"
 Button. Note: Only the calculation can be cancelled prematurely but not the `toString()` conversion.
 
 There are several ways to make your coroutines cooperative regarding cancellation: You can use either use `isActive()`, `ensureActive()` or `yield()`.
 More information about cancellation can be found [here](https://medium.com/androiddevelopers/exceptions-in-coroutines-ce8da1ec060c)
 
-[[code](https://github.com/LukasLechnerDev/Kotlin-Coroutine-Use-Cases-on-Android/blob/master/app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase10/CooperativeCancellationViewModel.kt)]
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase11/CooperativeCancellationViewModel.kt)]
 
-### 11. Offload expensive calculation to several Coroutines
+### 12. Offload expensive calculation to several Coroutines
 
 The factorial calculation here is not performed by a single coroutine, but by an amount of coroutines that can be defined in the UI. Each coroutine calculates the factorial of a sub-range.
 
-[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase11/CalculationInMultipleBackgroundThreadsViewModel.kt)]
-[[code factorial calculator](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase11/FactorialCalculator.kt)]
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/CalculationInSeveralCoroutinesViewModel.kt)]
+[[code factorial calculator](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/FactorialCalculator.kt)]
 
-### 12. Exception Handling
+### 13. Exception Handling
 
 This use case demonstrates different ways of handling exceptions using `try/catch` and `CoroutineExceptionHandler`. It also demonstrates when you should to use `supervisorScope{}`: In situations when you don't want a failing coroutine to cancel
 its sibling coroutines. In the use case the results of the successful responses are shown even tough one response wasn't successful.
 
-[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/ExceptionHandlingViewModel.kt)]
+[[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/ExceptionHandlingViewModel.kt)]
 
-### 13. Continue Coroutine execution when the user leaves the screen
+### 14. Continue Coroutine execution when the user leaves the screen
 
 Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get cancelled. Sometimes we want a certain coroutine operation to be continued
 when the user leave the screen. In this use case, the network request keeps running and the results still get inserted into the database
@@ -144,22 +152,22 @@ cache when the user leaves the screen. This makes sense in real world applicatio
 You can test this behavior in the UI by clearing the database, then loading the Android version and instantly close the screen. You will see in LogCat that the response
 still gets executed and the result still gets stored. The respective unit test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
 
-[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/ContinueCoroutineWhenUserLeavesScreenViewModel.kt)]
-[[code repository](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/AndroidVersionRepository.kt)]
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/ContinueCoroutineWhenUserLeavesScreenViewModel.kt)]
+[[code repository](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/AndroidVersionRepository.kt)]
 
-### 14. Using WorkManager with Coroutines
+### 15. Using WorkManager with Coroutines
 
 Demonstrates how you can use WorkManager together with Coroutines. When creating a subclass of `CoroutineWorker` instead of `Worker`,
 the `doWork()` function is now a `suspend function` which means that we can now call other suspend functions. In this
 example, we are sending an analytics request when the user enters the screen, which is a nice use case for using WorkManager.
 
-[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/WorkManagerViewModel.kt)]
-[[code worker](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/AnalyticsWorker.kt)]
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase15/WorkManagerViewModel.kt)]
+[[code worker](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase15/AnalyticsWorker.kt)]
 
 
-### 15. Performance analysis of dispatchers, number of coroutines and yielding
+### 16. Performance analysis of dispatchers, number of coroutines and yielding
 
-This is an extension of use case #11 (Offload expensive calculation to several coroutines). Here it is possible to additionally define the dispatcher type you want
+This is an extension of use case #12 (Offload expensive calculation to several coroutines). Here it is possible to additionally define the dispatcher type you want
 the calculation to be performed on. Additionally, you can enable or disable the call to `yield()` during the calculation. A list of calculations is displayed on the bottom in order to be able to compare them in a convenient way.
 
 

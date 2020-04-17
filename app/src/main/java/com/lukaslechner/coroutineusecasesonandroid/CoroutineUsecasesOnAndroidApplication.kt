@@ -1,8 +1,8 @@
 package com.lukaslechner.coroutineusecasesonandroid
 
 import android.app.Application
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.AndroidVersionDatabase
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.AndroidVersionRepository
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14.AndroidVersionDatabase
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14.AndroidVersionRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import timber.log.Timber

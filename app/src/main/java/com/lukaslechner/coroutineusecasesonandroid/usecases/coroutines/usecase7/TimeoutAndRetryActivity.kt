@@ -1,49 +1,34 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase4Description
-import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase7Description
+import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityRetrynetworkrequestBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
-class VariableAmountOfNetworkRequestsActivity : BaseActivity() {
+class TimeoutAndRetryActivity : BaseActivity() {
 
-    private val binding by lazy {
-        ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding.inflate(
-            layoutInflater
-        )
-    }
+    override fun getToolbarTitle() = useCase7Description
 
-    private val viewModel: VariableAmountOfNetworkRequestsViewModel by viewModels()
-
-    override fun getToolbarTitle() = useCase4Description
-
-    private var operationStartTime = 0L
+    private val binding by lazy { ActivityRetrynetworkrequestBinding.inflate(layoutInflater) }
+    private val viewModel: TimeoutAndRetryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         viewModel.uiState().observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
             }
         })
-
-        binding.btnRequestsSequentially.setOnClickListener {
-            viewModel.performNetworkRequestsSequentially()
+        binding.btnPerformSingleNetworkRequest.setOnClickListener {
+            viewModel.performNetworkRequest()
         }
-
-        binding.btnRequestsConcurrently.setOnClickListener {
-            viewModel.performNetworkRequestsConcurrently()
-        }
-
     }
 
     private fun render(uiState: UiState) {
@@ -61,18 +46,14 @@ class VariableAmountOfNetworkRequestsActivity : BaseActivity() {
     }
 
     private fun onLoad() = with(binding) {
-        operationStartTime = System.currentTimeMillis()
         progressBar.setVisible()
         textViewResult.text = ""
-        textViewDuration.text = ""
-        disableButtons()
+        btnPerformSingleNetworkRequest.isEnabled = false
     }
 
     private fun onSuccess(uiState: UiState.Success) = with(binding) {
-        enableButtons()
         progressBar.setGone()
-        val duration = System.currentTimeMillis() - operationStartTime
-        textViewDuration.text = getString(R.string.duration, duration)
+        btnPerformSingleNetworkRequest.isEnabled = true
 
         val versionFeatures = uiState.versionFeatures
         val versionFeaturesString = versionFeatures.map {
@@ -87,17 +68,7 @@ class VariableAmountOfNetworkRequestsActivity : BaseActivity() {
 
     private fun onError(uiState: UiState.Error) = with(binding) {
         progressBar.setGone()
+        btnPerformSingleNetworkRequest.isEnabled = true
         toast(uiState.message)
-        enableButtons()
-    }
-
-    private fun enableButtons() = with(binding) {
-        btnRequestsSequentially.isEnabled = true
-        btnRequestsConcurrently.isEnabled = true
-    }
-
-    private fun disableButtons() = with(binding) {
-        btnRequestsSequentially.isEnabled = false
-        btnRequestsConcurrently.isEnabled = false
     }
 }

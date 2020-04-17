@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9
 
 import com.google.gson.Gson
 import com.lukaslechner.coroutineusecasesonandroid.mock.createMockApi
@@ -12,6 +12,6 @@ fun mockApi() =
                 "http://localhost/recent-android-versions",
                 Gson().toJson(mockAndroidVersions),
                 200,
-                5000
+                1500
             )
     )

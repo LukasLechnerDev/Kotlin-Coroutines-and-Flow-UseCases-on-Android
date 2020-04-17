@@ -1,49 +1,50 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase4Description
-import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase12Description
+import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityExceptionhandlingBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
-class VariableAmountOfNetworkRequestsActivity : BaseActivity() {
+class ExceptionHandlingActivity : BaseActivity() {
 
     private val binding by lazy {
-        ActivityPerformvariableamountofnetworkrequestsconcurrentlyBinding.inflate(
+        ActivityExceptionhandlingBinding.inflate(
             layoutInflater
         )
     }
 
-    private val viewModel: VariableAmountOfNetworkRequestsViewModel by viewModels()
-
-    override fun getToolbarTitle() = useCase4Description
+    private val viewModel: ExceptionHandlingViewModel by viewModels()
+    override fun getToolbarTitle() = useCase12Description
 
     private var operationStartTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         viewModel.uiState().observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
             }
         })
-
-        binding.btnRequestsSequentially.setOnClickListener {
-            viewModel.performNetworkRequestsSequentially()
+        binding.btnExceptionTryCatch.setOnClickListener {
+            viewModel.handleExceptionWithTryCatch()
         }
-
-        binding.btnRequestsConcurrently.setOnClickListener {
-            viewModel.performNetworkRequestsConcurrently()
+        binding.btnCoroutineExceptionHandler.setOnClickListener {
+            viewModel.handleWithCoroutineExceptionHandler()
         }
-
+        binding.btnShowResultsEvenIfChildCoroutineFailsTryCatch.setOnClickListener {
+            viewModel.showResultsEvenIfChildCoroutineFails()
+        }
+        binding.btnShowResultsEvenIfChildCoroutineFailsRunCatching.setOnClickListener {
+            viewModel.showResultsEvenIfChildCoroutineFailsRunCatching()
+        }
     }
 
     private fun render(uiState: UiState) {
@@ -63,8 +64,8 @@ class VariableAmountOfNetworkRequestsActivity : BaseActivity() {
     private fun onLoad() = with(binding) {
         operationStartTime = System.currentTimeMillis()
         progressBar.setVisible()
-        textViewResult.text = ""
         textViewDuration.text = ""
+        textViewResult.text = ""
         disableButtons()
     }
 
@@ -75,29 +76,34 @@ class VariableAmountOfNetworkRequestsActivity : BaseActivity() {
         textViewDuration.text = getString(R.string.duration, duration)
 
         val versionFeatures = uiState.versionFeatures
-        val versionFeaturesString = versionFeatures.map {
+        val versionFeaturesString = versionFeatures.joinToString(separator = "<br><br>") {
             "<b>New Features of ${it.androidVersion.name} </b> <br> ${it.features.joinToString(
                 prefix = "- ",
                 separator = "<br>- "
             )}"
-        }.joinToString(separator = "<br><br>")
+        }
 
         textViewResult.text = fromHtml(versionFeaturesString)
     }
 
     private fun onError(uiState: UiState.Error) = with(binding) {
         progressBar.setGone()
+        textViewDuration.setGone()
         toast(uiState.message)
         enableButtons()
     }
 
     private fun enableButtons() = with(binding) {
-        btnRequestsSequentially.isEnabled = true
-        btnRequestsConcurrently.isEnabled = true
+        btnExceptionTryCatch.isEnabled = true
+        btnCoroutineExceptionHandler.isEnabled = true
+        btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = true
+        btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = true
     }
 
     private fun disableButtons() = with(binding) {
-        btnRequestsSequentially.isEnabled = false
-        btnRequestsConcurrently.isEnabled = false
+        btnExceptionTryCatch.isEnabled = false
+        btnCoroutineExceptionHandler.isEnabled = false
+        btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = false
+        btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = false
     }
 }

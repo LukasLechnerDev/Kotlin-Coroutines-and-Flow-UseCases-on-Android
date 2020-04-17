@@ -4,21 +4,22 @@ import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CooperativeCancellationActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CalculationInSeveralCoroutinesActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.ExceptionHandlingActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.ContinueCoroutineWhenUserLeavesScreenActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14.WorkManagerActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase15.PerformanceAnalysisActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CalculationInBackgroundActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CooperativeCancellationActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.CalculationInSeveralCoroutinesActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase13.ExceptionHandlingActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14.ContinueCoroutineWhenUserLeavesScreenActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase15.WorkManagerActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase16.PerformanceAnalysisActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.usingcallbacks.SequentialNetworkRequestsCallbacksActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6.RetryNetworkRequestActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.RoomAndCoroutinesActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.DebuggingCoroutinesActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.CalculationInBackgroundActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.TimeoutAndRetryActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.RoomAndCoroutinesActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.DebuggingCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
 import kotlinx.android.parcel.Parcelize
 
@@ -38,16 +39,17 @@ const val useCase3Description = "#3 Perform several network requests concurrentl
 const val useCase4Description = "#4 Perform variable amount of network requests"
 const val useCase5Description = "#5 Network request with TimeOut"
 const val useCase6Description = "#6 Retry Network request"
-const val useCase7Description = "#7 Room and Coroutines"
-const val useCase8Description = "#8 Debugging Coroutines"
-const val useCase9Description = "#9 Offload expensive calculation to background thread"
-const val useCase10Description = "#10 Cooperative Cancellation"
-const val useCase11Description = "#11 Offload expensive calculation to several coroutines"
-const val useCase12Description = "#12 Exception Handling"
-const val useCase13Description = "#13 Continue Coroutine when User leaves screen"
-const val useCase14Description = "#14 Using WorkManager with Coroutines"
-const val useCase15Description =
-    "#15 Performance Analysis of dispatchers, number of coroutines and yielding"
+const val useCase7Description = "#7 Network requests with timeout and retry"
+const val useCase8Description = "#8 Room and Coroutines"
+const val useCase9Description = "#9 Debugging Coroutines"
+const val useCase10Description = "#10 Offload expensive calculation to background thread"
+const val useCase11Description = "#11 Cooperative Cancellation"
+const val useCase12Description = "#12 Offload expensive calculation to several coroutines"
+const val useCase13Description = "#13 Exception Handling"
+const val useCase14Description = "#14 Continue Coroutine when User leaves screen"
+const val useCase15Description = "#15 Using WorkManager with Coroutines"
+const val useCase16Description =
+    "#16 Performance Analysis of dispatchers, number of coroutines and yielding"
 
 private val coroutinesUseCases =
     UseCaseCategory(
@@ -82,38 +84,42 @@ private val coroutinesUseCases =
             ),
             UseCase(
                 useCase7Description,
-                RoomAndCoroutinesActivity::class.java
+                TimeoutAndRetryActivity::class.java
             ),
             UseCase(
                 useCase8Description,
-                DebuggingCoroutinesActivity::class.java
+                RoomAndCoroutinesActivity::class.java
             ),
             UseCase(
                 useCase9Description,
-                CalculationInBackgroundActivity::class.java
+                DebuggingCoroutinesActivity::class.java
             ),
             UseCase(
                 useCase10Description,
-                CooperativeCancellationActivity::class.java
+                CalculationInBackgroundActivity::class.java
             ),
             UseCase(
                 useCase11Description,
-                CalculationInSeveralCoroutinesActivity::class.java
+                CooperativeCancellationActivity::class.java
             ),
             UseCase(
                 useCase12Description,
-                ExceptionHandlingActivity::class.java
+                CalculationInSeveralCoroutinesActivity::class.java
             ),
             UseCase(
                 useCase13Description,
-                ContinueCoroutineWhenUserLeavesScreenActivity::class.java
+                ExceptionHandlingActivity::class.java
             ),
             UseCase(
                 useCase14Description,
-                WorkManagerActivity::class.java
+                ContinueCoroutineWhenUserLeavesScreenActivity::class.java
             ),
             UseCase(
                 useCase15Description,
+                WorkManagerActivity::class.java
+            ),
+            UseCase(
+                useCase16Description,
                 PerformanceAnalysisActivity::class.java
             )
         )
