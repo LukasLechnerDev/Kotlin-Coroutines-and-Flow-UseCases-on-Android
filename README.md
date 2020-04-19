@@ -187,6 +187,8 @@ I am currently learning Coroutines myself. So if you have any ideas for or impro
 
 [Lukas Lechner](https://www.lukaslechner.com)
 
+[Twitter](https://twitter.com/LukasLechnerDev) 
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License").
