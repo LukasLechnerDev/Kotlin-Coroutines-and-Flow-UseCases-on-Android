@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.usingcallbacks
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.callbacks
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10

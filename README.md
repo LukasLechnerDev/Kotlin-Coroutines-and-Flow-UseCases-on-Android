@@ -45,14 +45,17 @@ Unit Tests exist for most use cases.
 
 ### 1. Perform single network request
 
-Performs a single network request to get the latest Android Versions.
+This use case performs a single network request to get the latest Android Versions and displays them on the screen.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase1/PerformSingleNetworkRequestViewModel.kt)]
 
 ### 2. Perform two sequential network requests
 
-Performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
-There also exists an alternative implementation for this use case which uses traditional callbacks. It should demonstrate the simplicity of the Coroutine version compared to callback-based version.
+This use case performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
+
+There are also 2 alternative implementations included. One is using old-school [callbacks](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/callbacks/SequentialNetworkRequestsCallbacksViewModel.kt).
+The other one uses [RxJava](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/rx/SequentialNetworkRequestsRxViewModel.kt). You can compare each implementation.
+If you compare all implementation, it is really interesting to see, in my opinion, how simple the Coroutine-based version actually is.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/Perform2SequentialNetworkRequestsViewModel.kt)]
 

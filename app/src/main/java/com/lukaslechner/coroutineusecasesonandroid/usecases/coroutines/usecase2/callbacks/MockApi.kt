@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.usingcallbacks
+package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2.callbacks
 
 import com.google.gson.Gson
 import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
