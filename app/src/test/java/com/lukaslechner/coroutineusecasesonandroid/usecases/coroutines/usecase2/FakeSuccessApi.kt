@@ -2,7 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import com.lukaslechner.coroutineusecasesonandroid.mock.*
 
-class FakeSuccessApi() : MockApi {
+class FakeSuccessApi : MockApi {
 
     override suspend fun getRecentAndroidVersions(): List<AndroidVersion> {
         return mockAndroidVersions

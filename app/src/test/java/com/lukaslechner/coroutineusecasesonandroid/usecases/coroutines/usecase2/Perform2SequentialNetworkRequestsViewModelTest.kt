@@ -30,7 +30,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
                 Perform2SequentialNetworkRequestsViewModel(
                     fakeApi
                 )
-            observeViewModel(viewModel)
+            viewModel.observe()
 
             Assert.assertTrue(receivedUiStates.isEmpty())
 
@@ -54,7 +54,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
                 Perform2SequentialNetworkRequestsViewModel(
                     fakeApi
                 )
-            observeViewModel(viewModel)
+            viewModel.observe()
 
             Assert.assertTrue(receivedUiStates.isEmpty())
 
@@ -78,7 +78,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
                 Perform2SequentialNetworkRequestsViewModel(
                     fakeApi
                 )
-            observeViewModel(viewModel)
+            viewModel.observe()
 
             Assert.assertTrue(receivedUiStates.isEmpty())
 
@@ -93,8 +93,8 @@ class Perform2SequentialNetworkRequestsViewModelTest {
             )
         }
 
-    private fun observeViewModel(viewModel: Perform2SequentialNetworkRequestsViewModel) {
-        viewModel.uiState().observeForever { uiState ->
+    private fun Perform2SequentialNetworkRequestsViewModel.observe() {
+        uiState().observeForever { uiState ->
             if (uiState != null) {
                 receivedUiStates.add(uiState)
             }
