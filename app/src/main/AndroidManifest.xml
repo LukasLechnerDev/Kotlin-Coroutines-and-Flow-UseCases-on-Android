@@ -28,6 +28,9 @@
         <activity android:name=".usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity" />
         <activity android:name=".usecases.coroutines.usecase6.RetryNetworkRequestActivity" />
         <activity android:name=".usecases.coroutines.usecase7.TimeoutAndRetryActivity" />
+        <activity
+            android:name=".usecases.coroutines.usecase7.callbacks.TimeoutAndRetryCallbackActivity"
+            android:exported="true" />
         <activity android:name=".usecases.coroutines.usecase8.RoomAndCoroutinesActivity" />
         <activity android:name=".usecases.coroutines.usecase9.DebuggingCoroutinesActivity" />
 

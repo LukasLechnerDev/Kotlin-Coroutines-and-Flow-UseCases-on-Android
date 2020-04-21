@@ -19,6 +19,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase4.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6.RetryNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.TimeoutAndRetryActivity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.callbacks.TimeoutAndRetryCallbackActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.RoomAndCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.DebuggingCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
@@ -42,6 +43,7 @@ const val useCase4Description = "#4 Perform variable amount of network requests"
 const val useCase5Description = "#5 Network request with TimeOut"
 const val useCase6Description = "#6 Retry Network request"
 const val useCase7Description = "#7 Network requests with timeout and retry"
+const val useCase7UsingCallbacksDescription = "#7 Using callbacks"
 const val useCase8Description = "#8 Room and Coroutines"
 const val useCase9Description = "#9 Debugging Coroutines"
 const val useCase10Description = "#10 Offload expensive calculation to background thread"
@@ -90,6 +92,10 @@ private val coroutinesUseCases =
             UseCase(
                 useCase7Description,
                 TimeoutAndRetryActivity::class.java
+            ),
+            UseCase(
+                useCase7UsingCallbacksDescription,
+                TimeoutAndRetryCallbackActivity::class.java
             ),
             UseCase(
                 useCase8Description,

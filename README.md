@@ -100,6 +100,8 @@ by asserting the amount of elapsed virtual time.
 Composes higher level functions `retry()` and `withTimeout()`. Demonstrates how simple and readable code written with Coroutines can be.
 The mock API first responds after the timeout and then returns an unsuccessful response. The third attempt is then successful.
 
+Take a look at the included [callback-based implementation](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase7/callbacks/TimeoutAndRetryCallbackViewModel.kt) to see how tricky this use case is to implement without Coroutines.
+
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase7/TimeoutAndRetryViewModel.kt)]
 
 ### 8. Room and Coroutines
