@@ -80,6 +80,8 @@ Then it performs a network request for each Android version to load its features
 This use case uses the suspending function `withTimeout()` from the coroutines-core library. It throws a `TimeoutCancellationException` if the timeout was exceeded.
 You can set the duration of the request in the UI and check the behaviour when the response time is bigger than the timeout.
 
+General networking timeouts can also be [configured in the okhttp client](https://square.github.io/okhttp/recipes/#timeouts-kt-java).
+
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase5/NetworkRequestWithTimeoutViewModel.kt)]
 
 ### 6. Retrying network requests
