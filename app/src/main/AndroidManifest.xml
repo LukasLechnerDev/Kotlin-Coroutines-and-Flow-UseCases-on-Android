@@ -31,6 +31,9 @@
         <activity
             android:name=".usecases.coroutines.usecase7.callbacks.TimeoutAndRetryCallbackActivity"
             android:exported="true" />
+        <activity
+            android:name=".usecases.coroutines.usecase7.rx.TimeoutAndRetryRxActivity"
+            android:exported="true" />
         <activity android:name=".usecases.coroutines.usecase8.RoomAndCoroutinesActivity" />
         <activity android:name=".usecases.coroutines.usecase9.DebuggingCoroutinesActivity" />
 
