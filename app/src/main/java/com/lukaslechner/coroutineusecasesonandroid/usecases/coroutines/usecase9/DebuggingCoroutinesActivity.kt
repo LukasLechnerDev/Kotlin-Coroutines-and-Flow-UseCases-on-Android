@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase7Description
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase9Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityDebuggingcoroutinesBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
@@ -13,7 +13,7 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
 class DebuggingCoroutinesActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = useCase7Description
+    override fun getToolbarTitle() = useCase9Description
 
     private val binding by lazy { ActivityDebuggingcoroutinesBinding.inflate(layoutInflater) }
     private val viewModel: DebuggingCoroutinesViewModel by viewModels()

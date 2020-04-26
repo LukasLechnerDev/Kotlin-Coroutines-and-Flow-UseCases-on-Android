@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase9Description
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase10Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCalculationinbackgroundBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
@@ -14,7 +14,7 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
 class CalculationInBackgroundActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = useCase9Description
+    override fun getToolbarTitle() = useCase10Description
 
     private val binding by lazy { ActivityCalculationinbackgroundBinding.inflate(layoutInflater) }
     private val viewModel: CalculationInBackgroundViewModel by viewModels()

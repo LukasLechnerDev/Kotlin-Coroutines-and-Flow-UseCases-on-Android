@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase10Description
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase11Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityCooperativecancellationBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.hideKeyboard
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
@@ -14,7 +14,7 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
 class CooperativeCancellationActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = useCase10Description
+    override fun getToolbarTitle() = useCase11Description
 
     private val binding by lazy { ActivityCooperativecancellationBinding.inflate(layoutInflater) }
     private val viewModel: CooperativeCancellationViewModel by viewModels()

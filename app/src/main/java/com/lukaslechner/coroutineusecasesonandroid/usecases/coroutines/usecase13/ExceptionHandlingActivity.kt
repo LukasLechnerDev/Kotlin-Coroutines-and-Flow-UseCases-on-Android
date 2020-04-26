@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase12Description
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase13Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityExceptionhandlingBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
@@ -21,7 +21,7 @@ class ExceptionHandlingActivity : BaseActivity() {
     }
 
     private val viewModel: ExceptionHandlingViewModel by viewModels()
-    override fun getToolbarTitle() = useCase12Description
+    override fun getToolbarTitle() = useCase13Description
 
     private var operationStartTime = 0L
 

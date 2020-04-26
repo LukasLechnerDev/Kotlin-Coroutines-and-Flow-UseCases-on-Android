@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase15Description
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase16Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityPerformanceanalysisBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 
 class PerformanceAnalysisActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = useCase15Description
+    override fun getToolbarTitle() = useCase16Description
 
     private val binding by lazy {
         ActivityPerformanceanalysisBinding.inflate(

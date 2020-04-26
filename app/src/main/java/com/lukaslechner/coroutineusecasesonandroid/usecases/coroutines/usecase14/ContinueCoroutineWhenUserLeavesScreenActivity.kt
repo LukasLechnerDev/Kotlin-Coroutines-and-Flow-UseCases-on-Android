@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.lukaslechner.coroutineusecasesonandroid.CoroutineUsecasesOnAndroidApplication
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.useCase13Description
+import com.lukaslechner.coroutineusecasesonandroid.base.useCase14Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityQueryfromroomdatabaseBinding
 import com.lukaslechner.coroutineusecasesonandroid.utils.fromHtml
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
@@ -15,7 +15,7 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 
 class ContinueCoroutineWhenUserLeavesScreenActivity : BaseActivity() {
 
-    override fun getToolbarTitle() = useCase13Description
+    override fun getToolbarTitle() = useCase14Description
 
     private val binding by lazy { ActivityQueryfromroomdatabaseBinding.inflate(layoutInflater) }
 
