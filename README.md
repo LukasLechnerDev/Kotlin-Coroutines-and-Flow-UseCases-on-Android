@@ -24,7 +24,7 @@ Android version.
 Unit Tests exist for most use cases.
 
 ## ⭐️ Use Cases
-1. [Perform single network request](#1-perform-a-single-network-request)
+1. [Perform single network request](#1-perform-single-network-request)
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
 3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
 4. [Perform variable amount of network requests](#4-perform-variable-amount-of-network-requests)
