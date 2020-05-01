@@ -23,6 +23,9 @@ Android version.
 
 Unit Tests exist for most use cases.
 
+## ✍️ Related Blogposts
+* Comparing Kotlin Coroutines with Callbacks and RxJava [[link](https://www.lukaslechner.com/comparing-kotlin-coroutines-with-callbacks-and-rxjava/)]
+
 ## ⭐️ Use Cases
 1. [Perform single network request](#1-perform-single-network-request)
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
