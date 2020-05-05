@@ -12,7 +12,7 @@ class FakeErrorApi() : MockApi {
         throw IOException()
     }
 
-    override suspend fun getAndroidVersionFeatures(apiVersion: Int): VersionFeatures {
+    override suspend fun getAndroidVersionFeatures(apiLevel: Int): VersionFeatures {
         throw EndpointShouldNotBeCalledException()
     }
 }

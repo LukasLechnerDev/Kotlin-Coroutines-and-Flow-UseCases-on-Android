@@ -19,7 +19,7 @@ class SequentialNetworkRequestsRxViewModel(
         mockApi.getRecentAndroidVersions()
             .flatMap { androidVersions ->
                 val recentVersion = androidVersions.last()
-                mockApi.getAndroidVersionFeatures(recentVersion.apiVersion)
+                mockApi.getAndroidVersionFeatures(recentVersion.apiLevel)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

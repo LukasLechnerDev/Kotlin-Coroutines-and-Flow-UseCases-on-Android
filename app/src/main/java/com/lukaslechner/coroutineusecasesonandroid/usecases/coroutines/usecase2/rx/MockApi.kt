@@ -36,8 +36,8 @@ interface RxMockApi {
     @GET("recent-android-versions")
     fun getRecentAndroidVersions(): Single<List<AndroidVersion>>
 
-    @GET("android-version-features/{apiVersion}")
-    fun getAndroidVersionFeatures(@Path("apiVersion") apiVersion: Int): Single<VersionFeatures>
+    @GET("android-version-features/{apiLevel}")
+    fun getAndroidVersionFeatures(@Path("apiLevel") apiLevel: Int): Single<VersionFeatures>
 }
 
 fun createMockApi(interceptor: MockNetworkInterceptor): RxMockApi {

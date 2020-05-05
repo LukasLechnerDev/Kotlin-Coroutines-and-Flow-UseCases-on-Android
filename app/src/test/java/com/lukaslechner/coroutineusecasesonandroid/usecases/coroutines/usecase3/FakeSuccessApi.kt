@@ -10,13 +10,13 @@ class FakeSuccessApi(private val responseDelay: Long) : MockApi {
         throw EndpointShouldNotBeCalledException()
     }
 
-    override suspend fun getAndroidVersionFeatures(apiVersion: Int): VersionFeatures {
+    override suspend fun getAndroidVersionFeatures(apiLevel: Int): VersionFeatures {
         delay(responseDelay)
-        return when (apiVersion) {
+        return when (apiLevel) {
             27 -> mockVersionFeaturesOreo
             28 -> mockVersionFeaturesPie
             29 -> mockVersionFeaturesAndroid10
-            else -> throw IllegalArgumentException("apiVersion not found")
+            else -> throw IllegalArgumentException("apiLevel not found")
         }
     }
 }

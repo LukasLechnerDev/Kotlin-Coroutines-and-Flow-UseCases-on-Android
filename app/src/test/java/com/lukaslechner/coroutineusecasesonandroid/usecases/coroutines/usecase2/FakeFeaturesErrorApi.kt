@@ -9,12 +9,12 @@ class FakeFeaturesErrorApi : MockApi {
         return mockAndroidVersions
     }
 
-    override suspend fun getAndroidVersionFeatures(apiVersion: Int): VersionFeatures {
-        return when (apiVersion) {
+    override suspend fun getAndroidVersionFeatures(apiLevel: Int): VersionFeatures {
+        return when (apiLevel) {
             27 -> mockVersionFeaturesOreo
             28 -> mockVersionFeaturesPie
             29 -> throw IOException()
-            else -> throw IllegalArgumentException("apiVersion not found")
+            else -> throw IllegalArgumentException("apiLevel not found")
         }
     }
 }

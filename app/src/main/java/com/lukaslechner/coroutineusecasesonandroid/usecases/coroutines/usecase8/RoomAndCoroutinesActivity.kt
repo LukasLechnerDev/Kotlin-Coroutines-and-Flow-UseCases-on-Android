@@ -83,7 +83,7 @@ class RoomAndCoroutinesActivity : BaseActivity() {
             }
         }
 
-        val readableVersions = uiState.recentVersions.map { "API ${it.apiVersion}: ${it.name}" }
+        val readableVersions = uiState.recentVersions.map { "API ${it.apiLevel}: ${it.name}" }
         textViewResult.text = fromHtml(
             "<b>Recent Android Versions [from ${uiState.dataSource.name}]</b><br>${readableVersions.joinToString(
                 separator = "<br>"

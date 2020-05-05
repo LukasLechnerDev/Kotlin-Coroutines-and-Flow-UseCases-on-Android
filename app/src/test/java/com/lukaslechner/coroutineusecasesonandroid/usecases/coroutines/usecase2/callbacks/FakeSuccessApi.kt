@@ -10,12 +10,12 @@ class FakeSuccessApi : CallbackMockApi {
         return Calls.response(mockAndroidVersions)
     }
 
-    override fun getAndroidVersionFeatures(apiVersion: Int): Call<VersionFeatures> {
-        val featureMocks = when (apiVersion) {
+    override fun getAndroidVersionFeatures(apiLevel: Int): Call<VersionFeatures> {
+        val featureMocks = when (apiLevel) {
             27 -> mockVersionFeaturesOreo
             28 -> mockVersionFeaturesPie
             29 -> mockVersionFeaturesAndroid10
-            else -> throw IllegalArgumentException("apiVersion not found")
+            else -> throw IllegalArgumentException("apiLevel not found")
         }
         return Calls.response(featureMocks)
     }

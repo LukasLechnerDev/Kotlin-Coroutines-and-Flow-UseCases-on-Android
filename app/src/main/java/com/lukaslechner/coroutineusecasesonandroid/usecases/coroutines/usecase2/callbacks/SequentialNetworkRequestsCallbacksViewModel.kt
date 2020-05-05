@@ -31,7 +31,7 @@ class SequentialNetworkRequestsCallbacksViewModel(
                 if (response.isSuccessful) {
                     val mostRecentVersion = response.body()!!.last()
                     getAndroidFeaturesCall =
-                        mockApi.getAndroidVersionFeatures(mostRecentVersion.apiVersion)
+                        mockApi.getAndroidVersionFeatures(mostRecentVersion.apiLevel)
                     getAndroidFeaturesCall!!.enqueue(object : Callback<VersionFeatures> {
                         override fun onFailure(call: Call<VersionFeatures>, t: Throwable) {
                             uiState.value = UiState.Error("Network Request failed")

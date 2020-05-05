@@ -13,7 +13,7 @@ class FakeVersionsErrorApi : CallbackMockApi {
         return Calls.response(mockAndroidVersions)
     }
 
-    override fun getAndroidVersionFeatures(apiVersion: Int): Call<VersionFeatures> {
+    override fun getAndroidVersionFeatures(apiLevel: Int): Call<VersionFeatures> {
         return Calls.failure(IOException())
     }
 }

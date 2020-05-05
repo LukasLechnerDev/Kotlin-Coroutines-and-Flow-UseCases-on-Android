@@ -1,6 +1,6 @@
 package com.lukaslechner.coroutineusecasesonandroid.mock
 
-data class AndroidVersion(val apiVersion: Int, val name: String)
+data class AndroidVersion(val apiLevel: Int, val name: String)
 
 data class VersionFeatures(val androidVersion: AndroidVersion, val features: List<String>)
 

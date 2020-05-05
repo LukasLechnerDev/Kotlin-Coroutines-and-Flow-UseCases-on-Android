@@ -34,8 +34,8 @@ interface CallbackMockApi {
     @GET("recent-android-versions")
     fun getRecentAndroidVersions(): Call<List<AndroidVersion>>
 
-    @GET("android-version-features/{apiVersion}")
-    fun getAndroidVersionFeatures(@Path("apiVersion") apiVersion: Int): Call<VersionFeatures>
+    @GET("android-version-features/{apiLevel}")
+    fun getAndroidVersionFeatures(@Path("apiLevel") apiLevel: Int): Call<VersionFeatures>
 }
 
 fun createMockApi(interceptor: MockNetworkInterceptor): CallbackMockApi {

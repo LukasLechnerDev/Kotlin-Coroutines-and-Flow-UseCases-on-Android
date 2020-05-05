@@ -17,7 +17,7 @@ class VariableAmountOfNetworkRequestsViewModel(
             try {
                 val recentVersions = mockApi.getRecentAndroidVersions()
                 val versionFeatures = recentVersions.map { androidVersion ->
-                    mockApi.getAndroidVersionFeatures(androidVersion.apiVersion)
+                    mockApi.getAndroidVersionFeatures(androidVersion.apiLevel)
                 }
                 uiState.value = UiState.Success(versionFeatures)
             } catch (exception: Exception) {
@@ -33,7 +33,7 @@ class VariableAmountOfNetworkRequestsViewModel(
                 val recentVersions = mockApi.getRecentAndroidVersions()
                 val versionFeatures = recentVersions
                     .map { androidVersion ->
-                        async { mockApi.getAndroidVersionFeatures(androidVersion.apiVersion) }
+                        async { mockApi.getAndroidVersionFeatures(androidVersion.apiLevel) }
                     }.awaitAll()
                 uiState.value = UiState.Success(versionFeatures)
             } catch (exception: Exception) {

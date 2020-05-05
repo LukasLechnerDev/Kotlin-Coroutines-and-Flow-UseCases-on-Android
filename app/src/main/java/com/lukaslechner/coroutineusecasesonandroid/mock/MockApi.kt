@@ -12,8 +12,8 @@ interface MockApi {
     @GET("recent-android-versions")
     suspend fun getRecentAndroidVersions(): List<AndroidVersion>
 
-    @GET("android-version-features/{apiVersion}")
-    suspend fun getAndroidVersionFeatures(@Path("apiVersion") apiVersion: Int): VersionFeatures
+    @GET("android-version-features/{apiLevel}")
+    suspend fun getAndroidVersionFeatures(@Path("apiLevel") apiLevel: Int): VersionFeatures
 }
 
 fun createMockApi(interceptor: MockNetworkInterceptor): MockApi {
