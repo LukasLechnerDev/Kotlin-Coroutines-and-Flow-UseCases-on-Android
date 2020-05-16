@@ -6,6 +6,7 @@ fun main() {
     println("main starts")
     threadRoutine(1, 500)
     threadRoutine(2, 300)
+    Thread.sleep(1000)
     println("main ends")
 }
 
