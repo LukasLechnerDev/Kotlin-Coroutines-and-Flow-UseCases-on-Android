@@ -53,6 +53,7 @@ Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to get more
 14. [Continue Coroutine execution even when the user leaves the screen](#14-continue-coroutine-execution-when-the-user-leaves-the-screen)
 15. [Using WorkManager with Coroutines](#15-using-workmanager-with-coroutines)
 16. [Performance analysis of dispatchers, number of coroutines and yielding](#16-performance-analysis-of-dispatchers-number-of-coroutines-and-yielding)
+17. [Perform expensive calculation on Main Thread without freezing the UI](#17-perform-expensive-calculation-on-main-thread-without-freezing-the-ui)
 
 ## 📄 Description
 
@@ -195,6 +196,11 @@ example, we are sending an analytics request when the user enters the screen, wh
 
 This is an extension of use case #12 (Offload expensive calculation to several coroutines). Here it is possible to additionally define the dispatcher type you want
 the calculation to be performed on. Additionally, you can enable or disable the call to `yield()` during the calculation. A list of calculations is displayed on the bottom in order to be able to compare them in a convenient way.
+
+### 17. Perform expensive calculation on Main Thread without freezing the UI
+
+This example shows how you can perform an expensive calculation on the main thread in a non-blocking fashion. It uses `yield()` for every step in the calculation so that other work, like drawing the UI, can be performed
+on the main thread. It is more a "showcase" rather than a use case for a real application, because of performance reasons you should always perform expensive calculations on a background thread (See UseCase#10).
 
 
 You can play around and check the performance of different configurations!
