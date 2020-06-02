@@ -60,6 +60,10 @@
             android:name=".usecases.coroutines.usecase16.PerformanceAnalysisActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".usecases.coroutines.usecase17.PerformCalculationOnMainThreadActivity"
+            android:exported="true" />
+
         <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
 
         <activity android:name=".usecases.flow.usecase1.FlowUseCase1Activity" />
