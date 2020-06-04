@@ -24,8 +24,6 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
     private val receivedUiStates: MutableList<UiState> =
         arrayListOf()
 
-
-
     @Test
     fun `performNetworkRequestsSequentially should return data after 3 times the response delay`() =
         coroutineTestRule.runBlockingTest {
