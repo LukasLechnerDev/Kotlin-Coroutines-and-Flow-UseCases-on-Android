@@ -3,6 +3,7 @@ package com.lukaslechner.coroutineusecasesonandroid.base
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CalculationInBackgroundActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CooperativeCancellationActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12.CalculationInSeveralCoroutinesActivity
@@ -64,7 +65,7 @@ private val coroutinesUseCases =
         "Coroutine Use Cases", listOf(
             UseCase(
                 useCase1Description,
-                PerformCalculationOnMainThreadActivity::class.java
+                PerformSingleNetworkRequestActivity::class.java
             ),
             UseCase(
                 useCase2Description,
