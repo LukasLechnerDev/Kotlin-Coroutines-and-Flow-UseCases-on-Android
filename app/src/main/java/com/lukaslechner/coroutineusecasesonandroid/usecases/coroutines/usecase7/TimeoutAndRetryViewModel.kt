@@ -12,23 +12,23 @@ class TimeoutAndRetryViewModel(
 
     fun performNetworkRequest() {
         uiState.value = UiState.Loading
+        val numberOfRetries = 2
+        val timeout = 1000L
+
+        val oreoVersionsDeferred = viewModelScope.async {
+            retryWithTimeout(numberOfRetries, timeout) {
+                api.getAndroidVersionFeatures(27)
+            }
+        }
+
+        val pieVersionsDeferred = viewModelScope.async {
+            retryWithTimeout(numberOfRetries, timeout) {
+                api.getAndroidVersionFeatures(28)
+            }
+        }
+
         viewModelScope.launch {
-            val numberOfRetries = 2
-            val timeout = 1000L
-
             try {
-                val oreoVersionsDeferred = async {
-                    retryWithTimeout(numberOfRetries, timeout) {
-                        api.getAndroidVersionFeatures(27)
-                    }
-                }
-
-                val pieVersionsDeferred = async {
-                    retryWithTimeout(numberOfRetries, timeout) {
-                        api.getAndroidVersionFeatures(28)
-                    }
-                }
-
                 val versionFeatures = listOf(
                     oreoVersionsDeferred,
                     pieVersionsDeferred
