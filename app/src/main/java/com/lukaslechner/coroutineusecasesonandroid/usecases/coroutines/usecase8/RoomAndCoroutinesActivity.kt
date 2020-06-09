@@ -17,7 +17,13 @@ class RoomAndCoroutinesActivity : BaseActivity() {
     override fun getToolbarTitle() = useCase8Description
 
     private val binding by lazy { ActivityQueryfromroomdatabaseBinding.inflate(layoutInflater) }
-    private val viewModel: RoomAndCoroutinesViewModel by viewModels()
+
+    private val viewModel: RoomAndCoroutinesViewModel by viewModels {
+        ViewModelFactory(
+            mockApi(),
+            AndroidVersionDatabase.getInstance(applicationContext).androidVersionDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +31,8 @@ class RoomAndCoroutinesActivity : BaseActivity() {
 
         // ugly setter injection of the database
         // could be improved to use constructor injection by using ViewModelFactory
-        viewModel.database =
-            AndroidVersionDatabase.getInstance(applicationContext).androidVersionDao()
+        /*viewModel.database =
+            AndroidVersionDatabase.getInstance(applicationContext).androidVersionDao()*/
         viewModel.uiState().observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
@@ -71,12 +77,12 @@ class RoomAndCoroutinesActivity : BaseActivity() {
 
     private fun onSuccess(uiState: UiState.Success) = with(binding) {
         when (uiState.dataSource) {
-            DataSource.Network -> {
+            DataSource.NETWORK -> {
                 progressBarLoadFromNetwork.setGone()
                 imageViewNetworkLoadSuccessOrError.setImageDrawable(getDrawable(R.drawable.ic_check_green_24dp))
                 imageViewNetworkLoadSuccessOrError.setVisible()
             }
-            DataSource.Database -> {
+            DataSource.DATABASE -> {
                 progressBarLoadFromDb.setGone()
                 imageViewDatabaseLoadSuccessOrError.setImageDrawable(getDrawable(R.drawable.ic_check_green_24dp))
                 imageViewDatabaseLoadSuccessOrError.setVisible()
@@ -93,12 +99,12 @@ class RoomAndCoroutinesActivity : BaseActivity() {
 
     private fun onError(uiState: UiState.Error) = with(binding) {
         when (uiState.dataSource) {
-            is DataSource.Network -> {
+            DataSource.NETWORK -> {
                 progressBarLoadFromNetwork.setGone()
                 imageViewNetworkLoadSuccessOrError.setImageDrawable(getDrawable(R.drawable.ic_clear_red_24dp))
                 imageViewNetworkLoadSuccessOrError.setVisible()
             }
-            is DataSource.Database -> {
+            DataSource.DATABASE -> {
                 progressBarLoadFromDb.setGone()
                 imageViewDatabaseLoadSuccessOrError.setImageDrawable(getDrawable(R.drawable.ic_clear_red_24dp))
                 imageViewDatabaseLoadSuccessOrError.setVisible()

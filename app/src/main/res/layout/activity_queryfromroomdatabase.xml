@@ -91,6 +91,7 @@
             android:id="@+id/textViewResult"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="8dp"
             android:textColor="@color/primary_text"
             android:textSize="16sp"
             tools:text="Results" />
