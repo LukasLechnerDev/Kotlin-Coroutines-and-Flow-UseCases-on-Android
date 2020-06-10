@@ -19,23 +19,49 @@
         </activity>
 
         <activity android:name=".base.UseCaseActivity" />
-        <activity android:name=".usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity" />
-        <activity android:name=".usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity" />
-        <activity android:name=".usecases.coroutines.usecase2.callbacks.SequentialNetworkRequestsCallbacksActivity" />
-        <activity android:name=".usecases.coroutines.usecase2.rx.SequentialNetworkRequestsRxActivity" />
-        <activity android:name=".usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity" />
-        <activity android:name=".usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsActivity" />
-        <activity android:name=".usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity" />
-        <activity android:name=".usecases.coroutines.usecase6.RetryNetworkRequestActivity" />
-        <activity android:name=".usecases.coroutines.usecase7.TimeoutAndRetryActivity" />
+
+        <activity
+            android:name=".usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".usecases.coroutines.usecase2.Perform2SequentialNetworkRequestsActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".usecases.coroutines.usecase2.callbacks.SequentialNetworkRequestsCallbacksActivity"
+            android:exported="true" />
+        <activity
+            android:name=".usecases.coroutines.usecase2.rx.SequentialNetworkRequestsRxActivity"
+            android:exported="true" />
+        <activity
+            android:name=".usecases.coroutines.usecase3.PerformNetworkRequestsConcurrentlyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".usecases.coroutines.usecase4.VariableAmountOfNetworkRequestsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".usecases.coroutines.usecase5.NetworkRequestWithTimeoutActivity"
+            android:exported="true" />
+        <activity
+            android:name=".usecases.coroutines.usecase6.RetryNetworkRequestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".usecases.coroutines.usecase7.TimeoutAndRetryActivity"
+            android:exported="true" />
         <activity
             android:name=".usecases.coroutines.usecase7.callbacks.TimeoutAndRetryCallbackActivity"
             android:exported="true" />
         <activity
             android:name=".usecases.coroutines.usecase7.rx.TimeoutAndRetryRxActivity"
             android:exported="true" />
-        <activity android:name=".usecases.coroutines.usecase8.RoomAndCoroutinesActivity" />
-        <activity android:name=".usecases.coroutines.usecase9.DebuggingCoroutinesActivity" />
+        <activity
+            android:name=".usecases.coroutines.usecase8.RoomAndCoroutinesActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".usecases.coroutines.usecase9.DebuggingCoroutinesActivity"
+            android:exported="true" />
 
         <activity
             android:name=".usecases.coroutines.usecase10.CalculationInBackgroundActivity"
@@ -53,8 +79,13 @@
             android:name=".usecases.coroutines.usecase13.ExceptionHandlingActivity"
             android:exported="true" />
 
-        <activity android:name=".usecases.coroutines.usecase14.ContinueCoroutineWhenUserLeavesScreenActivity" />
-        <activity android:name=".usecases.coroutines.usecase15.WorkManagerActivity" />
+        <activity
+            android:name=".usecases.coroutines.usecase14.ContinueCoroutineWhenUserLeavesScreenActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".usecases.coroutines.usecase15.WorkManagerActivity"
+            android:exported="true" />
 
         <activity
             android:name=".usecases.coroutines.usecase16.PerformanceAnalysisActivity"
@@ -64,9 +95,13 @@
             android:name=".usecases.coroutines.usecase17.PerformCalculationOnMainThreadActivity"
             android:exported="true" />
 
-        <activity android:name=".usecases.channels.usecase1.ChannelUseCase1Activity" />
+        <activity
+            android:name=".usecases.channels.usecase1.ChannelUseCase1Activity"
+            android:exported="true" />
 
-        <activity android:name=".usecases.flow.usecase1.FlowUseCase1Activity" />
+        <activity
+            android:name=".usecases.flow.usecase1.FlowUseCase1Activity"
+            android:exported="true" />
 
     </application>
 
