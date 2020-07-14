@@ -29,10 +29,6 @@ class RoomAndCoroutinesActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // ugly setter injection of the database
-        // could be improved to use constructor injection by using ViewModelFactory
-        /*viewModel.database =
-            AndroidVersionDatabase.getInstance(applicationContext).androidVersionDao()*/
         viewModel.uiState().observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
