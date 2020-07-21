@@ -11,10 +11,10 @@ class FactorialCalculator(
 
     suspend fun calculateFactorial(
         factorialOf: Int,
-        numberOfThreads: Int
+        numberOfCoroutines: Int
     ): BigInteger {
 
-        val subRanges = createSubRangeList(factorialOf, numberOfThreads)
+        val subRanges = createSubRangeList(factorialOf, numberOfCoroutines)
         return withContext(defaultDispatcher) {
             subRanges.map { subRange ->
                 async {
