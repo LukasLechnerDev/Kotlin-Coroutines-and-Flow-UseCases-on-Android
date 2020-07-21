@@ -13,9 +13,8 @@ class FactorialCalculator(
         factorialOf: Int,
         numberOfCoroutines: Int
     ): BigInteger {
-
-        val subRanges = createSubRangeList(factorialOf, numberOfCoroutines)
         return withContext(defaultDispatcher) {
+            val subRanges = createSubRangeList(factorialOf, numberOfCoroutines)
             subRanges.map { subRange ->
                 async {
                     calculateFactorialOfSubRange(subRange)
@@ -28,7 +27,7 @@ class FactorialCalculator(
         }
     }
 
-    suspend fun calculateFactorialOfSubRange(
+    private suspend fun calculateFactorialOfSubRange(
         subRange: SubRange
     ): BigInteger {
         return withContext(defaultDispatcher) {
@@ -42,27 +41,26 @@ class FactorialCalculator(
         }
     }
 
-    suspend fun createSubRangeList(
+    private fun createSubRangeList(
         factorialOf: Int,
         numberOfSubRanges: Int
-    ): List<SubRange> =
-        withContext(defaultDispatcher) {
-            val quotient = factorialOf.div(numberOfSubRanges)
-            val rangesList = mutableListOf<SubRange>()
+    ): List<SubRange> {
+        val quotient = factorialOf.div(numberOfSubRanges)
+        val rangesList = mutableListOf<SubRange>()
 
-            var curStartIndex = 1
-            repeat(numberOfSubRanges - 1) {
-                rangesList.add(
-                    SubRange(
-                        curStartIndex,
-                        curStartIndex + (quotient - 1)
-                    )
+        var curStartIndex = 1
+        repeat(numberOfSubRanges - 1) {
+            rangesList.add(
+                SubRange(
+                    curStartIndex,
+                    curStartIndex + (quotient - 1)
                 )
-                curStartIndex += quotient
-            }
-            rangesList.add(SubRange(curStartIndex, factorialOf))
-            rangesList
+            )
+            curStartIndex += quotient
         }
+        rangesList.add(SubRange(curStartIndex, factorialOf))
+        return rangesList
+    }
 }
 
 data class SubRange(val start: Int, val end: Int)
