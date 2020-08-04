@@ -172,8 +172,8 @@ its sibling coroutines. In the use case the results of the successful responses 
 
 ### 14. Continue Coroutine execution when the user leaves the screen
 
-Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get cancelled. Sometimes we want a certain coroutine operation to be continued
-when the user leave the screen. In this use case, the network request keeps running and the results still get inserted into the database
+Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get cancelled. Sometimes, however, we want a certain coroutine operation to be continued
+when the user leaves the screen. In this use case, the network request keeps running and the results still get inserted into the database
 cache when the user leaves the screen. This makes sense in real world application as we don't want to cancel an already started background "cache sync".
 
 
