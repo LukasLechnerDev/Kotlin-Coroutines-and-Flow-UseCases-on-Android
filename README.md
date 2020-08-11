@@ -141,6 +141,8 @@ This is done by enabling Coroutine Debug mode by setting the property `kotlinx.c
 
 This use case calculates the factorial of a number. The calculation is performed on a background thread using the default Dispatcher.
 
+**Attention: This use case does not support cancellation! UseCase#11 fixes this!**
+
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase10/CalculationInBackgroundViewModel.kt)]
 
 In the respective unit test, we have to pass the testDispatcher to the ViewModel, so that the calculation is not performed on a background thread but on the main thread.
