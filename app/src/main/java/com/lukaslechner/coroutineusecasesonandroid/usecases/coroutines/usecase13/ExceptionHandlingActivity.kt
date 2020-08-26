@@ -42,9 +42,6 @@ class ExceptionHandlingActivity : BaseActivity() {
         binding.btnShowResultsEvenIfChildCoroutineFailsTryCatch.setOnClickListener {
             viewModel.showResultsEvenIfChildCoroutineFails()
         }
-        binding.btnShowResultsEvenIfChildCoroutineFailsRunCatching.setOnClickListener {
-            viewModel.showResultsEvenIfChildCoroutineFailsRunCatching()
-        }
     }
 
     private fun render(uiState: UiState) {
@@ -97,13 +94,11 @@ class ExceptionHandlingActivity : BaseActivity() {
         btnExceptionTryCatch.isEnabled = true
         btnCoroutineExceptionHandler.isEnabled = true
         btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = true
-        btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = true
     }
 
     private fun disableButtons() = with(binding) {
         btnExceptionTryCatch.isEnabled = false
         btnCoroutineExceptionHandler.isEnabled = false
         btnShowResultsEvenIfChildCoroutineFailsTryCatch.isEnabled = false
-        btnShowResultsEvenIfChildCoroutineFailsRunCatching.isEnabled = false
     }
 }
