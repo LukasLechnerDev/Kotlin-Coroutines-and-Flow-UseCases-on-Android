@@ -23,7 +23,8 @@ Android version.
 
 Unit Tests exist for most use cases.
 
-## ✍️ Related Blogposts
+## ✍️ Related blog posts
+* Why exception handling with Kotlin Coroutines is so hard and how to successfully master it! [[link](https://www.lukaslechner.com/why-exception-handling-with-kotlin-coroutines-is-so-hard-and-how-to-successfully-master-it/)]
 * Understanding Kotlin Coroutines with this mental model [[link](https://www.lukaslechner.com/understanding-kotlin-coroutines-with-this-mental-model/)]
 * Do I need to call suspend functions of Retrofit and Room on a background thread? [[link](https://www.lukaslechner.com/do-i-need-to-call-suspend-functions-of-retrofit-and-room-on-a-background-thread/)]
 * Comparing Kotlin Coroutines with Callbacks and RxJava [[link](https://www.lukaslechner.com/comparing-kotlin-coroutines-with-callbacks-and-rxjava/)]
