@@ -36,14 +36,6 @@
             android:layout_marginBottom="16dp"
             android:text="Show Results even when Child Coroutine Fails (Try/Catch)" />
 
-        <Button
-            android:id="@+id/btnShowResultsEvenIfChildCoroutineFailsRunCatching"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Show Results even when Child Coroutine Fails (runCatching)" />
-
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
