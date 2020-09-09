@@ -1,7 +1,10 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import com.lukaslechner.coroutineusecasesonandroid.mock.*
-import java.io.IOException
+import okhttp3.MediaType
+import okhttp3.ResponseBody
+import retrofit2.HttpException
+import retrofit2.Response
 
 class FakeFeaturesErrorApi : MockApi {
 
@@ -13,7 +16,12 @@ class FakeFeaturesErrorApi : MockApi {
         return when (apiLevel) {
             27 -> mockVersionFeaturesOreo
             28 -> mockVersionFeaturesPie
-            29 -> throw IOException()
+            29 -> throw HttpException(
+                Response.error<List<AndroidVersion>>(
+                    500,
+                    ResponseBody.create(MediaType.parse("application/json"), "")
+                )
+            )
             else -> throw IllegalArgumentException("apiLevel not found")
         }
     }
