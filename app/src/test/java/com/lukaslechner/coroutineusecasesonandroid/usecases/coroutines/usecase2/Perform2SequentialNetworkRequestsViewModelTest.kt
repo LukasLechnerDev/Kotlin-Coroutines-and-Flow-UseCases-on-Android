@@ -2,7 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
-import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
@@ -17,13 +17,13 @@ class Perform2SequentialNetworkRequestsViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `should return Success when both network requests are successful`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val fakeApi = FakeSuccessApi()
             val viewModel =
                 Perform2SequentialNetworkRequestsViewModel(
@@ -46,7 +46,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
 
     @Test
     fun `should return Error when first network requests fails`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
 
             val fakeApi = FakeVersionsErrorApi()
             val viewModel =
@@ -70,7 +70,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
 
     @Test
     fun `should return Error when second network requests fails`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
 
             val fakeApi = FakeFeaturesErrorApi()
             val viewModel =

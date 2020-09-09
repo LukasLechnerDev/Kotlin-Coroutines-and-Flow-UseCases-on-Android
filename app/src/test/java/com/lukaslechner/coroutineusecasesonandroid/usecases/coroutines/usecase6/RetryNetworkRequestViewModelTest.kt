@@ -2,7 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
@@ -17,13 +17,13 @@ class RetryNetworkRequestViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performSingleNetworkRequest() should return Success UiState on successful network response`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = RetryNetworkRequestViewModel(fakeApi).apply {
@@ -47,7 +47,7 @@ class RetryNetworkRequestViewModelTest {
 
     @Test
     fun `performSingleNetworkRequest() should retry network request two times`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessOnThirdAttemptApi(responseDelay)
             val viewModel = RetryNetworkRequestViewModel(fakeApi).apply {
@@ -82,7 +82,7 @@ class RetryNetworkRequestViewModelTest {
 
     @Test
     fun `performSingleNetworkRequest() should return Error UiState on 3 unsuccessful network responses`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val fakeApi = FakeVersionsErrorApi(responseDelay)
             val viewModel = RetryNetworkRequestViewModel(fakeApi).apply {

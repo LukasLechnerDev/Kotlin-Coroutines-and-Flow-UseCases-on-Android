@@ -2,7 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -18,13 +18,13 @@ class PerformSingleNetworkRequestViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `should return Success when network request is successful`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val fakeApi = FakeSuccessApi()
             val viewModel =
                 PerformSingleNetworkRequestViewModel(fakeApi)
@@ -44,16 +44,17 @@ class PerformSingleNetworkRequestViewModelTest {
         }
 
     @Test
-    fun `should return Error when network request fails`() = coroutineTestRule.runBlockingTest {
-        val fakeApi = FakeErrorApi()
+    fun `should return Error when network request fails`() =
+        mainCoroutineScopeRule.runBlockingTest {
+            val fakeApi = FakeErrorApi()
 
-        val viewModel =
-            PerformSingleNetworkRequestViewModel(fakeApi)
-        observeViewModel(viewModel)
+            val viewModel =
+                PerformSingleNetworkRequestViewModel(fakeApi)
+            observeViewModel(viewModel)
 
-        assertTrue(receivedUiStates.isEmpty())
+            assertTrue(receivedUiStates.isEmpty())
 
-        viewModel.performSingleNetworkRequest()
+            viewModel.performSingleNetworkRequest()
 
         assertEquals(
             listOf(

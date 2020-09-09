@@ -2,7 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase5
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
@@ -17,13 +17,13 @@ class NetworkRequestWithTimeoutViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performNetworkRequest() should return Success UiState on successful network request within timeout`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val timeout = 1001L
             val fakeApi = FakeSuccessApi(responseDelay)
@@ -47,7 +47,7 @@ class NetworkRequestWithTimeoutViewModelTest {
 
     @Test
     fun `performNetworkRequest() should return Error UiState with timeout error message if timeout gets exceeded`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val timeout = 999L
             val fakeApi = FakeSuccessApi(responseDelay)
@@ -71,7 +71,7 @@ class NetworkRequestWithTimeoutViewModelTest {
 
     @Test
     fun `performNetworkRequest() should return Error UiState on unsuccessful network response`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val timeout = 1001L
             val fakeApi = FakeVersionsErrorApi(responseDelay)

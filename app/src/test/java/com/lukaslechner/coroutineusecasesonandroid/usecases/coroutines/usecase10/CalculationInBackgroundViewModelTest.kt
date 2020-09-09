@@ -1,7 +1,7 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
 import org.junit.Rule
@@ -14,15 +14,15 @@ class CalculationInBackgroundViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performCalculation() should perform correct calculations`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val viewModel =
-                CalculationInBackgroundViewModel(coroutineTestRule.testDispatcher).apply {
+                CalculationInBackgroundViewModel(mainCoroutineScopeRule.testDispatcher).apply {
                     observe()
                 }
 

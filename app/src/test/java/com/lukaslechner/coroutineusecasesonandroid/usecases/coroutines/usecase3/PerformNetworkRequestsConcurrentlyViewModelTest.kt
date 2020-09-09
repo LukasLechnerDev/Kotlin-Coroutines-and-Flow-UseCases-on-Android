@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesOreo
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesPie
-import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert
@@ -19,13 +19,13 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performNetworkRequestsSequentially should return data after 3 times the response delay`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = PerformNetworkRequestsConcurrentlyViewModel(fakeApi)
@@ -61,7 +61,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
 
     @Test
     fun `performNetworkRequestsConcurrently should return data after the response delay`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = PerformNetworkRequestsConcurrentlyViewModel(fakeApi)
@@ -96,7 +96,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
 
     @Test
     fun `performNetworkRequestsConcurrently should return Error when network request fails`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val fakeApi = FakeErrorApi(responseDelay)
             val viewModel = PerformNetworkRequestsConcurrentlyViewModel(fakeApi)

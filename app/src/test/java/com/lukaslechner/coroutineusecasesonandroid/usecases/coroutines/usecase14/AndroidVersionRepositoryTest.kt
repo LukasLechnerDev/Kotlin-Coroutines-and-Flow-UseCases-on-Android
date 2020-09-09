@@ -4,8 +4,8 @@ import com.lukaslechner.coroutineusecasesonandroid.mock.AndroidVersion
 import com.lukaslechner.coroutineusecasesonandroid.mock.MockApi
 import com.lukaslechner.coroutineusecasesonandroid.mock.VersionFeatures
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.utils.CoroutineTestRule
 import com.lukaslechner.coroutineusecasesonandroid.utils.EndpointShouldNotBeCalledException
+import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.*
@@ -19,7 +19,7 @@ import org.junit.Test
 class AndroidVersionRepositoryTest {
 
     @get: Rule
-    val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
+    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
 
     private var insertedIntoDb = false
 
@@ -30,21 +30,21 @@ class AndroidVersionRepositoryTest {
 
     @Test
     fun `getLocalAndroidVersions() should return android versions from database`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val fakeDatabase = createFakeDatabase()
 
-            val repository = AndroidVersionRepository(fakeDatabase, coroutineTestRule)
+            val repository = AndroidVersionRepository(fakeDatabase, mainCoroutineScopeRule)
             assertEquals(mockAndroidVersions, repository.getLocalAndroidVersions())
         }
 
     @Test
     fun `loadRecentAndroidVersions() should return android versions from network`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val fakeDatabase = createFakeDatabase()
             val fakeApi = createFakeApi()
             val repository = AndroidVersionRepository(
                 fakeDatabase,
-                coroutineTestRule,
+                mainCoroutineScopeRule,
                 api = fakeApi
             )
             assertEquals(mockAndroidVersions, repository.loadAndStoreRemoteAndroidVersions())
@@ -52,12 +52,12 @@ class AndroidVersionRepositoryTest {
 
     @Test
     fun `loadRecentAndroidVersions() should continue to load and store android versions when calling scope gets cancelled`() =
-        coroutineTestRule.runBlockingTest {
+        mainCoroutineScopeRule.runBlockingTest {
             val fakeDatabase = createFakeDatabase()
             val fakeApi = createFakeApi()
             val repository = AndroidVersionRepository(
                 fakeDatabase,
-                coroutineTestRule,
+                mainCoroutineScopeRule,
                 api = fakeApi
             )
 

@@ -11,8 +11,10 @@ import org.junit.runner.Description
 
 // https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/
 
+// see: https://github.com/googlecodelabs/kotlin-coroutines/blob/master/coroutines-codelab/finished_code/src/test/java/com/example/android/kotlincoroutines/main/utils/MainCoroutineScopeRule.kt
+
 @ExperimentalCoroutinesApi
-class CoroutineTestRule(
+class MainCoroutineScopeRule(
     val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 ) : TestWatcher(),
     TestCoroutineScope by TestCoroutineScope(testDispatcher) {
