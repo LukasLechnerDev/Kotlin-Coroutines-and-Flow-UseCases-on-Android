@@ -20,8 +20,7 @@ class PerformSingleNetworkRequestViewModelTest {
     @get: Rule
     val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
 
-    private val receivedUiStates: MutableList<UiState> =
-        arrayListOf()
+    private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `should return Success when network request is successful`() =

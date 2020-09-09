@@ -21,8 +21,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
     @get: Rule
     val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
 
-    private val receivedUiStates: MutableList<UiState> =
-        arrayListOf()
+    private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performNetworkRequestsSequentially() should return Success UiState on successful network requests after 4000ms`() =

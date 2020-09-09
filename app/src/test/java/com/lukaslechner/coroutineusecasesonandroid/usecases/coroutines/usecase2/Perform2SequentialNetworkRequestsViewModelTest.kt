@@ -19,8 +19,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
     @get: Rule
     val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
 
-    private val receivedUiStates: MutableList<UiState> =
-        arrayListOf()
+    private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `should return Success when both network requests are successful`() =

@@ -19,8 +19,7 @@ class RetryNetworkRequestViewModelTest {
     @get: Rule
     val coroutineTestRule: CoroutineTestRule = CoroutineTestRule()
 
-    private val receivedUiStates: MutableList<UiState> =
-        arrayListOf()
+    private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performSingleNetworkRequest() should return Success UiState on successful network response`() =
