@@ -5,7 +5,10 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
@@ -51,13 +54,14 @@ class AndroidVersionRepositoryTest {
 
             // this coroutine will be executed immediately (eagerly)
             // how ever, it will stop its execution at the delay(1) in the fakeApi
-            val job = launch {
+            val viewModelScope = TestCoroutineScope(SupervisorJob())
+            viewModelScope.launch {
                 println("running coroutine!")
-                val loadedVersions = repository.loadAndStoreRemoteAndroidVersions()
+                repository.loadAndStoreRemoteAndroidVersions()
                 fail("Scope should be cancelled before versions are loaded!")
             }
 
-            job.cancel()
+            viewModelScope.cancel()
 
             // continue coroutine execution after delay(1) in the fakeApi
             advanceUntilIdle()
