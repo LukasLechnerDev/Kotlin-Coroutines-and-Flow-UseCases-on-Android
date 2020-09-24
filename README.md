@@ -13,7 +13,7 @@ In the `playground` package you can play around with Coroutines examples that ru
 
 ## 🔧 Project Setup
 
-Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contains all the interesting Coroutine related code.
+Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contain all the interesting Coroutine related code.
 `Activities` listen to `LiveData` events of the `ViewModel` and render received `UiState`s.
 
 This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. This lets you define how the API should behave.
@@ -34,7 +34,7 @@ Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never mi
 
 ## 🎓 Online Course
 
-This project is the foundation of a comprehensive Online Course about "Mastering Kotlin Coroutines for Android Development", which I am currently working on.
+This project is the foundation of a comprehensive Online Course about "Mastering Kotlin Coroutines for Android Development",on which I am currently working on.
 
 Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to get more information once it is released!
 
@@ -71,7 +71,7 @@ This use case performs two network requests sequentially. First it retrieves rec
 
 There are also 2 alternative implementations included. One is using old-school [callbacks](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/callbacks/SequentialNetworkRequestsCallbacksViewModel.kt).
 The other one uses [RxJava](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/rx/SequentialNetworkRequestsRxViewModel.kt). You can compare each implementation.
-If you compare all implementation, it is really interesting to see, in my opinion, how simple the Coroutine-based version actually is.
+If you compare all three implementations, it is really interesting to see, in my opinion, how simple the Coroutine-based version actually is.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/Perform2SequentialNetworkRequestsViewModel.kt)]
 
