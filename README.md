@@ -34,9 +34,9 @@ Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never mi
 
 ## 🎓 Online Course
 
-This project is the foundation of a comprehensive Online Course about "Mastering Kotlin Coroutines for Android Development",on which I am currently working on.
+This project is the foundation of a comprehensive Online Course about [Mastering Kotlin Coroutines for Android Development](https://www.lukaslechner.com/coroutines-on-android/)
 
-Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to get more information once it is released!
+![CourseCoroutinesOnAndroid](documentation/images/course.png)
 
 ## ⭐️ Use Cases
 1. [Perform single network request](#1-perform-single-network-request)
