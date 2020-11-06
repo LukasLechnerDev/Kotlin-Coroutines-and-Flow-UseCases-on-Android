@@ -37,7 +37,15 @@ Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never mi
 
 This project is the foundation of a comprehensive Online Course about [Mastering Kotlin Coroutines for Android Development](https://www.lukaslechner.com/coroutines-on-android/)
 
-![CourseCoroutinesOnAndroid](documentation/images/course.png)
+[![CourseCoroutinesOnAndroid](documentation/images/course.png)](https://www.lukaslechner.com/coroutines-on-android/)
+
+## 📢 Sharing is Caring 
+
+If you like this project, please tell other developers about it! ❤️
+
+[![Share on Twitter](documentation/images/Twitter_bird_logo.png)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FLukasLechnerDev%2FKotlin-Coroutine-Use-Cases-on-Android&text=This%20awesome%20example%20project%20shows%20how%20to%20implement%20the%20most%20common%20use%20cases%20for%20using%20Kotlin%20Coroutines%20for%20Android%20Development%21%20By%20@LukasLechnerDev&hashtags=%23AndroidDev%20%23Kotlin%20%23Coroutines)
+
+If you like, you can follow me on Twitter [**@LukasLechnerDev**](https://twitter.com/LukasLechnerDev).
 
 ## ⭐️ Use Cases
 1. [Perform single network request](#1-perform-single-network-request)
