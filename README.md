@@ -23,6 +23,10 @@ Android version.
 
 Unit Tests exist for most use cases.
 
+## 🍿️ Related Videos
+* Kotlin Coroutines Fundamentals Playlist [[link](https://www.youtube.com/playlist?list=PL-1MzrWZIYU2a4TGbSXeXzfet8Br3cya1)]
+* Kotlin Coroutines Exception Handling explained [[link](https://youtu.be/Pgek3_3vPU8)]
+
 ## ✍️ Related blog posts
 * Why exception handling with Kotlin Coroutines is so hard and how to successfully master it! [[link](https://www.lukaslechner.com/why-exception-handling-with-kotlin-coroutines-is-so-hard-and-how-to-successfully-master-it/)]
 * Kotlin Coroutines exception handling cheat sheet [[link](https://www.lukaslechner.com/coroutines-exception-handling-cheat-sheet/)]
