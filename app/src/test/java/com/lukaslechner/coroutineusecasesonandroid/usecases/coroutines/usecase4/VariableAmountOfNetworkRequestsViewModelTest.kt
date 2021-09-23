@@ -104,7 +104,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
         }
 
     @Test
-    fun `performNetworkRequestsConcurrently() should return Error UiState on successful network requests after 2000ms`() =
+    fun `performNetworkRequestsConcurrently() should return Success UiState on successful network requests after 2000ms`() =
         mainCoroutineScopeRule.runBlockingTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
@@ -147,7 +147,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
             Assert.assertTrue(receivedUiStates.isEmpty())
 
-            viewModel.performNetworkRequestsSequentially()
+            viewModel.performNetworkRequestsConcurrently()
 
             advanceUntilIdle()
 
@@ -170,7 +170,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
             Assert.assertTrue(receivedUiStates.isEmpty())
 
-            viewModel.performNetworkRequestsSequentially()
+            viewModel.performNetworkRequestsConcurrently()
 
             advanceUntilIdle()
 
