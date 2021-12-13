@@ -9,10 +9,12 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-// https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/
-
-// see: https://github.com/googlecodelabs/kotlin-coroutines/blob/master/coroutines-codelab/finished_code/src/test/java/com/example/android/kotlincoroutines/main/utils/MainCoroutineScopeRule.kt
-
+/**
+ * JUnit Rule that replaces the Main Dispatcher with a test dispatcher in your tests
+ *
+ * @see: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/
+ * @see: https://github.com/googlecodelabs/kotlin-coroutines/blob/master/coroutines-codelab/finished_code/src/test/java/com/example/android/kotlincoroutines/main/utils/MainCoroutineScopeRule.kt
+ */
 @ExperimentalCoroutinesApi
 class MainCoroutineScopeRule(
     val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
