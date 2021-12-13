@@ -19,6 +19,12 @@ private fun simple(): Flow<Int> = flow {
 
 // flowOn creates another coroutine for an upstream flow when it has to change the CoroutineDispatcher in its context
 
+// Notice how flow{} works in the background thread, while collection happens in the main thread.
+
+// Another thing to observe here is that the flowOn operator has changed the default sequential nature of the flow.
+// Now, collection happens in one coroutine, and emission happens in another coroutine that is running in another thread concurrently with
+// the collecting coroutine
+
 fun main() = runBlocking<Unit> {
     simple().collect { value ->
         log("Collected $value")

@@ -12,6 +12,8 @@ fun numbers(): Flow<Int> = flow {
         emit(2)
         println("This line will not execute")
         emit(3)
+    } catch (e: Exception) {
+        println(e) // kotlinx.coroutines.flow.internal.AbortFlowException: Flow was aborted, no more elements needed
     } finally {
         println("Finally in numbers")
     }
