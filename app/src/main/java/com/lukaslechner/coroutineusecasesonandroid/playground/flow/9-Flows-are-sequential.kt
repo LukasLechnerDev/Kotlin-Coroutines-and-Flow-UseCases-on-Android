@@ -20,4 +20,7 @@ fun main() = runBlocking<Unit> {
         }.collect {
             println("Collect $it")
         }
+
+    // every item moves from upstream to downstream
+    // items are NOT all filtered, then mapped, etc
 }

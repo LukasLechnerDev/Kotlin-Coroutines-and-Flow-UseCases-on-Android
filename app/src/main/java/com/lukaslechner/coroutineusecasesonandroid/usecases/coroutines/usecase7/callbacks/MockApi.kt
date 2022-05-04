@@ -18,7 +18,7 @@ fun mockApi(): CallbackMockApi = createMockApi(
         // timeout on first request for oreo features
         .mock(
             "http://localhost/android-version-features/27",
-            Gson().toJson(mockVersionFeaturesOreo),
+            { Gson().toJson(mockVersionFeaturesOreo) },
             200,
             1200,
             persist = false
@@ -26,7 +26,7 @@ fun mockApi(): CallbackMockApi = createMockApi(
         // network error on second request
         .mock(
             "http://localhost/android-version-features/27",
-            "Something went wrong on servers side",
+            { "Something went wrong on servers side" },
             500,
             300,
             persist = false
@@ -34,14 +34,14 @@ fun mockApi(): CallbackMockApi = createMockApi(
         // 3rd request is successful and within timeout
         .mock(
             "http://localhost/android-version-features/27",
-            Gson().toJson(mockVersionFeaturesOreo),
+            { Gson().toJson(mockVersionFeaturesOreo) },
             200,
             100
         )
         // timeout on first request for pie features
         .mock(
             "http://localhost/android-version-features/28",
-            Gson().toJson(mockVersionFeaturesPie),
+            { Gson().toJson(mockVersionFeaturesPie) },
             200,
             1200,
             persist = false
@@ -49,7 +49,7 @@ fun mockApi(): CallbackMockApi = createMockApi(
         // network error on second request
         .mock(
             "http://localhost/android-version-features/28",
-            "Something went wrong on servers side",
+            { "Something went wrong on servers side" },
             500,
             200,
             persist = false
@@ -57,7 +57,7 @@ fun mockApi(): CallbackMockApi = createMockApi(
         // 3rd request is successful and within timeout
         .mock(
             "http://localhost/android-version-features/28",
-            Gson().toJson(mockVersionFeaturesPie),
+            { Gson().toJson(mockVersionFeaturesPie) },
             200,
             100
         )

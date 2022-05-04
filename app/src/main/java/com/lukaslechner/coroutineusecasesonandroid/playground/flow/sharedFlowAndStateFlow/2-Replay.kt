@@ -9,6 +9,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.random.Random
 
+// replay caches emissions of the flow
+
 private fun replaySharedFlow(): Flow<Int> {
     val sharedFlow = MutableSharedFlow<Int>(replay = 2)
 

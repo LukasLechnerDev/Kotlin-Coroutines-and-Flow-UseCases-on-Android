@@ -28,7 +28,7 @@ class AnalyticsWorker(appContext: Context, workerParameters: WorkerParameters) :
             MockNetworkInterceptor()
                 .mock(
                     "http://localhost/analytics/workmanager-screen-opened",
-                    "true",
+                    { "true" },
                     200,
                     1500
                 )

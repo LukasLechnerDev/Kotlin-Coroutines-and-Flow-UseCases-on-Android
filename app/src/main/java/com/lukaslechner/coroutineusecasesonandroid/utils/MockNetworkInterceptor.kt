@@ -65,7 +65,7 @@ class MockNetworkInterceptor : Interceptor {
             .body(
                 ResponseBody.create(
                     MediaType.get("application/json"),
-                    mockResponse.body
+                    mockResponse.body.invoke()
                 )
             )
             .build()
@@ -73,7 +73,7 @@ class MockNetworkInterceptor : Interceptor {
 
     fun mock(
         path: String,
-        body: String,
+        body: () -> String,
         status: Int,
         delayInMs: Long = 250,
         persist: Boolean = true
@@ -96,7 +96,7 @@ class MockNetworkInterceptor : Interceptor {
 
 data class MockResponse(
     val path: String,
-    val body: String,
+    val body: () -> String,
     val status: Int,
     val delayInMs: Long,
     val persist: Boolean
