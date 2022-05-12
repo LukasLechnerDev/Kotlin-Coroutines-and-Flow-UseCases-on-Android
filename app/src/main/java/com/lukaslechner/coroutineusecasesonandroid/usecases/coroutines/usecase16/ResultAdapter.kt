@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lukaslechner.coroutineusecasesonandroid.R
 import com.lukaslechner.coroutineusecasesonandroid.databinding.RecyclerviewItemCalculationResultBinding
-import kotlinx.android.synthetic.main.recyclerview_item_calculation_result.view.*
 
 class ResultAdapter(
     private val results: MutableList<UiState.Success> = mutableListOf()
@@ -30,10 +29,9 @@ class ResultAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding =
             RecyclerviewItemCalculationResultBinding.inflate(layoutInflater, parent, false)
-        val layout = binding.root.linearLayout as LinearLayout
 
         return ViewHolder(
-            layout,
+            binding.root,
             binding.textViewResultFactorialOf,
             binding.textViewResultNumberCoroutines,
             binding.textViewResultDispatcher,
