@@ -26,6 +26,7 @@ Unit Tests exist for most use cases.
 ## 🍿️ Related Videos
 * Kotlin Coroutines Fundamentals Playlist [[link](https://www.youtube.com/playlist?list=PL-1MzrWZIYU2a4TGbSXeXzfet8Br3cya1)]
 * Kotlin Coroutines Exception Handling explained [[link](https://youtu.be/Pgek3_3vPU8)]
+* How to avoid 5 common mistakes when using Kotlin Coroutines [[link](https://youtu.be/coq9XDMB-yU)]
 
 ## ✍️ Related blog posts
 * 7 Common Mistakes you might be making when using Kotlin Coroutines [[link](https://www.lukaslechner.com/7-common-mistakes-you-might-be-making-when-using-kotlin-coroutines/)]
