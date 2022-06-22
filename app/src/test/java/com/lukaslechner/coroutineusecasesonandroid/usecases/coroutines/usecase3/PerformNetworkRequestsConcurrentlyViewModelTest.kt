@@ -4,9 +4,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesOreo
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesPie
-import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.currentTime
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -19,13 +21,13 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
+    val replaceMainDispatcherRule = ReplaceMainDispatcherRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performNetworkRequestsSequentially should return data after 3 times the response delay`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = PerformNetworkRequestsConcurrentlyViewModel(fakeApi)
@@ -35,7 +37,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
 
             viewModel.performNetworkRequestsSequentially()
 
-            val forwardedTime = advanceUntilIdle()
+            advanceUntilIdle()
 
             Assert.assertEquals(
                 listOf(
@@ -55,13 +57,13 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
             // 3000ms to receive all data
             Assert.assertEquals(
                 3000,
-                forwardedTime
+                currentTime
             )
         }
 
     @Test
     fun `performNetworkRequestsConcurrently should return data after the response delay`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = PerformNetworkRequestsConcurrentlyViewModel(fakeApi)
@@ -71,7 +73,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
 
             viewModel.performNetworkRequestsConcurrently()
 
-            val forwardedTime = advanceUntilIdle()
+            advanceUntilIdle()
 
             Assert.assertEquals(
                 listOf(
@@ -90,13 +92,13 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
             // Verify that requests actually got executed concurrently within 1000ms
             Assert.assertEquals(
                 1000,
-                forwardedTime
+                currentTime
             )
         }
 
     @Test
     fun `performNetworkRequestsConcurrently should return Error when network request fails`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeErrorApi(responseDelay)
             val viewModel = PerformNetworkRequestsConcurrentlyViewModel(fakeApi)

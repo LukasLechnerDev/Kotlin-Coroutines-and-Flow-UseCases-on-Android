@@ -28,6 +28,6 @@ private fun CoroutineScope.generateRandom() = produce {
 
         // emit in flows or send in channels will suspend until someone can receive the item
         // send(Random.nextInt())
-        offer(Random.nextInt())
+        trySend(Random.nextInt())
     }
 }

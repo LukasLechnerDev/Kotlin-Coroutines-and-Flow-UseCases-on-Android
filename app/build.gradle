@@ -50,7 +50,7 @@ android {
 dependencies {
 
     def lifecycle_version = "2.2.0"
-    def coroutines_version = "1.4.2"
+    def coroutines_version = "1.6.3"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -92,6 +92,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    testImplementation project(path: ':app')
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
