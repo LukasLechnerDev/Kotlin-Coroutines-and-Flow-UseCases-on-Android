@@ -11,7 +11,9 @@ class MockNetworkInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
 
-        val mockResponse = findMockResponseInList(request) ?: return chain.proceed(request)
+        val mockResponse = findMockResponseInList(request)
+            ?: throw RuntimeException("No mock response found for url ${request.url()}. Please define a mock response in your MockApi!")
+
         removeResponseIfItShouldNotBePersisted(mockResponse)
         simulateNetworkDelay(mockResponse)
 
