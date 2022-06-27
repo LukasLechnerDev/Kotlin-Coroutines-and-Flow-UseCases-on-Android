@@ -8,11 +8,8 @@ import retrofit2.http.GET
 
 interface FlowMockApi {
 
-    @GET("current-bitcoin-price")
-    suspend fun getCurrentBitcoinPrice(): BitcoinPrice
-
-    @GET("current-etherium-price")
-    suspend fun getCurrentEtheriumPrice(): EtheriumPrice
+    @GET("current-google-stock-price")
+    suspend fun getCurrentGoogleStockPrice(): GoogleStock
 }
 
 fun createFlowMockApi(interceptor: MockNetworkInterceptor): FlowMockApi {
