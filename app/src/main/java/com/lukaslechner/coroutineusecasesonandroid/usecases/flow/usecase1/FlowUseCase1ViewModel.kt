@@ -11,14 +11,14 @@ class FlowUseCase1ViewModel(
     private val mockApi: FlowMockApi = mockApi()
 ) : BaseViewModel<UiState>() {
 
-    val currentGoogleStockPrice = MutableLiveData<UiState>(UiState.Loading)
+    val bitcoinPrice = MutableLiveData<UiState>(UiState.Loading)
 
     fun whileTrueInCoroutine() {
         viewModelScope.launch {
             while (true) {
-                val currentGoogleStockPrice = mockApi.getCurrentGoogleStockPrice()
-                this@FlowUseCase1ViewModel.currentGoogleStockPrice.value = UiState.Success(currentGoogleStockPrice)
-                delay(2000)
+                val currentBitcoinPrice = mockApi.getCurrentBitcoinPrice()
+                bitcoinPrice.value = UiState.Success(currentBitcoinPrice)
+                delay(5_000)
             }
         }
     }

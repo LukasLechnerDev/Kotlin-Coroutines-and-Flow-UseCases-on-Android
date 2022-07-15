@@ -60,8 +60,6 @@ const val useCase16Description =
 const val useCase17Description =
     "#17 Perform heavy calculation on Main Thread without freezing the UI"
 
-const val flowUseCase1Description = "#1 Read from database that exposes Flow, ViewModel exposes LiveData"
-
 private val coroutinesUseCases =
     UseCaseCategory(
         "Coroutine Use Cases", listOf(
@@ -166,7 +164,7 @@ private val flowUseCases =
         "Flow Use Cases",
         listOf(
             UseCase(
-                flowUseCase1Description,
+                "Flow Use Case 1",
                 FlowUseCase1Activity::class.java
             )
         )
