@@ -28,12 +28,18 @@
             android:layout_marginBottom="32dp"
             android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/textViewResult"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/primary_text"
-            android:textSize="16sp" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="16sp" />
+
+        </ScrollView>
 
     </LinearLayout>
 
