@@ -2,6 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.utils
 
 import com.google.gson.Gson
 import okhttp3.*
+import kotlin.random.Random
 
 class MockNetworkInterceptor : Interceptor {
 
@@ -18,10 +19,23 @@ class MockNetworkInterceptor : Interceptor {
         simulateNetworkDelay(mockResponse)
 
         return if (mockResponse.status < 400) {
-            createSuccessResponse(mockResponse, request)
+
+            if (mockResponse.errorFrequencyInPercent == 0) {
+                createSuccessResponse(mockResponse, request)
+            } else {
+                maybeReturnErrorResponse(mockResponse, request)
+            }
         } else {
             createErrorResponse(request)
         }
+    }
+
+    private fun maybeReturnErrorResponse(
+        mockResponse: MockResponse,
+        request: Request
+    ) = when (Random.nextInt(0, 101)) {
+        in 0..mockResponse.errorFrequencyInPercent -> createErrorResponse(request)
+        else -> createSuccessResponse(mockResponse, request)
     }
 
     private fun findMockResponseInList(request: Request): MockResponse? {
@@ -78,7 +92,8 @@ class MockNetworkInterceptor : Interceptor {
         body: () -> String,
         status: Int,
         delayInMs: Long = 250,
-        persist: Boolean = true
+        persist: Boolean = true,
+        errorFrequencyInPercent:Int = 0
     ) = apply {
         val mockResponse =
             MockResponse(
@@ -86,7 +101,8 @@ class MockNetworkInterceptor : Interceptor {
                 body,
                 status,
                 delayInMs,
-                persist
+                persist,
+                errorFrequencyInPercent
             )
         mockResponses.add(mockResponse)
     }
@@ -101,5 +117,6 @@ data class MockResponse(
     val body: () -> String,
     val status: Int,
     val delayInMs: Long,
-    val persist: Boolean
+    val persist: Boolean,
+    val errorFrequencyInPercent: Int
 )
