@@ -95,10 +95,6 @@
             android:name=".usecases.coroutines.usecase17.PerformCalculationOnMainThreadActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".usecases.flow.usecase1.FlowUseCase1Activity"
-            android:exported="true" />
-
     </application>
 
 </manifest>
