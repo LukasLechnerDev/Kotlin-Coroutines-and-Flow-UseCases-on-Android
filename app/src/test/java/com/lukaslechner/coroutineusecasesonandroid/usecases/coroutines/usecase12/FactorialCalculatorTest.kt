@@ -2,26 +2,19 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Test
 import java.math.BigInteger
 
 @ExperimentalCoroutinesApi
 class FactorialCalculatorTest {
 
-    lateinit var factorialCalculator: FactorialCalculator
-
-    private val testDispatcher = TestCoroutineDispatcher()
-
-    @Before
-    fun setUp() {
-        factorialCalculator = FactorialCalculator(testDispatcher)
-    }
-
     @Test
-    fun `createSubRangeList() should create correct range lists`() = runBlockingTest {
+    fun `createSubRangeList() should create correct range lists`() {
+        val testDispatcher = UnconfinedTestDispatcher()
+        val factorialCalculator = FactorialCalculator(testDispatcher)
+
         assertEquals(
             listOf(
                 SubRange(1, 3),
@@ -51,7 +44,10 @@ class FactorialCalculatorTest {
     }
 
     @Test
-    fun calculateFactorialOfSubRange() = runBlockingTest {
+    fun calculateFactorialOfSubRange() = runBlocking {
+        val testDispatcher = UnconfinedTestDispatcher()
+        val factorialCalculator = FactorialCalculator(testDispatcher)
+
         assertEquals(
             BigInteger.valueOf(6),
             factorialCalculator.calculateFactorialOfSubRange(SubRange(1, 3))
@@ -67,7 +63,10 @@ class FactorialCalculatorTest {
     }
 
     @Test
-    fun calculateFactorial() = runBlockingTest {
+    fun calculateFactorial() = runBlocking {
+        val testDispatcher = UnconfinedTestDispatcher()
+        val factorialCalculator = FactorialCalculator(testDispatcher)
+
         assertEquals(
             BigInteger.valueOf(3628800),
             factorialCalculator.calculateFactorial(10, 3)

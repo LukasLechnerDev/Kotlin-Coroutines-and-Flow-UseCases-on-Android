@@ -6,7 +6,7 @@ import com.lukaslechner.coroutineusecasesonandroid.mock.VersionFeatures
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.EndpointShouldNotBeCalledException
 
-class FakeSuccessApi() : MockApi {
+class FakeSuccessApi : MockApi {
 
     override suspend fun getRecentAndroidVersions(): List<AndroidVersion> {
         return mockAndroidVersions

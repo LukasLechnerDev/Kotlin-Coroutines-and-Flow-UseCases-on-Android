@@ -4,9 +4,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesAndroid10
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesOreo
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockVersionFeaturesPie
-import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.currentTime
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -19,13 +21,13 @@ class VariableAmountOfNetworkRequestsViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
+    val replaceMainDispatcherRule = ReplaceMainDispatcherRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performNetworkRequestsSequentially() should return Success UiState on successful network requests after 4000ms`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = VariableAmountOfNetworkRequestsViewModel(fakeApi)
@@ -35,7 +37,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
             viewModel.performNetworkRequestsSequentially()
 
-            val forwardedTime = advanceUntilIdle()
+            advanceUntilIdle()
 
             Assert.assertEquals(
                 listOf(
@@ -53,13 +55,13 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
             Assert.assertEquals(
                 4000,
-                forwardedTime
+                currentTime
             )
         }
 
     @Test
     fun `performNetworkRequestsSequentially() should return Error UiState on unsuccessful recent-android-versions network request`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeVersionsErrorApi(responseDelay)
             val viewModel = VariableAmountOfNetworkRequestsViewModel(fakeApi)
@@ -82,7 +84,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
     @Test
     fun `performNetworkRequestsSequentially() should return Error UiState on unsuccessful android-version-features network request`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeFeaturesErrorApi(responseDelay)
             val viewModel = VariableAmountOfNetworkRequestsViewModel(fakeApi)
@@ -105,7 +107,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
     @Test
     fun `performNetworkRequestsConcurrently() should return Success UiState on successful network requests after 2000ms`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = VariableAmountOfNetworkRequestsViewModel(fakeApi)
@@ -115,7 +117,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
             viewModel.performNetworkRequestsConcurrently()
 
-            val forwardedTime = advanceUntilIdle()
+            advanceUntilIdle()
 
             Assert.assertEquals(
                 listOf(
@@ -133,13 +135,13 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
             Assert.assertEquals(
                 2000,
-                forwardedTime
+                currentTime
             )
         }
 
     @Test
     fun `performNetworkRequestsConcurrently() should return Error UiState on unsuccessful recent-android-versions network request`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeVersionsErrorApi(responseDelay)
             val viewModel = VariableAmountOfNetworkRequestsViewModel(fakeApi)
@@ -162,7 +164,7 @@ class VariableAmountOfNetworkRequestsViewModelTest {
 
     @Test
     fun `performNetworkRequestsConcurrently() should return Error UiState on unsuccessful android-version-features network request`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeFeaturesErrorApi(responseDelay)
             val viewModel = VariableAmountOfNetworkRequestsViewModel(fakeApi)
