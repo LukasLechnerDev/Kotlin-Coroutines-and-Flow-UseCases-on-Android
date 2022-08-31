@@ -11,7 +11,9 @@ class MockNetworkInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
 
-        val mockResponse = findMockResponseInList(request) ?: return chain.proceed(request)
+        val mockResponse = findMockResponseInList(request)
+            ?: throw RuntimeException("No mock response found for url ${request.url()}. Please define a mock response in your MockApi!")
+
         removeResponseIfItShouldNotBePersisted(mockResponse)
         simulateNetworkDelay(mockResponse)
 
@@ -65,7 +67,7 @@ class MockNetworkInterceptor : Interceptor {
             .body(
                 ResponseBody.create(
                     MediaType.get("application/json"),
-                    mockResponse.body
+                    mockResponse.body.invoke()
                 )
             )
             .build()
@@ -73,7 +75,7 @@ class MockNetworkInterceptor : Interceptor {
 
     fun mock(
         path: String,
-        body: String,
+        body: () -> String,
         status: Int,
         delayInMs: Long = 250,
         persist: Boolean = true
@@ -96,7 +98,7 @@ class MockNetworkInterceptor : Interceptor {
 
 data class MockResponse(
     val path: String,
-    val body: String,
+    val body: () -> String,
     val status: Int,
     val delayInMs: Long,
     val persist: Boolean
