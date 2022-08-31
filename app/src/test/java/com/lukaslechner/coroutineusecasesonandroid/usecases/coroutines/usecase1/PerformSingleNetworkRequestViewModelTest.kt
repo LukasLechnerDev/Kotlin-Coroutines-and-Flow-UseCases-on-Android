@@ -2,9 +2,9 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -18,43 +18,38 @@ class PerformSingleNetworkRequestViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
+    val replaceMainDispatcherRule = ReplaceMainDispatcherRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
-    fun `should return Success when network request is successful`() =
-        mainCoroutineScopeRule.runBlockingTest {
-            val fakeApi = FakeSuccessApi()
-            val viewModel =
-                PerformSingleNetworkRequestViewModel(fakeApi)
-            observeViewModel(viewModel)
+    fun `should return Success when network request is successful`() = runTest {
+        val fakeApi = FakeSuccessApi()
+        val viewModel = PerformSingleNetworkRequestViewModel(fakeApi)
+        observeViewModel(viewModel)
 
-            assertTrue(receivedUiStates.isEmpty())
+        assertTrue(receivedUiStates.isEmpty())
 
-            viewModel.performSingleNetworkRequest()
+        viewModel.performSingleNetworkRequest()
 
-            assertEquals(
-                listOf(
-                    UiState.Loading,
-                    UiState.Success(mockAndroidVersions)
-                ),
-                receivedUiStates
-            )
-        }
+        assertEquals(
+            listOf(
+                UiState.Loading,
+                UiState.Success(mockAndroidVersions)
+            ),
+            receivedUiStates
+        )
+    }
 
     @Test
-    fun `should return Error when network request fails`() =
-        mainCoroutineScopeRule.runBlockingTest {
-            val fakeApi = FakeErrorApi()
+    fun `should return Error when network request fails`() = runTest {
+        val fakeApi = FakeErrorApi()
+        val viewModel = PerformSingleNetworkRequestViewModel(fakeApi)
+        observeViewModel(viewModel)
 
-            val viewModel =
-                PerformSingleNetworkRequestViewModel(fakeApi)
-            observeViewModel(viewModel)
+        assertTrue(receivedUiStates.isEmpty())
 
-            assertTrue(receivedUiStates.isEmpty())
-
-            viewModel.performSingleNetworkRequest()
+        viewModel.performSingleNetworkRequest()
 
         assertEquals(
             listOf(

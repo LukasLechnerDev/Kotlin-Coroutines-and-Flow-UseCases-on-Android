@@ -2,9 +2,11 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase6
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
-import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.currentTime
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -17,13 +19,13 @@ class RetryNetworkRequestViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
+    val replaceMainDispatcherRule = ReplaceMainDispatcherRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
     fun `performSingleNetworkRequest() should return Success UiState on successful network response`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
             val viewModel = RetryNetworkRequestViewModel(fakeApi).apply {
@@ -33,7 +35,6 @@ class RetryNetworkRequestViewModelTest {
             Assert.assertTrue(receivedUiStates.isEmpty())
 
             viewModel.performNetworkRequest()
-
             advanceUntilIdle()
 
             Assert.assertEquals(
@@ -47,7 +48,7 @@ class RetryNetworkRequestViewModelTest {
 
     @Test
     fun `performSingleNetworkRequest() should retry network request two times`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessOnThirdAttemptApi(responseDelay)
             val viewModel = RetryNetworkRequestViewModel(fakeApi).apply {
@@ -57,8 +58,7 @@ class RetryNetworkRequestViewModelTest {
             Assert.assertTrue(receivedUiStates.isEmpty())
 
             viewModel.performNetworkRequest()
-
-            val elapsedTime = advanceUntilIdle()
+            advanceUntilIdle()
 
             Assert.assertEquals(
                 listOf(
@@ -76,13 +76,13 @@ class RetryNetworkRequestViewModelTest {
             // 3*1000 (Request delays) + 100 (initial delay) + 200 (second delay)
             Assert.assertEquals(
                 3300,
-                elapsedTime
+                currentTime
             )
         }
 
     @Test
     fun `performSingleNetworkRequest() should return Error UiState on 3 unsuccessful network responses`() =
-        mainCoroutineScopeRule.runBlockingTest {
+        runTest {
             val responseDelay = 1000L
             val fakeApi = FakeVersionsErrorApi(responseDelay)
             val viewModel = RetryNetworkRequestViewModel(fakeApi).apply {
@@ -92,8 +92,7 @@ class RetryNetworkRequestViewModelTest {
             Assert.assertTrue(receivedUiStates.isEmpty())
 
             viewModel.performNetworkRequest()
-
-            val elapsedTime = advanceUntilIdle()
+            advanceUntilIdle()
 
             Assert.assertEquals(
                 listOf(
@@ -111,7 +110,7 @@ class RetryNetworkRequestViewModelTest {
             // 3*1000 response delays + 100 (initial delay) + 200 (second delay)
             Assert.assertEquals(
                 3300,
-                elapsedTime
+                currentTime
             )
         }
 

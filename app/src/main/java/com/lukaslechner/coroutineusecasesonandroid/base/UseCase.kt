@@ -25,7 +25,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.RoomAndCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.DebuggingCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UseCase(
@@ -171,7 +171,7 @@ private val flowUseCases =
     )
 
 val useCaseCategories = listOf(
-    coroutinesUseCases /*,
-    channelsUseCases,
-    flowUseCases */
+    coroutinesUseCases,
+    // channelsUseCases,
+    flowUseCases
 )
