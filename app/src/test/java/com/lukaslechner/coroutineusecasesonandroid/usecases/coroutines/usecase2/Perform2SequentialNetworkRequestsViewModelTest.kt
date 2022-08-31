@@ -1,7 +1,7 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.lukaslechner.coroutineusecasesonandroid.utils.MainCoroutineScopeRule
+import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.Test
@@ -14,7 +14,7 @@ class Perform2SequentialNetworkRequestsViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get: Rule
-    val mainCoroutineScopeRule: MainCoroutineScopeRule = MainCoroutineScopeRule()
+    val replaceMainDispatcherRule: ReplaceMainDispatcherRule = ReplaceMainDispatcherRule()
 
     private val receivedUiStates = mutableListOf<UiState>()
 
