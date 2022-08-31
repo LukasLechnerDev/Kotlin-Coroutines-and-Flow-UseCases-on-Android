@@ -2,7 +2,6 @@ package com.lukaslechner.coroutineusecasesonandroid.base
 
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CalculationInBackgroundActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CooperativeCancellationActivity
@@ -148,17 +147,6 @@ private val coroutinesUseCases =
         )
     )
 
-private val channelsUseCases =
-    UseCaseCategory(
-        "Channels Use Cases",
-        listOf(
-            UseCase(
-                "Channels Use Case 1",
-                ChannelUseCase1Activity::class.java
-            )
-        )
-    )
-
 private val flowUseCases =
     UseCaseCategory(
         "Flow Use Cases",
@@ -172,6 +160,5 @@ private val flowUseCases =
 
 val useCaseCategories = listOf(
     coroutinesUseCases,
-    // channelsUseCases,
     flowUseCases
 )

@@ -96,10 +96,6 @@
             android:exported="true" />
 
         <activity
-            android:name=".usecases.channels.usecase1.ChannelUseCase1Activity"
-            android:exported="true" />
-
-        <activity
             android:name=".usecases.flow.usecase1.FlowUseCase1Activity"
             android:exported="true" />
 
