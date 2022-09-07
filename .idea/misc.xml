@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_exceptionhandling.xml" value="0.5260416666666666" />
+        <entry key="app/src/main/res/layout/activity_flow_usecase1.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/recyclerview_item_calculation_result.xml" value="0.33469202898550726" />
+        <entry key="app/src/main/res/layout/recyclerview_item_stock.xml" value="0.3229166666666667" />
       </map>
     </option>
   </component>

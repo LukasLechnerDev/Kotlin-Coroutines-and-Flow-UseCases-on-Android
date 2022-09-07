@@ -26,7 +26,7 @@ class MockNetworkInterceptor : Interceptor {
 
     private fun findMockResponseInList(request: Request): MockResponse? {
         return mockResponses.find { mockResponse ->
-            mockResponse.path == request.url().toString()
+            mockResponse.path.contains(request.url().encodedPath())
         }
     }
 
