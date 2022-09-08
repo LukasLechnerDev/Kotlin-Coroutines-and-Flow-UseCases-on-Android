@@ -2,6 +2,7 @@ package com.lukaslechner.coroutineusecasesonandroid.playground.flow.terminal_ope
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
 
 fun main() {
 
@@ -17,12 +18,9 @@ fun main() {
         emit(2)
     }
 
-    val list = buildList {
-        add(1)
-        println("add 1 to list")
-
-        add(2)
-        println("add 2 to list")
+    runBlocking {
+        flow.collect { receivedValue ->
+            println("Received value $receivedValue")
+        }
     }
-
 }

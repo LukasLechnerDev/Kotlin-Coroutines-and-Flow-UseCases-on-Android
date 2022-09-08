@@ -1,7 +1,9 @@
 package com.lukaslechner.coroutineusecasesonandroid.playground.flow.terminal_operators
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
 
 fun main() {
 
@@ -17,12 +19,8 @@ fun main() {
         emit(2)
     }
 
-    val list = buildList {
-        add(1)
-        println("add 1 to list")
-
-        add(2)
-        println("add 2 to list")
+    runBlocking {
+        val item = flow.first { it > 1 }
+        println("Received $item")
     }
-
 }
