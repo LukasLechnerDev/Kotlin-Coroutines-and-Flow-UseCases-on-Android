@@ -99,6 +99,10 @@
             android:name=".usecases.flow.usecase1.FlowUseCase1Activity"
             android:exported="true" />
 
+        <activity
+            android:name=".usecases.flow.usecase2.FlowUseCase2Activity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
