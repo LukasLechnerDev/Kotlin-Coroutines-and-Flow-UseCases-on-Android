@@ -1,12 +1,10 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase2
+package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase3
 
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.mock.FlowMockApi
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.mock.Stock
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.retry
-import retrofit2.HttpException
 import timber.log.Timber
 
 interface StockPriceDataSource {
@@ -22,14 +20,5 @@ class NetworkStockPriceDataSource(mockApi: FlowMockApi) : StockPriceDataSource {
             emit(currentStockList)
             delay(5_000)
         }
-    }.retry { cause ->
-        Timber.tag("Flow").d("Enter retry operator with $cause")
-        val shouldRetry = cause is HttpException
-
-        if (shouldRetry) {
-            delay(5_000)
-        }
-
-        shouldRetry
     }
 }

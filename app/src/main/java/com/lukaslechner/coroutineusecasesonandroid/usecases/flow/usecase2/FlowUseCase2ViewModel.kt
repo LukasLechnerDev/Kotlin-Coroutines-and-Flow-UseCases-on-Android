@@ -69,5 +69,9 @@ class FlowUseCase2ViewModel(
         .onStart {
             emit(UiState.Loading)
         }
+        .catch { throwable ->
+            Timber.tag("Flow").d("Handle exception in catch operator $throwable")
+            emit(UiState.Error("Something went wrong..."))
+        }
         .asLiveData(defaultDispatcher)
 }

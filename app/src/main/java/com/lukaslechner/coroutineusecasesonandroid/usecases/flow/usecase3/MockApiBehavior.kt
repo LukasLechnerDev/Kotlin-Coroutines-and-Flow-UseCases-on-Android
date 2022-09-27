@@ -1,4 +1,4 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase2
+package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase3
 
 import android.content.Context
 import com.google.gson.Gson
@@ -13,6 +13,7 @@ fun mockApi(context: Context) =
                 path = "/current-stock-prices",
                 body = { Gson().toJson(fakeCurrentStockPrices(context)) },
                 status = 200,
-                delayInMs = 1500
+                delayInMs = 1500,
+                errorFrequencyInPercent = 50
             )
     )

@@ -25,6 +25,7 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.DebuggingCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase2.FlowUseCase2Activity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase3.FlowUseCase3Activity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -150,6 +151,7 @@ private val coroutinesUseCases =
 
 const val flowUseCase1Description = "#1 Flow Basics"
 const val flowUseCase2Description = "#2 Basic Intermediate operators"
+const val flowUseCase3Description = "#3 Exception Handling"
 
 private val flowUseCases =
     UseCaseCategory(
@@ -161,6 +163,9 @@ private val flowUseCases =
             ),UseCase(
                 flowUseCase2Description,
                 FlowUseCase2Activity::class.java
+            ),UseCase(
+                flowUseCase3Description,
+                FlowUseCase3Activity::class.java
             )
         )
     )
