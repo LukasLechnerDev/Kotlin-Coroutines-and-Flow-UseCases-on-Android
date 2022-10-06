@@ -1,11 +1,9 @@
 package com.lukaslechner.coroutineusecasesonandroid.playground.flow.cancellation
 
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.launch
+import java.math.BigInteger
 import kotlin.coroutines.EmptyCoroutineContext
 
 suspend fun main() {
@@ -31,5 +29,19 @@ suspend fun main() {
 private fun intFlow() = flow {
     emit(1)
     emit(2)
+
+    println("Start calculation")
+    calculateFactorialOf(1_000)
+    println("Calculation finished!")
+
     emit(3)
+}
+
+private suspend fun calculateFactorialOf(number: Int): BigInteger = coroutineScope {
+    var factorial = BigInteger.ONE
+    for (i in 1..number) {
+        factorial = factorial.multiply(BigInteger.valueOf(i.toLong()))
+        ensureActive()
+    }
+    factorial
 }
