@@ -107,6 +107,10 @@
             android:name=".usecases.flow.usecase3.FlowUseCase3Activity"
             android:exported="true" />
 
+        <activity
+            android:name=".usecases.flow.usecase4.FlowUseCase4Activity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
