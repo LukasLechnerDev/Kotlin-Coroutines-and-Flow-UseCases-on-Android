@@ -2,7 +2,9 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase4
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
 import com.lukaslechner.coroutineusecasesonandroid.base.flowUseCase4Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityFlowUsecase1Binding
@@ -28,8 +30,10 @@ class FlowUseCase4Activity : BaseActivity() {
         binding.recyclerView.adapter = adapter
 
         lifecycleScope.launch {
-            viewModel.currentStockPriceAsFlow.collect { uiState ->
-                render(uiState)
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.currentStockPriceAsFlow.collect { uiState ->
+                    render(uiState)
+                }
             }
         }
     }
