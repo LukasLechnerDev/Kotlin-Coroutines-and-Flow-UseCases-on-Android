@@ -1,13 +1,11 @@
 package com.lukaslechner.coroutineusecasesonandroid.utils
 
-import com.google.gson.Gson
 import okhttp3.*
 import kotlin.random.Random
 
 class MockNetworkInterceptor : Interceptor {
 
     private val mockResponses = mutableListOf<MockResponse>()
-    private val gson = Gson()
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -26,7 +24,7 @@ class MockNetworkInterceptor : Interceptor {
                 maybeReturnErrorResponse(mockResponse, request)
             }
         } else {
-            createErrorResponse(request)
+            createErrorResponse(request, mockResponse.body())
         }
     }
 
@@ -54,16 +52,16 @@ class MockNetworkInterceptor : Interceptor {
         Thread.sleep(mockResponse.delayInMs)
     }
 
-    private fun createErrorResponse(request: Request): Response {
+    private fun createErrorResponse(request: Request, errorBody: String = "Error"): Response {
         return Response.Builder()
             .code(500)
             .request(request)
             .protocol(Protocol.HTTP_1_1)
-            .message("Internal Server Error")
+            .message("Internal Server Error: $errorBody")
             .body(
                 ResponseBody.create(
-                    MediaType.get("application/json"),
-                    gson.toJson(mapOf("cause" to "not sure"))
+                    MediaType.get("text/plain"),
+                    errorBody
                 )
             )
             .build()
