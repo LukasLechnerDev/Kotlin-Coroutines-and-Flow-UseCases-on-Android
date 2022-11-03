@@ -14,14 +14,11 @@ class FlowUseCase4ViewModel(
         .map { stockList ->
             UiState.Success(stockList) as UiState
         }
-        .onStart {
-            emit(UiState.Loading)
-        }
         .onCompletion {
             Timber.tag("Flow").d("Flow has completed.")
-        }.shareIn(
+        }.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
-            replay = 1
+            initialValue = UiState.Loading,
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000)
         )
 }
