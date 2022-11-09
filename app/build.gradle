@@ -45,6 +45,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+        }
+    }
 }
 
 dependencies {
