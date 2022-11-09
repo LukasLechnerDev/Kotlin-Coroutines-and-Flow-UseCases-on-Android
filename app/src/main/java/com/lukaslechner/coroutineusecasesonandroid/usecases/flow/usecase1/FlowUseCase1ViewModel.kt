@@ -1,25 +1,27 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
-import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.mock.FlowMockApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
+import timber.log.Timber
 
 class FlowUseCase1ViewModel(
-    private val mockApi: FlowMockApi = mockApi()
+    stockPriceDataSource: StockPriceDataSource
 ) : BaseViewModel<UiState>() {
 
-    val bitcoinPrice = MutableLiveData<UiState>(UiState.Loading)
-
-    fun whileTrueInCoroutine() {
-        viewModelScope.launch {
-            while (true) {
-                val currentBitcoinPrice = mockApi.getCurrentBitcoinPrice()
-                bitcoinPrice.value = UiState.Success(currentBitcoinPrice)
-                delay(5_000)
-            }
+    val currentStockPriceAsLiveData: LiveData<UiState> = stockPriceDataSource
+        .latestStockList
+        .map { stockList ->
+            UiState.Success(stockList) as UiState
         }
-    }
+        .onStart {
+            emit(UiState.Loading)
+        }
+        .onCompletion {
+            Timber.tag("Flow").d("Flow has completed.")
+        }
+        .asLiveData()
 }
