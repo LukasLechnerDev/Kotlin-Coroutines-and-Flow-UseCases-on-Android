@@ -9,7 +9,7 @@ class FlowUseCase4ViewModel(
     stockPriceDataSource: StockPriceDataSource
 ) : BaseViewModel<UiState>() {
 
-    val currentStockPriceAsFlow: Flow<UiState> = stockPriceDataSource
+    val currentStockPriceAsFlow: StateFlow<UiState> = stockPriceDataSource
         .latestStockList
         .map { stockList ->
             UiState.Success(stockList) as UiState
