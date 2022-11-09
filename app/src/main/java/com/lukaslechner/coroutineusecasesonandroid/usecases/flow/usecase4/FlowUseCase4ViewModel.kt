@@ -1,24 +1,27 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase4
 
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import timber.log.Timber
 
 class FlowUseCase4ViewModel(
     stockPriceDataSource: StockPriceDataSource
 ) : BaseViewModel<UiState>() {
 
-    val currentStockPriceAsFlow: StateFlow<UiState> = stockPriceDataSource
+    val currentStockPriceAsLiveData: LiveData<UiState> = stockPriceDataSource
         .latestStockList
         .map { stockList ->
             UiState.Success(stockList) as UiState
         }
+        .onStart {
+            emit(UiState.Loading)
+        }
         .onCompletion {
             Timber.tag("Flow").d("Flow has completed.")
-        }.stateIn(
-            scope = viewModelScope,
-            initialValue = UiState.Loading,
-            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000)
-        )
+        }
+        .asLiveData()
 }
