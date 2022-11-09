@@ -2,7 +2,6 @@ package com.lukaslechner.coroutineusecasesonandroid.base
 
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
-import com.lukaslechner.coroutineusecasesonandroid.usecases.channels.usecase1.ChannelUseCase1Activity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1.PerformSingleNetworkRequestActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase10.CalculationInBackgroundActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase11.CooperativeCancellationActivity
@@ -25,6 +24,9 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase7.
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase8.RoomAndCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase9.DebuggingCoroutinesActivity
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.FlowUseCase1Activity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase2.FlowUseCase2Activity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase3.FlowUseCase3Activity
+import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase4.FlowUseCase4Activity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -148,30 +150,32 @@ private val coroutinesUseCases =
         )
     )
 
-private val channelsUseCases =
-    UseCaseCategory(
-        "Channels Use Cases",
-        listOf(
-            UseCase(
-                "Channels Use Case 1",
-                ChannelUseCase1Activity::class.java
-            )
-        )
-    )
+const val flowUseCase1Description = "#1 Flow Basics"
+const val flowUseCase2Description = "#2 Basic Intermediate operators"
+const val flowUseCase3Description = "#3 Exception Handling"
+const val flowUseCase4Description = "#4 Exposing Flows in the ViewModel"
 
 private val flowUseCases =
     UseCaseCategory(
         "Flow Use Cases",
         listOf(
             UseCase(
-                "Flow Use Case 1",
+                flowUseCase1Description,
                 FlowUseCase1Activity::class.java
+            ),UseCase(
+                flowUseCase2Description,
+                FlowUseCase2Activity::class.java
+            ),UseCase(
+                flowUseCase3Description,
+                FlowUseCase3Activity::class.java
+            ),UseCase(
+                flowUseCase4Description,
+                FlowUseCase4Activity::class.java
             )
         )
     )
 
 val useCaseCategories = listOf(
     coroutinesUseCases,
-    // channelsUseCases,
     flowUseCases
 )

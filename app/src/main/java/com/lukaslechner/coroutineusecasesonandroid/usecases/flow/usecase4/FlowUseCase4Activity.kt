@@ -1,22 +1,26 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1
+package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase4
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.flowUseCase1Description
+import com.lukaslechner.coroutineusecasesonandroid.base.flowUseCase4Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityFlowUsecase1Binding
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
 import com.lukaslechner.coroutineusecasesonandroid.utils.toast
+import kotlinx.coroutines.launch
 import org.joda.time.LocalDateTime
 import org.joda.time.format.DateTimeFormat
 
-class FlowUseCase1Activity : BaseActivity() {
+class FlowUseCase4Activity : BaseActivity() {
 
     private val binding by lazy { ActivityFlowUsecase1Binding.inflate(layoutInflater) }
     private val adapter = StockAdapter()
 
-    private val viewModel: FlowUseCase1ViewModel by viewModels {
+    private val viewModel: FlowUseCase4ViewModel by viewModels {
         ViewModelFactory(NetworkStockPriceDataSource(mockApi(applicationContext)))
     }
 
@@ -25,9 +29,11 @@ class FlowUseCase1Activity : BaseActivity() {
         setContentView(binding.root)
         binding.recyclerView.adapter = adapter
 
-        viewModel.currentStockPriceAsLiveData.observe(this) { uiState ->
-            if (uiState != null) {
-                render(uiState)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.currentStockPriceAsFlow.collect { uiState ->
+                    render(uiState)
+                }
             }
         }
     }
@@ -52,5 +58,5 @@ class FlowUseCase1Activity : BaseActivity() {
         }
     }
 
-    override fun getToolbarTitle() = flowUseCase1Description
+    override fun getToolbarTitle() = flowUseCase4Description
 }

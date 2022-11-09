@@ -1,9 +1,9 @@
-package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1
+package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase3
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.lukaslechner.coroutineusecasesonandroid.base.BaseActivity
-import com.lukaslechner.coroutineusecasesonandroid.base.flowUseCase1Description
+import com.lukaslechner.coroutineusecasesonandroid.base.flowUseCase3Description
 import com.lukaslechner.coroutineusecasesonandroid.databinding.ActivityFlowUsecase1Binding
 import com.lukaslechner.coroutineusecasesonandroid.utils.setGone
 import com.lukaslechner.coroutineusecasesonandroid.utils.setVisible
@@ -11,12 +11,12 @@ import com.lukaslechner.coroutineusecasesonandroid.utils.toast
 import org.joda.time.LocalDateTime
 import org.joda.time.format.DateTimeFormat
 
-class FlowUseCase1Activity : BaseActivity() {
+class FlowUseCase3Activity : BaseActivity() {
 
     private val binding by lazy { ActivityFlowUsecase1Binding.inflate(layoutInflater) }
     private val adapter = StockAdapter()
 
-    private val viewModel: FlowUseCase1ViewModel by viewModels {
+    private val viewModel: FlowUseCase3ViewModel by viewModels {
         ViewModelFactory(NetworkStockPriceDataSource(mockApi(applicationContext)))
     }
 
@@ -52,5 +52,5 @@ class FlowUseCase1Activity : BaseActivity() {
         }
     }
 
-    override fun getToolbarTitle() = flowUseCase1Description
+    override fun getToolbarTitle() = flowUseCase3Description
 }

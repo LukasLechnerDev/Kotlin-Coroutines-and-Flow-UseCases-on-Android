@@ -96,11 +96,19 @@
             android:exported="true" />
 
         <activity
-            android:name=".usecases.channels.usecase1.ChannelUseCase1Activity"
+            android:name=".usecases.flow.usecase1.FlowUseCase1Activity"
             android:exported="true" />
 
         <activity
-            android:name=".usecases.flow.usecase1.FlowUseCase1Activity"
+            android:name=".usecases.flow.usecase2.FlowUseCase2Activity"
+            android:exported="true" />
+
+        <activity
+            android:name=".usecases.flow.usecase3.FlowUseCase3Activity"
+            android:exported="true" />
+
+        <activity
+            android:name=".usecases.flow.usecase4.FlowUseCase4Activity"
             android:exported="true" />
 
     </application>
