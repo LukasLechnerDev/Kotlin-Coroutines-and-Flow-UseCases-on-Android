@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Coroutine Usecases on Android</string>
+    <string name="app_name">Coroutines and Flows on Android</string>
     <string name="perform_single_network_request_on_background_thread">Load recent Android Versions</string>
     <string name="perform_2_network_requests_sequentially">Load Features of most recent Android Version</string>
     <string name="load_features_of_android_versions_sequentially">Load Features of Android Versions sequentially</string>
