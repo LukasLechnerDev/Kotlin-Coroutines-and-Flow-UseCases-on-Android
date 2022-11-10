@@ -1,20 +1,20 @@
 ![CoroutineUsecasesOnAndroid](documentation/images/Logo-new.png)
 
-# Kotlin Coroutines - Use Cases on Android
+# Kotlin Coroutines and Flow - Use Cases on Android
 
-🎓 Learning Kotlin Coroutines for Android by example. 
+🎓 Learning Kotlin Coroutines and Flows for Android Development by example
 
-🚀 Sample implementations for real-world Android use cases. 
+🚀 Sample implementations for real-world Android use cases 
 
 🛠 Unit tests included!
 
-This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine Android implementations.
-In the `playground` package you can play around with Coroutines examples that run directly on the JVM.
+This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine and Flow Android implementations.
+In the `playground` package you can play around with Coroutines and Flow examples that run directly on the JVM.
 
 ## 🔧 Project Setup
 
 Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contain all the interesting Coroutine related code.
-`Activities` listen to `LiveData` events of the `ViewModel` and render received `UiState`s.
+`Activities` listen to `LiveData` or `StateFlow` events of the `ViewModel` and render received `UiState`s.
 
 This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. This lets you define how the API should behave.
 Everything can be configured: http status codes, response data and delays. Every use case defines a certain behaviour of the Mock API.
@@ -38,7 +38,7 @@ Unit Tests exist for most use cases.
 * Comparing Kotlin Coroutines with Callbacks and RxJava [[link](https://www.lukaslechner.com/comparing-kotlin-coroutines-with-callbacks-and-rxjava/)]
 * How to run an expensive calculation with Kotlin Coroutines on the Android Main Thread without freezing the UI [[link](https://www.lukaslechner.com/how-to-run-an-expensive-calculation-with-kotlin-coroutines-on-the-android-main-thread-without-freezing-the-ui/)]
 
-Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never miss a new blog post. I will publish new blog posts about Coroutines on a regular basis.
+Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never miss new content. I will publish new blog posts and videos about Coroutines and Flow on a regular basis.
 
 ## 🎓 Online Course
 
@@ -54,7 +54,7 @@ If you like this project, please tell other developers about it! ❤️
 
 If you like, you can follow me on Twitter [**@LukasLechnerDev**](https://twitter.com/LukasLechnerDev).
 
-## ⭐️ Use Cases
+## ⭐️ Coroutine Use Cases
 1. [Perform single network request](#1-perform-single-network-request)
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
 3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
@@ -73,7 +73,13 @@ If you like, you can follow me on Twitter [**@LukasLechnerDev**](https://twitter
 16. [Performance analysis of dispatchers, number of coroutines and yielding](#16-performance-analysis-of-dispatchers-number-of-coroutines-and-yielding)
 17. [Perform expensive calculation on Main Thread without freezing the UI](#17-perform-expensive-calculation-on-main-thread-without-freezing-the-ui)
 
-## 📄 Description
+## ⭐ Flow Use Cases
+1. [Flow Basics](#1-flow-basics)
+2. [Basic Flow intermediate operators](#2-basic-flow-intermediate-operators)
+3. [Flow Exception Handling](#3-flow-exception-handling)
+4. [Exposing Flows in the ViewModel](#4-exposing-flows-in-the-viewmodel)
+
+## 📄 Coroutine Use Cases Description
 
 ### 1. Perform single network request
 
@@ -226,9 +232,34 @@ See [[this blog post](https://www.lukaslechner.com/how-to-run-an-expensive-calcu
 
 You can play around and check the performance of different configurations!
 
-## 👷‍♀️ Contributing 👷‍♂️
+## 📄 Flow Use Cases Description
 
-I am currently learning Coroutines myself. So if you have any ideas for or improvements or other use cases, feel free to create a pull request or an issue.
+### 1. Flow Basics
+
+This simple use case shows how to consume values from a `DataSource` that emits live stock information and how to display them in the UI. 
+
+The datasource exposes a flow which is built with the `flow{}` flow builder. It fetches fresh stock information every 5 seconds from a mocked endpoint. 
+
+A `LiveData` property that exposes the `UiState` in the `ViewModel` is created by using the `.asLiveData()` terminal operator.
+This use case also shows how to use the `map` intermediate operator and the `onStart` lifecycle operator. 
+
+### 2. Basic Flow Intermediate Operators
+
+The second use case is an extension of the first one. 
+It uses some basic intermediate operators, like `withIndex`, `map`, `take` and `filter`.
+
+### 3. Flow Exception Handling
+
+The third use case shows how to properly implement exception handling with flows. 
+
+It uses the `catch` operator to handle exceptions of our flow in the `ViewModel`, and uses the `retry ` operator to retry failed network requests in the `DataSource`.
+
+### 4. Exposing Flows in the ViewModel
+
+This use case shows how to expose flows (a `StateFlow` to be precise) in the `ViewModel` instead of a `LiveData` property. 
+The `statIn` operator is used to convert the ordinary, cold `Flow` into a hot `StateFlow`.
+
+In the `Activity`, the `repeadOnLifecycle` suspend function is used to collect emissions of the `StateFlow` in a lifecycle-aware manner. 
 
 ## Author
 
