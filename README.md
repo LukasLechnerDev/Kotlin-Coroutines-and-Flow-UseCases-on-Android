@@ -2,7 +2,7 @@
 
 # Kotlin Coroutines and Flow - Use Cases on Android
 
-🎓 Learning Kotlin Coroutines and Flows for Android Development by example
+🎓 Learning Kotlin Coroutines and Flows for Android Development by Example
 
 🚀 Sample implementations for real-world Android use cases 
 
@@ -13,7 +13,7 @@ In the `playground` package you can play around with Coroutines and Flow example
 
 ## 🔧 Project Setup
 
-Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contain all the interesting Coroutine related code.
+Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contain most of the interesting Coroutine-related code.
 `Activities` listen to `LiveData` or `StateFlow` events of the `ViewModel` and render received `UiState`s.
 
 This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. This lets you define how the API should behave.
@@ -89,7 +89,7 @@ This use case performs a single network request to get the latest Android Versio
 
 ### 2. Perform two sequential network requests
 
-This use case performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
+This use case performs two network requests sequentially. First, it retrieves recent Android Versions and then it requests the features of the latest version.
 
 There are also 2 alternative implementations included. One is using old-school [callbacks](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/callbacks/SequentialNetworkRequestsCallbacksViewModel.kt).
 The other one uses [RxJava](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/rx/SequentialNetworkRequestsRxViewModel.kt). You can compare each implementation.
@@ -101,8 +101,8 @@ If you compare all three implementations, it is really interesting to see, in my
 
 Performs three network requests concurrently. It loads the feature information of the 3 most recent Android Versions. Additionally, an implementation
 that performs the requests sequentially is included. The UI shows how much time each implementation takes to load the data so you can see that the network
-requests in the concurrent version are actually performed in parallel. The included unit test is also interesting, as it shows how you can use virtual time to
-verify that the concurrent version really gets performed in parallel.
+requests in the concurrent version are indeed performed in parallel. The included unit test is also interesting, as it shows how you can use virtual time to
+verify that the concurrent version gets performed in parallel.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase3/PerformNetworkRequestsConcurrentlyViewModel.kt)]
 
@@ -124,13 +124,13 @@ General networking timeouts can also be [configured in the okhttp client](https:
 
 ### 6. Retrying network requests
 
-Demonstrates the usage of higher order functions together with coroutines. The higher order function `retry()` retries a certain suspending operation for a given amount of times.
+Demonstrates the usage of higher-order functions together with coroutines. The higher-order function `retry()` retries a certain suspending operation for a given amount of times.
 It uses an exponential backoff for retries, which means that the delay between retries increases exponentially. The behavior of the Mock API is defined in a way that it responses
 with 2 unsuccessful responses followed by a successful response.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase6/RetryNetworkRequestViewModel.kt)]
 
-Unit tests verify the amount of request that are performed in different scenarios. Furthermore they check if the exponential backoff is working properly
+Unit tests verify the amount of requests that are performed in different scenarios. Furthermore, they check if the exponential backoff is working properly
 by asserting the amount of elapsed virtual time.
 
 ### 7. Network requests with timeout and retry
@@ -174,7 +174,7 @@ In the respective unit test, we have to pass the testDispatcher to the ViewModel
 
 UseCase#10 has a problem. It is not able to prematurely cancel the calculation because it is not cooperative regarding cancellation. This leads to wasted device resources and
 memory leaks, as the calculation is not stopped and the ViewModel is retained longer than necessary. This use case now fixes this issue. The UI now also has a "Cancel Calculation"
-Button. Note: Only the calculation can be cancelled prematurely but not the `toString()` conversion.
+Button. Note: Only the calculation can be canceled prematurely but not the `toString()` conversion.
 
 There are several ways to make your coroutines cooperative regarding cancellation: You can use either use `isActive()`, `ensureActive()` or `yield()`.
 More information about cancellation can be found [here](https://medium.com/androiddevelopers/exceptions-in-coroutines-ce8da1ec060c)
@@ -183,26 +183,26 @@ More information about cancellation can be found [here](https://medium.com/andro
 
 ### 12. Offload expensive calculation to several Coroutines
 
-The factorial calculation here is not performed by a single coroutine, but by an amount of coroutines that can be defined in the UI. Each coroutine calculates the factorial of a sub-range.
+The factorial calculation here is not performed by a single coroutine, but by a number of coroutines that can be defined in the UI. Each coroutine calculates the factorial of a sub-range.
 
 [[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/CalculationInSeveralCoroutinesViewModel.kt)]
 [[code factorial calculator](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/FactorialCalculator.kt)]
 
 ### 13. Exception Handling
 
-This use case demonstrates different ways of handling exceptions using `try/catch` and `CoroutineExceptionHandler`. It also demonstrates when you should to use `supervisorScope{}`: In situations when you don't want a failing coroutine to cancel
-its sibling coroutines. In one implementation of this use case, the results of the successful responses are shown even tough one response wasn't successful.
+This use case demonstrates different ways of handling exceptions using `try/catch` and `CoroutineExceptionHandler`. It also demonstrates when you should use `supervisorScope{}`: In situations when you don't want a failing coroutine to cancel
+its sibling coroutines. In one implementation of this use case, the results of the successful responses are shown even though one response wasn't successful.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/ExceptionHandlingViewModel.kt)]
 
 ### 14. Continue Coroutine execution when the user leaves the screen
 
-Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get cancelled. Sometimes, however, we want a certain coroutine operation to be continued
+Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get canceled. Sometimes, however, we want a certain coroutine operation to be continued
 when the user leaves the screen. In this use case, the network request keeps running and the results still get inserted into the database
-cache when the user leaves the screen. This makes sense in real world application as we don't want to cancel an already started background "cache sync".
+cache when the user leaves the screen. This makes sense in real-world applications as we don't want to cancel an already started background "cache sync".
 
 
-You can test this behavior in the UI by clearing the database, then loading the Android version and instantly close the screen. You will see in LogCat that the response
+You can test this behavior in the UI by clearing the database, then loading the Android version and instantly closing the screen. You will see in LogCat that the response
 still gets executed and the result still gets stored. The respective unit test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
 
 [[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/ContinueCoroutineWhenUserLeavesScreenViewModel.kt)]
@@ -238,7 +238,7 @@ You can play around and check the performance of different configurations!
 
 This simple use case shows how to consume values from a `DataSource` that emits live stock information and how to display them in the UI. 
 
-The datasource exposes a flow which is built with the `flow{}` flow builder. It fetches fresh stock information every 5 seconds from a mocked endpoint. 
+The datasource exposes a `Flow` which is built with the `flow{}` flow builder. It fetches fresh stock information every 5 seconds from a mocked endpoint. 
 
 A `LiveData` property that exposes the `UiState` in the `ViewModel` is created by using the `.asLiveData()` terminal operator.
 This use case also shows how to use the `map` intermediate operator and the `onStart` lifecycle operator. 
@@ -252,7 +252,7 @@ It uses some basic intermediate operators, like `withIndex`, `map`, `take` and `
 
 The third use case shows how to properly implement exception handling with flows. 
 
-It uses the `catch` operator to handle exceptions of our flow in the `ViewModel`, and uses the `retry ` operator to retry failed network requests in the `DataSource`.
+It uses the `catch` operator to handle exceptions of our flow in the `ViewModel` and uses the `retry ` operator to retry failed network requests in the `DataSource`.
 
 ### 4. Exposing Flows in the ViewModel
 
