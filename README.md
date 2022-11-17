@@ -243,10 +243,16 @@ The datasource exposes a `Flow` which is built with the `flow{}` flow builder. I
 A `LiveData` property that exposes the `UiState` in the `ViewModel` is created by using the `.asLiveData()` terminal operator.
 This use case also shows how to use the `map` intermediate operator and the `onStart` lifecycle operator. 
 
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase1/FlowUseCase1ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase1/StockPriceDataSource.kt)]
+
 ### 2. Basic Flow Intermediate Operators
 
 The second use case is an extension of the first one. 
 It uses some basic intermediate operators, like `withIndex`, `map`, `take` and `filter`.
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase2/FlowUseCase2ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase2/StockPriceDataSource.kt)]
 
 ### 3. Flow Exception Handling
 
@@ -254,12 +260,18 @@ The third use case shows how to properly implement exception handling with flows
 
 It uses the `catch` operator to handle exceptions of our flow in the `ViewModel` and uses the `retry ` operator to retry failed network requests in the `DataSource`.
 
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase3/FlowUseCase3ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase3/StockPriceDataSource.kt)]
+
 ### 4. Exposing Flows in the ViewModel
 
 This use case shows how to expose flows (a `StateFlow` to be precise) in the `ViewModel` instead of a `LiveData` property. 
 The `statIn` operator is used to convert the ordinary, cold `Flow` into a hot `StateFlow`.
 
 In the `Activity`, the `repeadOnLifecycle` suspend function is used to collect emissions of the `StateFlow` in a lifecycle-aware manner. 
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase4/FlowUseCase4ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase4/StockPriceDataSource.kt)]
 
 ## Author
 
