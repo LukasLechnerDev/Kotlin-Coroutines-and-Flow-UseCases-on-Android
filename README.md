@@ -42,7 +42,7 @@ Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never mi
 
 ## 🎓 Online Course
 
-This project is the foundation of a comprehensive Online Course about [Mastering Kotlin Coroutines for Android Development](https://www.udemy.com/course/coroutines-on-android/?referralCode=EE8CCB9284B14877724C)
+This project is the foundation of a comprehensive Online Course about [Kotlin Coroutines and Flow for Android Development](https://www.udemy.com/course/coroutines-on-android/?referralCode=EE8CCB9284B14877724C)
 
 [![CourseCoroutinesOnAndroid](documentation/images/course.png)](https://www.udemy.com/course/coroutines-on-android/?referralCode=EE8CCB9284B14877724C)
 
