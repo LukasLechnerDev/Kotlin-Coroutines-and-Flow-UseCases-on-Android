@@ -44,6 +44,7 @@ Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never mi
 ## 🎓 Online Course
 
 This project is the foundation of a comprehensive Online Course about [Kotlin Coroutines and Flow for Android Development](https://lukaslechner.com/coroutines-flow-android?source=github)
+In the course, we are going to implement the use cases of this repository together, as well as talk about all the necessary concepts that you need to know. 
 
 [![CourseCoroutinesOnAndroid](documentation/images/course.png)](https://lukaslechner.com/coroutines-flow-android?source=github)
 
