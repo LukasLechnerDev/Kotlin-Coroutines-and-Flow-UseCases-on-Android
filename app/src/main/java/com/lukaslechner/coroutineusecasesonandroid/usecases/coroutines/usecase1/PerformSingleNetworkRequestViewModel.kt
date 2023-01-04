@@ -16,15 +16,15 @@ class PerformSingleNetworkRequestViewModel(
     fun performSingleNetworkRequest() {
         viewModelScope.launch {
             uiState.value = UiState.Loading
-            uiState.value = withContext(Dispatchers.IO) {
-                kotlin.runCatching { UiState.Success(mockApi.getRecentAndroidVersions()) }
-                    .getOrElse { throwable ->
-                        when (throwable) {
-                            is HttpException -> UiState.Error("${throwable.code()} : ${throwable.message()}")
-                            else -> UiState.Error(throwable.message.toString())
-                        }
+            uiState.value =
+                runCatching {
+                    UiState.Success(mockApi.getRecentAndroidVersions())
+                }.getOrElse { throwable ->
+                    when (throwable) {
+                        is HttpException -> UiState.Error("${throwable.code()} : ${throwable.message()}")
+                        else -> UiState.Error(throwable.message.toString())
                     }
-            }
+                }
         }
     }
 }

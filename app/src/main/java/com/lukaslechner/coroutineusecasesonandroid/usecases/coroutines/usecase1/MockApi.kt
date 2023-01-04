@@ -11,7 +11,7 @@ fun mockApi() =
             .mock(
                 "http://localhost/recent-android-versions",
                 { Gson().toJson(mockAndroidVersions) },
-                404,
+                200, //에러 터트리려면 400이상 날려야함
                 150
             )
     )
