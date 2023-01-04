@@ -11,7 +11,7 @@ fun mockApi() =
             .mock(
                 "http://localhost/recent-android-versions",
                 { Gson().toJson(mockAndroidVersions) },
-                200,
-                1500
+                404,
+                150
             )
     )
