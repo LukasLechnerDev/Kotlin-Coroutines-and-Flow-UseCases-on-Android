@@ -2,13 +2,13 @@ package com.lukaslechner.coroutineusecasesonandroid.playground.flow.concurrency
 
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 
 suspend fun main(): Unit = coroutineScope {
 
-    val flow = MutableSharedFlow<Int>(extraBufferCapacity = 10)
+    val flow = MutableStateFlow(0)
 
     // Collector 1
     launch {
