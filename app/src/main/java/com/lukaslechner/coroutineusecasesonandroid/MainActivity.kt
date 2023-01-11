@@ -50,5 +50,5 @@ class MainActivity : BaseActivity() {
         return itemDecorator
     }
 
-    override fun getToolbarTitle() = "Coroutine Usecases on Android"
+    override fun getToolbarTitle() = "Coroutines and Flows on Android"
 }
