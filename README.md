@@ -1,20 +1,20 @@
 ![CoroutineUsecasesOnAndroid](documentation/images/Logo-new.png)
 
-# Kotlin Coroutines - Use Cases on Android
+# Kotlin Coroutines and Flow - Use Cases on Android
 
-🎓 Learning Kotlin Coroutines for Android by example. 
+🎓 Learning Kotlin Coroutines and Flows for Android Development by Example
 
-🚀 Sample implementations for real-world Android use cases. 
+🚀 Sample implementations for real-world Android use cases 
 
 🛠 Unit tests included!
 
-This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine Android implementations.
-In the `playground` package you can play around with Coroutines examples that run directly on the JVM.
+This repository is intended to be a "Playground Project". You can quickly look up and play around with the different Coroutine and Flow Android implementations.
+In the `playground` package you can play around with Coroutines and Flow examples that run directly on the JVM.
 
 ## 🔧 Project Setup
 
-Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contain all the interesting Coroutine related code.
-`Activities` listen to `LiveData` events of the `ViewModel` and render received `UiState`s.
+Every use case is using its own `Activity` and `JetPack ViewModel`. The `ViewModel`s contain most of the interesting Coroutine-related code.
+`Activities` listen to `LiveData` or `StateFlow` events of the `ViewModel` and render received `UiState`s.
 
 This project is using retrofit/okhttp together with a `MockNetworkInterceptor`. This lets you define how the API should behave.
 Everything can be configured: http status codes, response data and delays. Every use case defines a certain behaviour of the Mock API.
@@ -24,6 +24,7 @@ Android version.
 Unit Tests exist for most use cases.
 
 ## 🍿️ Related Videos
+* Kotlin Flow on Android Basics Playlist [[link](https://youtube.com/playlist?list=PL-1MzrWZIYU3McdBOEic_1nsy8Rw48xIO)]
 * Kotlin Coroutines Fundamentals Playlist [[link](https://www.youtube.com/playlist?list=PL-1MzrWZIYU2a4TGbSXeXzfet8Br3cya1)]
 * Kotlin Coroutines Exception Handling explained [[link](https://youtu.be/Pgek3_3vPU8)]
 * How to avoid 5 common mistakes when using Kotlin Coroutines [[link](https://youtu.be/coq9XDMB-yU)]
@@ -38,13 +39,14 @@ Unit Tests exist for most use cases.
 * Comparing Kotlin Coroutines with Callbacks and RxJava [[link](https://www.lukaslechner.com/comparing-kotlin-coroutines-with-callbacks-and-rxjava/)]
 * How to run an expensive calculation with Kotlin Coroutines on the Android Main Thread without freezing the UI [[link](https://www.lukaslechner.com/how-to-run-an-expensive-calculation-with-kotlin-coroutines-on-the-android-main-thread-without-freezing-the-ui/)]
 
-Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never miss a new blog post. I will publish new blog posts about Coroutines on a regular basis.
+Sign up to my [newsletter](https://www.lukaslechner.com/newsletter/) to never miss new content. I will publish new blog posts and videos about Coroutines and Flow on a regular basis.
 
 ## 🎓 Online Course
 
-This project is the foundation of a comprehensive Online Course about [Mastering Kotlin Coroutines for Android Development](https://www.udemy.com/course/coroutines-on-android/?referralCode=EE8CCB9284B14877724C)
+This project is the foundation of a comprehensive Online Course about [Kotlin Coroutines and Flow for Android Development](https://lukaslechner.com/coroutines-flow-android?source=github)
+In the course, we are going to implement the use cases of this repository together, as well as talk about all the necessary concepts that you need to know. 
 
-[![CourseCoroutinesOnAndroid](documentation/images/course.png)](https://www.udemy.com/course/coroutines-on-android/?referralCode=EE8CCB9284B14877724C)
+[![CourseCoroutinesOnAndroid](documentation/images/course.png)](https://lukaslechner.com/coroutines-flow-android?source=github)
 
 ## 📢 Sharing is Caring 
 
@@ -54,7 +56,7 @@ If you like this project, please tell other developers about it! ❤️
 
 If you like, you can follow me on Twitter [**@LukasLechnerDev**](https://twitter.com/LukasLechnerDev).
 
-## ⭐️ Use Cases
+## ⭐️ Coroutine Use Cases
 1. [Perform single network request](#1-perform-single-network-request)
 2. [Perform two sequential network requests](#2-perform-two-sequential-network-requests)
 3. [Perform several network requests concurrently](#3-perform-several-network-requests-concurrently)
@@ -73,7 +75,13 @@ If you like, you can follow me on Twitter [**@LukasLechnerDev**](https://twitter
 16. [Performance analysis of dispatchers, number of coroutines and yielding](#16-performance-analysis-of-dispatchers-number-of-coroutines-and-yielding)
 17. [Perform expensive calculation on Main Thread without freezing the UI](#17-perform-expensive-calculation-on-main-thread-without-freezing-the-ui)
 
-## 📄 Description
+## ⭐ Flow Use Cases
+1. [Flow Basics](#1-flow-basics)
+2. [Basic Flow intermediate operators](#2-basic-flow-intermediate-operators)
+3. [Flow Exception Handling](#3-flow-exception-handling)
+4. [Exposing Flows in the ViewModel](#4-exposing-flows-in-the-viewmodel)
+
+## 📄 Coroutine Use Cases Description
 
 ### 1. Perform single network request
 
@@ -83,7 +91,7 @@ This use case performs a single network request to get the latest Android Versio
 
 ### 2. Perform two sequential network requests
 
-This use case performs two network requests sequentially. First it retrieves recent Android Versions and then it requests the features of the latest version.
+This use case performs two network requests sequentially. First, it retrieves recent Android Versions and then it requests the features of the latest version.
 
 There are also 2 alternative implementations included. One is using old-school [callbacks](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/callbacks/SequentialNetworkRequestsCallbacksViewModel.kt).
 The other one uses [RxJava](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase2/rx/SequentialNetworkRequestsRxViewModel.kt). You can compare each implementation.
@@ -95,8 +103,8 @@ If you compare all three implementations, it is really interesting to see, in my
 
 Performs three network requests concurrently. It loads the feature information of the 3 most recent Android Versions. Additionally, an implementation
 that performs the requests sequentially is included. The UI shows how much time each implementation takes to load the data so you can see that the network
-requests in the concurrent version are actually performed in parallel. The included unit test is also interesting, as it shows how you can use virtual time to
-verify that the concurrent version really gets performed in parallel.
+requests in the concurrent version are indeed performed in parallel. The included unit test is also interesting, as it shows how you can use virtual time to
+verify that the concurrent version gets performed in parallel.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase3/PerformNetworkRequestsConcurrentlyViewModel.kt)]
 
@@ -118,13 +126,13 @@ General networking timeouts can also be [configured in the okhttp client](https:
 
 ### 6. Retrying network requests
 
-Demonstrates the usage of higher order functions together with coroutines. The higher order function `retry()` retries a certain suspending operation for a given amount of times.
+Demonstrates the usage of higher-order functions together with coroutines. The higher-order function `retry()` retries a certain suspending operation for a given amount of times.
 It uses an exponential backoff for retries, which means that the delay between retries increases exponentially. The behavior of the Mock API is defined in a way that it responses
 with 2 unsuccessful responses followed by a successful response.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase6/RetryNetworkRequestViewModel.kt)]
 
-Unit tests verify the amount of request that are performed in different scenarios. Furthermore they check if the exponential backoff is working properly
+Unit tests verify the amount of requests that are performed in different scenarios. Furthermore, they check if the exponential backoff is working properly
 by asserting the amount of elapsed virtual time.
 
 ### 7. Network requests with timeout and retry
@@ -168,7 +176,7 @@ In the respective unit test, we have to pass the testDispatcher to the ViewModel
 
 UseCase#10 has a problem. It is not able to prematurely cancel the calculation because it is not cooperative regarding cancellation. This leads to wasted device resources and
 memory leaks, as the calculation is not stopped and the ViewModel is retained longer than necessary. This use case now fixes this issue. The UI now also has a "Cancel Calculation"
-Button. Note: Only the calculation can be cancelled prematurely but not the `toString()` conversion.
+Button. Note: Only the calculation can be canceled prematurely but not the `toString()` conversion.
 
 There are several ways to make your coroutines cooperative regarding cancellation: You can use either use `isActive()`, `ensureActive()` or `yield()`.
 More information about cancellation can be found [here](https://medium.com/androiddevelopers/exceptions-in-coroutines-ce8da1ec060c)
@@ -177,26 +185,26 @@ More information about cancellation can be found [here](https://medium.com/andro
 
 ### 12. Offload expensive calculation to several Coroutines
 
-The factorial calculation here is not performed by a single coroutine, but by an amount of coroutines that can be defined in the UI. Each coroutine calculates the factorial of a sub-range.
+The factorial calculation here is not performed by a single coroutine, but by a number of coroutines that can be defined in the UI. Each coroutine calculates the factorial of a sub-range.
 
 [[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/CalculationInSeveralCoroutinesViewModel.kt)]
 [[code factorial calculator](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase12/FactorialCalculator.kt)]
 
 ### 13. Exception Handling
 
-This use case demonstrates different ways of handling exceptions using `try/catch` and `CoroutineExceptionHandler`. It also demonstrates when you should to use `supervisorScope{}`: In situations when you don't want a failing coroutine to cancel
-its sibling coroutines. In one implementation of this use case, the results of the successful responses are shown even tough one response wasn't successful.
+This use case demonstrates different ways of handling exceptions using `try/catch` and `CoroutineExceptionHandler`. It also demonstrates when you should use `supervisorScope{}`: In situations when you don't want a failing coroutine to cancel
+its sibling coroutines. In one implementation of this use case, the results of the successful responses are shown even though one response wasn't successful.
 
 [[code](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase13/ExceptionHandlingViewModel.kt)]
 
 ### 14. Continue Coroutine execution when the user leaves the screen
 
-Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get cancelled. Sometimes, however, we want a certain coroutine operation to be continued
+Usually, when the user leaves the screen, the `ViewModel` gets cleared and all the coroutines launched in `viewModelScope` get canceled. Sometimes, however, we want a certain coroutine operation to be continued
 when the user leaves the screen. In this use case, the network request keeps running and the results still get inserted into the database
-cache when the user leaves the screen. This makes sense in real world application as we don't want to cancel an already started background "cache sync".
+cache when the user leaves the screen. This makes sense in real-world applications as we don't want to cancel an already started background "cache sync".
 
 
-You can test this behavior in the UI by clearing the database, then loading the Android version and instantly close the screen. You will see in LogCat that the response
+You can test this behavior in the UI by clearing the database, then loading the Android version and instantly closing the screen. You will see in LogCat that the response
 still gets executed and the result still gets stored. The respective unit test `AndroidVersionRepositoryTest` also verifies this behavior. Check out this [blogpost](https://medium.com/androiddevelopers/coroutines-patterns-for-work-that-shouldnt-be-cancelled-e26c40f142ad) for details of the implementation.
 
 [[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/coroutines/usecase14/ContinueCoroutineWhenUserLeavesScreenViewModel.kt)]
@@ -226,9 +234,46 @@ See [[this blog post](https://www.lukaslechner.com/how-to-run-an-expensive-calcu
 
 You can play around and check the performance of different configurations!
 
-## 👷‍♀️ Contributing 👷‍♂️
+## 📄 Flow Use Cases Description
 
-I am currently learning Coroutines myself. So if you have any ideas for or improvements or other use cases, feel free to create a pull request or an issue.
+### 1. Flow Basics
+
+This simple use case shows how to consume values from a `DataSource` that emits live stock information and how to display them in the UI. 
+
+The datasource exposes a `Flow` which is built with the `flow{}` flow builder. It fetches fresh stock information every 5 seconds from a mocked endpoint. 
+
+A `LiveData` property that exposes the `UiState` in the `ViewModel` is created by using the `.asLiveData()` terminal operator.
+This use case also shows how to use the `map` intermediate operator and the `onStart` lifecycle operator. 
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase1/FlowUseCase1ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase1/StockPriceDataSource.kt)]
+
+### 2. Basic Flow Intermediate Operators
+
+The second use case is an extension of the first one. 
+It uses some basic intermediate operators, like `withIndex`, `map`, `take` and `filter`.
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase2/FlowUseCase2ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase2/StockPriceDataSource.kt)]
+
+### 3. Flow Exception Handling
+
+The third use case shows how to properly implement exception handling with flows. 
+
+It uses the `catch` operator to handle exceptions of our flow in the `ViewModel` and uses the `retry ` operator to retry failed network requests in the `DataSource`.
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase3/FlowUseCase3ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase3/StockPriceDataSource.kt)]
+
+### 4. Exposing Flows in the ViewModel
+
+This use case shows how to expose flows (a `StateFlow` to be precise) in the `ViewModel` instead of a `LiveData` property. 
+The `statIn` operator is used to convert the ordinary, cold `Flow` into a hot `StateFlow`.
+
+In the `Activity`, the `repeadOnLifecycle` suspend function is used to collect emissions of the `StateFlow` in a lifecycle-aware manner. 
+
+[[code viewmodel](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase4/FlowUseCase4ViewModel.kt)]
+[[code datasource](app/src/main/java/com/lukaslechner/coroutineusecasesonandroid/usecases/flow/usecase4/StockPriceDataSource.kt)]
 
 ## Author
 
