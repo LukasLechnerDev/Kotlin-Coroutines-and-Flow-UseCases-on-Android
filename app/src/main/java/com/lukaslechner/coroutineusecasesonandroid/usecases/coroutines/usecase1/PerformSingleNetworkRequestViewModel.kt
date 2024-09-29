@@ -8,6 +8,6 @@ class PerformSingleNetworkRequestViewModel(
 ) : BaseViewModel<UiState>() {
 
     fun performSingleNetworkRequest() {
-
+        uiState.value = UiState.Error("something went wrong!")
     }
 }
