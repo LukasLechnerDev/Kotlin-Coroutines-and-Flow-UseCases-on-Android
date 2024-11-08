@@ -13,7 +13,7 @@ class TimeoutAndRetryViewModel(
         val timeout = 1000L
 
         // TODO: Exercise 3
-        // switch to branch "coroutine_course_full" to see solution
+        // switch to branch "coroutine_course_complete" to see solution
 
         // run api.getAndroidVersionFeatures(27) and api.getAndroidVersionFeatures(28) in parallel
     }

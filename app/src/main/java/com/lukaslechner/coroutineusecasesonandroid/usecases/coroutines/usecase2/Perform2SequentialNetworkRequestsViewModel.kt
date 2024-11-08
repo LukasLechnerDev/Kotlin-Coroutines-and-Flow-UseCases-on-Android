@@ -9,6 +9,6 @@ class Perform2SequentialNetworkRequestsViewModel(
 
     fun perform2SequentialNetworkRequest() {
         // TODO: Exercise 1
-        // switch to branch "coroutine_course_full" to see solution
+        // switch to branch "coroutine_course_complete" to see solution
     }
 }
