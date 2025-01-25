@@ -7,7 +7,10 @@ class PerformSingleNetworkRequestViewModel(
     private val mockApi: MockApi = mockApi()
 ) : BaseViewModel<UiState>() {
 
+
     fun performSingleNetworkRequest() {
+
+
 
     }
 }
