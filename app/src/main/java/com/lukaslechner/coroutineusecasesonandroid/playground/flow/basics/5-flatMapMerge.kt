@@ -11,6 +11,7 @@ private fun requestFlow(i: Int): Flow<String> = flow {
 
 @OptIn(ExperimentalCoroutinesApi::class)
 fun main() = runBlocking<Unit> {
+    // flatMapMerge is not maintaining Order
     val startTime = System.currentTimeMillis() // remember the start time
     (1..3).asFlow().onEach { delay(100) } // a number every 100 ms
         .flatMapMerge { requestFlow(it) }
