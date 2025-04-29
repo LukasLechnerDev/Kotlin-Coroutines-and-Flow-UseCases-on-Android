@@ -22,6 +22,7 @@ suspend fun main(): Unit = coroutineScope {
             println("Handle exception in catch() operator $throwable")
         }
         .launchIn(this)
+    println("Done")
 }
 
 private fun stocksFlow(): Flow<String> = flow {

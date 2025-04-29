@@ -8,7 +8,7 @@ import kotlin.system.measureTimeMillis
 
 suspend fun main(): Unit = coroutineScope {
 
-    val flow = MutableStateFlow(0)
+    val flow = MutableStateFlow<Int>(0)
 
     // Collector 1
     launch {

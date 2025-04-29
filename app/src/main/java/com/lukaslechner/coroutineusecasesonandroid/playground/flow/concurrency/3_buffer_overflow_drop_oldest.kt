@@ -8,6 +8,20 @@ import kotlinx.coroutines.flow.flow
 
 suspend fun main() = coroutineScope {
 
+    val fastFlow = flow {
+        repeat(10) {
+            println("Produced $it")
+            emit(it)
+        }
+    }
+
+    fastFlow
+        .buffer(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+        .collect {
+            delay(100) // slow consumer
+            println("Consumed $it")
+        }
+
     val flow = flow {
         repeat(5) {
             val pancakeIndex = it + 1

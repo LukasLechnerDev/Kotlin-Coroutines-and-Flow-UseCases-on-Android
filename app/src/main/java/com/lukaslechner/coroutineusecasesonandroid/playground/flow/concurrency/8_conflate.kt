@@ -6,13 +6,14 @@ import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flow
 
 suspend fun main() = coroutineScope {
-
+    // Conflate is same as BufferOverflow.DROP_OLDEST
     val flow = flow {
         repeat(5) {
-            println("Emitter:    Start Cooking Pancake $it")
+            val pancakeIndex = it + 1
+            println("Emitter:    Start Cooking Pancake $pancakeIndex")
             delay(100)
-            println("Emitter:    Pancake $it ready!")
-            emit(it)
+            println("Emitter:    Pancake $pancakeIndex ready!")
+            emit(pancakeIndex)
         }
     }.conflate()
 
