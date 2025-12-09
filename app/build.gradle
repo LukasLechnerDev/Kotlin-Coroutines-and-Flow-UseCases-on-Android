@@ -5,7 +5,7 @@ apply plugin: 'kotlin-parcelize'
 
 android {
 
-    compileSdkVersion 34
+    compileSdkVersion 36
     defaultConfig {
         applicationId "com.lukaslechner.coroutineusecasesonandroid"
         versionCode 1
@@ -53,7 +53,7 @@ android {
 dependencies {
 
     def lifecycle_version = "2.8.6"
-    def coroutines_version = "1.8.1"
+    def coroutines_version = "1.10.2"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -92,7 +92,7 @@ dependencies {
 
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
-    def room_version = "2.6.1"
+    def room_version = "2.8.4"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
