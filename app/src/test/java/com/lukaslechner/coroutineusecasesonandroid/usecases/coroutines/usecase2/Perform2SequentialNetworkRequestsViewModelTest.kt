@@ -2,12 +2,12 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase2
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-@ExperimentalCoroutinesApi
 class Perform2SequentialNetworkRequestsViewModelTest {
 
     @get:Rule
