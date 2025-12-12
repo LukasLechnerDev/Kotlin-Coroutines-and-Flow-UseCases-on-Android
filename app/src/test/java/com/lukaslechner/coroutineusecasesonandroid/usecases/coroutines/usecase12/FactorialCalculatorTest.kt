@@ -1,13 +1,11 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase12
 
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Test
 import java.math.BigInteger
 
-@ExperimentalCoroutinesApi
 class FactorialCalculatorTest {
 
     @Test
