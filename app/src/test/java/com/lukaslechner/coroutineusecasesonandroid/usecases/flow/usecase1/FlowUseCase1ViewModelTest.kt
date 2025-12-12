@@ -3,7 +3,6 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
@@ -14,7 +13,6 @@ class FlowUseCase1ViewModelTest {
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @get: Rule
     val replaceMainDispatcherRule = ReplaceMainDispatcherRule()
 

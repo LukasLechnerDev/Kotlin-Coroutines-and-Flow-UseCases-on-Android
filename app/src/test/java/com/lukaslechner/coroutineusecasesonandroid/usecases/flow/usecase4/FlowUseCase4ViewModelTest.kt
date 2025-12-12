@@ -4,7 +4,6 @@ import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.appleS
 import com.lukaslechner.coroutineusecasesonandroid.usecases.flow.usecase1.googleStock
 import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -14,7 +13,6 @@ import org.junit.Test
 
 class FlowUseCase4ViewModelTest {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @get: Rule
     val replaceMainDispatcherRule = ReplaceMainDispatcherRule()
 

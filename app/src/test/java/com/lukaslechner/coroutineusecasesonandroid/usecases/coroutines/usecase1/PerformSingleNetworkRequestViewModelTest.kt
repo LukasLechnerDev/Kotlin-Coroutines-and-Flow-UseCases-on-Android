@@ -3,7 +3,6 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
 import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -11,7 +10,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-@ExperimentalCoroutinesApi
 class PerformSingleNetworkRequestViewModelTest {
 
     @get:Rule
