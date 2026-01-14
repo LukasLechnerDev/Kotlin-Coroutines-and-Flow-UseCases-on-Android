@@ -34,7 +34,6 @@ class TestClass {
     fun `functionWithDelay should return 42`() = runTest {
 
         val realTimeStart = System.currentTimeMillis()
-        val virtualTimeStart = currentTime
 
         functionThatStartsNewCoroutine()
 
@@ -44,7 +43,7 @@ class TestClass {
         advanceUntilIdle()
 
         val realTimeDuration = System.currentTimeMillis() - realTimeStart
-        val virtualTimeDuration = currentTime - virtualTimeStart
+        val virtualTimeDuration = currentTime
 
         println("Test took $realTimeDuration real ms")
         println("Test took $virtualTimeDuration virtual ms")
