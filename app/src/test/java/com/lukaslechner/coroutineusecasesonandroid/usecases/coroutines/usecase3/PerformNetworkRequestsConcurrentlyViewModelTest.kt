@@ -24,7 +24,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
     private val receivedUiStates = mutableListOf<UiState>()
 
     @Test
-    fun `performNetworkRequestsSequentially should return data after 3 times the response delay`() =
+    fun `performNetworkRequestsSequentially() should load data sequentially`() =
         runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
@@ -60,7 +60,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
         }
 
     @Test
-    fun `performNetworkRequestsConcurrently should return data after the response delay`() =
+    fun `performNetworkRequestsConcurrently() should load data concurrently`() =
         runTest {
             val responseDelay = 1000L
             val fakeApi = FakeSuccessApi(responseDelay)
@@ -95,7 +95,7 @@ class PerformNetworkRequestsConcurrentlyViewModelTest {
         }
 
     @Test
-    fun `performNetworkRequestsConcurrently should return Error when network request fails`() =
+    fun `performNetworkRequestsConcurrently() should return Error when network request fails`() =
         runTest {
             val responseDelay = 1000L
             val fakeApi = FakeErrorApi(responseDelay)
