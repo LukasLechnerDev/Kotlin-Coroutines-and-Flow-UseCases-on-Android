@@ -4,7 +4,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.currentTime
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
@@ -19,8 +21,10 @@ class SystemUnderTest {
 
 fun CoroutineScope.functionThatStartsNewCoroutine() {
     launch {
-        delay(1000)
-        println("Coroutine completed!")
+        delay(500)
+        println("Task A was executed")
+        delay(500)
+        println("Task B was executed")
     }
 }
 
@@ -33,7 +37,11 @@ class TestClass {
         val virtualTimeStart = currentTime
 
         functionThatStartsNewCoroutine()
-        advanceTimeBy(1000)
+
+        // advanceTimeBy(500)
+        // runCurrent()
+
+        advanceUntilIdle()
 
         val realTimeDuration = System.currentTimeMillis() - realTimeStart
         val virtualTimeDuration = currentTime - virtualTimeStart
