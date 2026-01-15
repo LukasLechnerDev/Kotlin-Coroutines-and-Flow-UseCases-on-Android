@@ -1,6 +1,7 @@
 package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase14
 
 import com.lukaslechner.coroutineusecasesonandroid.mock.mockAndroidVersions
+import com.lukaslechner.coroutineusecasesonandroid.playground.structuredconcurrency.scope
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -33,36 +34,37 @@ class AndroidVersionRepositoryTest {
     }
 
     @Test
-    fun `loadRecentAndroidVersions() should continue to load and store android versions when calling scope gets cancelled`() = runTest {
-        val fakeDatabase = FakeDatabase()
-        val fakeApi = FakeApi()
-        val applicationScope = this
-        val repository = AndroidVersionRepository(
-            fakeDatabase,
-            applicationScope,
-            api = fakeApi
-        )
+    fun `loadRecentAndroidVersions() should continue to load and store android versions when calling scope gets cancelled`() =
+        runTest {
+            val fakeDatabase = FakeDatabase()
+            val fakeApi = FakeApi()
 
-        // Sharing the testScheduler with the applicationScope is important!
-        val viewModelScope = TestScope(this.testScheduler)
-        val job = viewModelScope.launch {
-            repository.loadAndStoreRemoteAndroidVersions()
+            val repository = AndroidVersionRepository(
+                database = fakeDatabase,
+                scope = this,
+                api = fakeApi
+            )
+
+            // Sharing the testScheduler with the applicationScope is important!
+            val viewModelScope = TestScope(this.testScheduler)
+            val job = viewModelScope.launch {
+                repository.loadAndStoreRemoteAndroidVersions()
+            }
+
+            // execute coroutine until delay(1) in the fakeApi
+            runCurrent()
+
+            // Check if nothing is inserted into the db before we cancel the scope
+            assertEquals(false, fakeDatabase.insertedIntoDb)
+
+            // Cancel the scope and check if it was indeed cancelled
+            viewModelScope.cancel()
+            assertEquals(true, job.isCancelled)
+
+            // continue coroutine execution after delay(1) in the fakeApi
+            advanceTimeBy(1)
+            runCurrent()
+
+            assertEquals(true, fakeDatabase.insertedIntoDb)
         }
-
-        // execute coroutine until delay(1) in the fakeApi
-        applicationScope.runCurrent()
-
-        // Check if nothing is inserted into the db before we cancel the scope
-        assertEquals(false, fakeDatabase.insertedIntoDb)
-
-        // Cancel the scope and check if it was indeed cancelled
-        viewModelScope.cancel()
-        assertEquals(true, job.isCancelled)
-
-        // continue coroutine execution after delay(1) in the fakeApi
-        applicationScope.advanceTimeBy(1)
-        applicationScope.runCurrent()
-
-        assertEquals(true, fakeDatabase.insertedIntoDb)
-    }
 }
