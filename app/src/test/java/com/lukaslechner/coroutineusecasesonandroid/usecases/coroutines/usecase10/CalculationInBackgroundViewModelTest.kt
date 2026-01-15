@@ -3,6 +3,8 @@ package com.lukaslechner.coroutineusecasesonandroid.usecases.coroutines.usecase1
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.lukaslechner.coroutineusecasesonandroid.utils.ReplaceMainDispatcherRule
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -22,15 +24,16 @@ class CalculationInBackgroundViewModelTest {
 
     @Test
     fun `performCalculation() should perform correct calculations`() = runTest {
+
+        val testDispatcher = UnconfinedTestDispatcher(testScheduler)
         val viewModel =
-            CalculationInBackgroundViewModel(StandardTestDispatcher(testScheduler)).apply {
+            CalculationInBackgroundViewModel(testDispatcher).apply {
                 observe()
             }
 
         Assert.assertTrue(receivedUiStates.isEmpty())
 
         viewModel.performCalculation(1)
-        runCurrent()
 
         Assert.assertEquals(
             UiState.Loading,
@@ -45,7 +48,6 @@ class CalculationInBackgroundViewModelTest {
         receivedUiStates.clear()
 
         viewModel.performCalculation(2)
-        runCurrent()
 
         Assert.assertEquals(
             UiState.Loading,
@@ -60,7 +62,6 @@ class CalculationInBackgroundViewModelTest {
         receivedUiStates.clear()
 
         viewModel.performCalculation(3)
-        runCurrent()
 
         Assert.assertEquals(
             UiState.Loading,
